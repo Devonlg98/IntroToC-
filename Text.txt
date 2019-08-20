@@ -1,0 +1,57 @@
+1.
+A variable is a container that stores code either letters or numbers
+
+2.
+int is a number variable that can't be displayed with decimals, it's a whole number
+
+3.
+float is a number variable that can be displayed with decimals
+
+4.
+boolean is a variable that can only be true or false
+
+5.
+string is a variable that stores text
+
+6.
+Declaring a variable is done by defining which type of variable it is and then naming it.
+
+7.
+An example of declaring a variable would be: int gameScore;
+
+8.
+initialising a variable is when you give a variable a value
+
+9.
+An example of initialising a variable is int gameScore = 0;
+
+10.
+No ints can't have decimals
+
+11.
+Yes, floats can have decimals
+
+12.
+A good variable for an enemies health would be int, because it would lose health
+in chunks instead of it having a sliver of health.
+
+13.
+a good variable for a type of players speed is float, because it would allow for more
+smooth speed transitions that int wouldn't allow.
+
+14.
+a good variable for storing dialogue would be string, because it allows you to store text.
+
+15.
+a good variable for tracking if a player is alive is a boolean, because it's made for
+true or false statements, if the player's health fell to zero, you could then set
+the boolean for the player being alive to false.
+
+16.
+camelCase is when you begin variables with lower case letters and every word after starts
+with a capital letter. For example gameScore playerWasDefeatedScreen.
+
+17.
+I would name a variable in code called "player power up" like this:
+bool playerPowerUp;
+
