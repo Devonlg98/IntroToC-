@@ -20,6 +20,7 @@ namespace SmallestThreeNumbers
             Int32.TryParse(num3, out num3a);
             int lowNum = 0;
 
+
             
             if (num1a < num2a && num1a < num3a)
             {
