@@ -12,6 +12,8 @@ namespace ExerciseArrays
         {
             int[] values = { 2, 6, 10, 14 };
             Console.WriteLine(++values[0]);            Console.ReadKey();
+
+            for ( int )
         }
     }
 }
