@@ -1,0 +1,4 @@
+git add :/ (This adds all your changes)
+git commit -m "message on what you did here"
+git push (pushes it to the cloud)
+git status (to make sure)
