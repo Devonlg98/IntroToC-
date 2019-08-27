@@ -47,7 +47,7 @@ namespace Dragon
                     foodAmt = wr.Ask($"How many small children is {drgNames[drgSlider]} going to eat for day {dayCounter +1}?");
                     int foodAmtOut = 0;
                     Int32.TryParse(foodAmt, out foodAmtOut);
-                    smallNum = foodAmtOut;
+                    smallNum = map[0, 0];
                     map[rowDragon, colDay] = foodAmtOut;
                     avgFood += foodAmtOut;
                     avgFoodDrgSld += foodAmtOut;
