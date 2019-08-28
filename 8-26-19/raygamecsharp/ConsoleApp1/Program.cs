@@ -85,7 +85,7 @@ namespace ConsoleApp1
             Enemy[] enemyIdx = new Enemy[5];
             int idx = 0;
             int idxE = 0;
-            string[] gemPickUp = new string[10] {"gem1.png", "gem2.png", "gem3.png", "gem4.png", "gem5.png", "gem6.png", "gem7.png", "gem8.png", "gem9.png", "gem10.png"};
+            string[] gemPickUp = new string[6] {"gem1.png", "gem2.png", "gem3.png", "gem4.png", "gem5.png", "gem6.png"};
 
             
             rl.InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
@@ -103,7 +103,7 @@ namespace ConsoleApp1
             }
 
 
-            PickUp.SetTexture("platformPack_item009.png");
+            //PickUp.SetTexture("platformPack_item009.png");
 
             for (int x = 0; x < 1000 && idx < 1000; x++)
             {
@@ -134,19 +134,14 @@ namespace ConsoleApp1
                 rl.DrawText($"TIME : {MyPlayer.timer/60}", 400, 50, 20, Color.GREEN);
                 rl.DrawText("Pick Up Dem Cubes", 200, 50, 20, Color.GREEN);
                 MyPlayer.Draw();
-                if (MyPlayer.timer / 60 % 2 == 1)
-                {
-                    PickUp.SetTexture("platformPack_item009fix.png");
-                    Console.WriteLine("debug1");
-                }
-                for(int i= 0; i<10; i++)
-                {
-                    if (MyPlayer.timer / 60 % 2 == 0)
-                    {
-                        PickUp.SetTexture(gemPickUp[i]);
-                        Console.WriteLine("debug1");
-                    }
-                }
+                //for(int i= 0; i<6; i++)
+                //{
+                //    if (MyPlayer.timer / 60 % 2 == 1)
+                //    {
+                //        PickUp.SetTexture(gemPickUp[i]);
+                //        Console.WriteLine("debug1");
+                //    }
+                //}
                 foreach (Enemy enemy in enemyIdx)
                 {
                     if (enemy.Life && !winState)
