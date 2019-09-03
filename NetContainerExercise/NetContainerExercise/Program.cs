@@ -23,15 +23,16 @@ namespace NetContainerExercise
         static void Main(string[] args)
         {
             {
-                Write wr = new Write();
-                string className;
-                className = wr.Ask("Name your class >");
+                //Write wr = new Write();
+                //string className;
+                //className = wr.Ask("Name your class >");
                 ArrayExample(array456);
                 Test(array123);
                 Console.ReadKey();
             }
         }
-        public static void ArrayExample(int size) // static makes it easier to call, but I can't adjust values from outside such as the array
+        public static void ArrayExample(int size) 
+        // static makes it easier to call, but I can't adjust values from outside such as the array
         {
 
             int[] array = new int[size];
@@ -48,7 +49,9 @@ namespace NetContainerExercise
         }
         public static void Test(int[] bob)
         {
-            ArrayExample(10);
+            ArrayExample(10); 
+            // grabs an array with the size of 10
+            
         }
 
     }
