@@ -8,7 +8,6 @@ namespace NetContainerExercise
 {
     class Program
     {
-
         public static int[] array123 = new int[] { 1, 2, 3 };
         public static int array456 = 10;
 
@@ -17,6 +16,7 @@ namespace NetContainerExercise
             public string Ask(string _val)
             {
                 Console.WriteLine(_val);
+
                 return Console.ReadLine();
             }
         }
