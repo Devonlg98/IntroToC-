@@ -13,8 +13,8 @@ namespace RPG_GrassCutting
         public int quantity = 0;
         public int healthGain = 0;
         public int hungerGain = 0;
-        public string[] foodString = new string[4];
-        //public string fs2;
+        //public string[] foodString = new string[4];
+        public string foodString;
 
         public Food(int v1, int v2, int v3, int v4, string v5)
         {
@@ -22,57 +22,104 @@ namespace RPG_GrassCutting
             this.quantity = v2;
             this.healthGain = v3;
             this.hungerGain = v4;
-            this.foodString[0] = v5;
+            this.foodString = v5;
         }
 
-        public Food (int kind)
-        {
-            //1= pizza. 2=lettuce,3=apple
-            switch (kind)
+        //public Food (int kind)
+        //{
+        //    //kind = 2;
+        //    //1= pizza. 2=lettuce,3=apple
+        //    switch (kind)
 
 
-            {
-                case 1:
-                    price = 15;
-                    quantity = 8;
-                    healthGain = 0;
-                    hungerGain = 2;
-                    foodString[0] = ($"Pizza \r\n" +
-                         $"Price : {price} \r\n" +
-                         $"Quanity : {quantity} \r\n" +
-                         $"Health Gain : {healthGain} \r\n" +
-                         $"Hunger Gain : {hungerGain}");
-                    break;
-                case 2:
-                    price = 15;
-                    quantity = 3;
-                    healthGain = 0;
-                    hungerGain = 3;
-                    foodString[1] = ($"Lettuce \r\n" +
-                        $"Price : {price} \r\n" +
-                        $"Quanity : {quantity} \r\n" +
-                        $"Health Gain : {healthGain} \r\n" +
-                        $"Hunger Gain : {hungerGain}");
-                    break;
+        //    {
+        //        case 1:
+        //            price = 3;
+        //            quantity = 8;
+        //            healthGain = 0;
+        //            hungerGain = 2;
+        //            foodString = ($"Pizza Slice \r\n" +
+        //                 $"Price : {price} \r\n" +
+        //                 $"Quanity : {quantity} \r\n" +
+        //                 $"Health Gain : {healthGain} \r\n" +
+        //                 $"Hunger Gain : {hungerGain}");
+        //            break;
+        //        case 2:
+        //            price = 2;
+        //            quantity = 12;
+        //            healthGain = 0;
+        //            hungerGain = 1;
+        //            foodString = ($"Donut \r\n" +
+        //                $"Price : {price} \r\n" +
+        //                $"Quanity : {quantity} \r\n" +
+        //                $"Health Gain : {healthGain} \r\n" +
+        //                $"Hunger Gain : {hungerGain}");
+        //            break;
 
-                case 3:
-                    price = 15;
-                    quantity = 2;
-                    healthGain = 1;
-                    hungerGain = 2;
-                    foodString[2] = ($"Apple \r\n" +
-                        $"Price : {price} \r\n" +
-                        $"Quanity : {quantity} \r\n" +
-                        $"Health Gain : {healthGain} \r\n" +
-                        $"Hunger Gain : {hungerGain}");
+        //        case 3:
+        //            price = 6;
+        //            quantity = 2;
+        //            healthGain = 1;
+        //            hungerGain = 6;
+        //            foodString = ($"BLT Sammy \r\n" +
+        //                $"Price : {price} \r\n" +
+        //                $"Quanity : {quantity} \r\n" +
+        //                $"Health Gain : {healthGain} \r\n" +
+        //                $"Hunger Gain : {hungerGain}");
 
-                    break;
+        //            break;
 
-                default:
-                    break;
-            }
+        //        default:
+        //            break;
+        //    }
 
-        }
+        //    //kind = 2;
+        //    //1= pizza. 2=lettuce,3=apple
+        //    switch (kind)
+
+
+        //    {
+        //        case 1:
+        //            price = 3;
+        //            quantity = 8;
+        //            healthGain = 0;
+        //            hungerGain = 2;
+        //            foodString = ($"Pizza Slice \r\n" +
+        //                 $"Price : {price} \r\n" +
+        //                 $"Quanity : {quantity} \r\n" +
+        //                 $"Health Gain : {healthGain} \r\n" +
+        //                 $"Hunger Gain : {hungerGain}");
+        //            break;
+        //        case 2:
+        //            price = 2;
+        //            quantity = 12;
+        //            healthGain = 0;
+        //            hungerGain = 1;
+        //            foodString = ($"Donut \r\n" +
+        //                $"Price : {price} \r\n" +
+        //                $"Quanity : {quantity} \r\n" +
+        //                $"Health Gain : {healthGain} \r\n" +
+        //                $"Hunger Gain : {hungerGain}");
+        //            break;
+
+        //        case 3:
+        //            price = 6;
+        //            quantity = 2;
+        //            healthGain = 1;
+        //            hungerGain = 6;
+        //            foodString = ($"BLT Sammy \r\n" +
+        //                $"Price : {price} \r\n" +
+        //                $"Quanity : {quantity} \r\n" +
+        //                $"Health Gain : {healthGain} \r\n" +
+        //                $"Hunger Gain : {hungerGain}");
+
+        //            break;
+
+        //        default:
+        //            break;
+        //    }
+        //}
+
     }
     //public class Pizza : Food
     //{

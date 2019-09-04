@@ -8,5 +8,6 @@ namespace RPG_GrassCutting
 {
     class Player
     {
+        int Rupees = 0;
     }
 }
