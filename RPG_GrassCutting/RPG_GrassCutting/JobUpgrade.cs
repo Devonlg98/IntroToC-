@@ -9,18 +9,14 @@ namespace RPG_GrassCutting
     class JobUpgrade
     {
         public int price = 0;
-        public int quantity = 0;
-        public int healthGain = 0;
-        public int hungerGain = 0;
-        public int jobUpgrade = 0;
+        public float jobUpgrade = 0;
         public string upgradeDescription;
         public class SharpStick : JobUpgrade
         {
             public SharpStick()
             {
                 price = 10;
-                quantity = 8;
-                jobUpgrade = 0;
+                jobUpgrade = 1.2f;
                 upgradeDescription = "Just a slightly sharpened stick";
             }
         }
@@ -28,9 +24,8 @@ namespace RPG_GrassCutting
         {
             public WoodenSword()
             {
-                price = 10;
-                quantity = 8;
-                jobUpgrade = 0;
+                price = 25;
+                jobUpgrade = 1.5f;
                 upgradeDescription = "Just a sharp stick shaped like a sword";
             }
         }
@@ -38,12 +33,12 @@ namespace RPG_GrassCutting
         {
             public StoneSword()
             {
-                price = 10;
-                quantity = 8;
-                jobUpgrade = 0;
+                price = 50;
+                jobUpgrade = 2f;
                 upgradeDescription = "A regular sword";
             }
             //public override double 
         }
+        //Note to self add MasterSword and HylianLawnMower
     }
 }
