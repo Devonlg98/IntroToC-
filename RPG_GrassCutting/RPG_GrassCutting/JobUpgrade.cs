@@ -9,35 +9,18 @@ namespace RPG_GrassCutting
     class JobUpgrade
     {
         public int price = 0;
-        public float jobUpgrade = 0;
+        public int jobUpgrade = 0;
+        public string jobUpgradeName;
         public string upgradeDescription;
-        public class SharpStick : JobUpgrade
+        public bool finalWeapon = false;
+
+        public JobUpgrade(int v1, int v2, string v3, string v4, bool v5)
         {
-            public SharpStick()
-            {
-                price = 10;
-                jobUpgrade = 1.2f;
-                upgradeDescription = "Just a slightly sharpened stick";
-            }
-        }
-        public class WoodenSword : JobUpgrade
-        {
-            public WoodenSword()
-            {
-                price = 25;
-                jobUpgrade = 1.5f;
-                upgradeDescription = "Just a sharp stick shaped like a sword";
-            }
-        }
-        public class StoneSword : JobUpgrade
-        {
-            public StoneSword()
-            {
-                price = 50;
-                jobUpgrade = 2f;
-                upgradeDescription = "A regular sword";
-            }
-            //public override double 
+            this.price = v1;
+            this.jobUpgrade = v2;
+            this.jobUpgradeName = v3;
+            this.upgradeDescription = v4;
+            this.finalWeapon = v5;
         }
         //Note to self add MasterSword and HylianLawnMower
     }

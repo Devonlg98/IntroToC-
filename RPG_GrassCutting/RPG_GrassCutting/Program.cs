@@ -26,51 +26,91 @@ namespace RPG_GrassCutting
             //Food lt = new Lettuce();
             //Food ap = new Apple();
             Player pl = new Player();
-            JobUpgrade jb = new JobUpgrade();
-            JobUpgrade.SharpStick jbshs = new JobUpgrade.SharpStick();
-            JobUpgrade.WoodenSword jbwos = new JobUpgrade.WoodenSword();
-            JobUpgrade.StoneSword jbsts = new JobUpgrade.StoneSword();
+            //JobUpgrade jb = new JobUpgrade();
+            //JobUpgrade.SharpStick jbshs = new JobUpgrade.SharpStick();
+            //JobUpgrade.WoodenSword jbwos = new JobUpgrade.WoodenSword();
+            //JobUpgrade.StoneSword jbsts = new JobUpgrade.StoneSword();
+
             Random rd = new Random();
             Read re = new Read();
-            // 1 2 or 3 for each case
-            Food pz1 = new Food(3, 8, 0, 2, ($"Pizza Slice"));
-            // Assigns the value of v1 price v2 quanity etc etc
-            Food dt1 = new Food(2, 12, 0, 1, ("Donut"));
-            Food bs1 = new Food(6, 2, 1, 6, ("BLT Sammy"));
-            Food[] foodArray = new Food[3] { pz1, dt1, bs1 };
-            int foodRandomizer = rd.Next(0, 3);
-            JobUpgrade[] jobArray = new JobUpgrade[3] {jbshs, jbwos, jbsts};
-            int currentWeapon = 1;
-            bool goHome = true;
+            int jfoodRandomizer = 0;
+            int hfoodRandomizer = 0;
+            int mfoodRandomizer = 0;
+            int currentWeapon = 0;
+            string goalDayAsked = "";
+            int goalDay = 0;
+            int currentDay = 1;
+            string purchaseAsk;
+            bool goHome = false;
             bool goBack = true;
             bool gameOn = true;
+            JobUpgrade bst1 = new JobUpgrade(0, 1, "Bad Stick", "It's a stick, what did you expect?", false);
+            JobUpgrade sh1 = new JobUpgrade(110, 2, "Sharp Stick", "Just a slightly sharpened stick", false);
+            JobUpgrade wo1 = new JobUpgrade(150, 3, "Wooden Sword", "Just a sharp stick shaped like a sword", false);
+            JobUpgrade st1 = new JobUpgrade(200, 4, "Stone Sword", "Used for cutting thicker grass", false);
+            JobUpgrade fw1 = new JobUpgrade(9^9, 4, "Sold Out", "Currently there are", true);
 
+            //v1 price, v2 jobupgrade, v3jobupgradename, v4 jobupgrade description
+
+            // 1 2 or 3 for each case
+            JFood pz1 = new JFood(3, 8, 0, 2, ($"Pizza Slice"));
+            JFood dt1 = new JFood(2, 12, 0, 1, ("Donut"));
+            JFood bs1 = new JFood(6, 2, 1, 6, ("BLT Sammy"));
+            // Banana Apple Orange
+            HFood ba1 = new HFood(10, 3, 1, 3, ("Banana"));
+            HFood ap1 = new HFood(10, 1, 3, 1, ("Apple"));
+            HFood or1 = new HFood(8, 1, 2, 2, ("Orange"));
+            // OctoPopRocs, SugarSkullTulas, DekuPeanuts
+            MFood oc1 = new MFood(4, 10, -1, 1, ("OctoPopRocs"));
+            MFood su1 = new MFood(5, 5, -1, 0, ("SugarSkullTulas"));
+            MFood de1 = new MFood(9, 3, -2, 3, ("DekuPeanuts"));
+
+            // Assigns the value of v1 price v2 quanity v3 health gain, v4 hunger, v5 string
+            JobUpgrade[] jobUpgradeArray = new JobUpgrade[] {bst1, sh1, wo1, st1, fw1};
+            JFood[] jfoodArray = new JFood[3] { pz1, dt1, bs1 };
+            HFood[] hfoodArray = new HFood[3] { ba1, ap1, or1 };
+            MFood[] mfoodArray = new MFood[3] { oc1, su1, de1 };
+            pl.hunger = pl.startHunger;
+            pl.health = pl.startHealth;
             while(gameOn == true)
             {
-                while (goHome == true)
+                jfoodRandomizer = rd.Next(0, 3);
+                hfoodRandomizer = rd.Next(0, 3);
+                mfoodRandomizer = rd.Next(0, 3);
+                if (pl.hunger <= 0)
+                {
+                    pl.health -= 2;
+                    Console.Clear();
+                    Console.WriteLine($"Rupees = {pl.rupees}\r\nHunger : {pl.hunger}\r\nHealth : {pl.health}\r\n---------------\r\n");
+                    Console.WriteLine("Since you went to bed hungry and lost 2 hp");
+                    Console.ReadKey();
+
+                }
+                while (goHome == false)
                 {
                     goBack = true;
                     Console.Clear();
-                    Console.WriteLine($"Rupees = {pl.rupees}");
-                    string buysellrentask = re.Ask("Welcome to my shop mighty traveler \r\nWould you like to Buy[1], Sell[2], Rent[3]?, go Home[g]? or quit [q] >");
+                    Console.WriteLine($"Rupees = {pl.rupees}\r\nHunger : {pl.hunger}\r\nHealth : {pl.health}\r\n---------------\r\n");
+                    string buysellrentask = re.Ask("Welcome to my shop mighty traveler \r\n\r\nWould you like to Buy[1], Sell[2], Rent[3]?, go Home[g]? or quit [q] >");
                     int buysellrent = 0;
                     Int32.TryParse(buysellrentask, out buysellrent);
                     switch (buysellrentask)
                     {
                         case "g":
-                            goHome = false;
+
+                            goHome = true;
                             break;
 
                         case "G":
-                            goHome = false;
+                            goHome = true;
                             break;
 
                         case "q":
-                            gameOn = false;
+                            gameOn = true;
                             break;
 
                         case "Q":
-                            gameOn = false;
+                            gameOn = true;
                             break;
 
                         default:
@@ -82,10 +122,9 @@ namespace RPG_GrassCutting
                                     case 1:
                                         Console.Clear();
 
-                                        Console.WriteLine($"Rupees = {pl.rupees}");
-
-                                        Console.WriteLine("Here is what I have available for today!");
-                                        Console.WriteLine($"{foodArray[foodRandomizer].foodString}[1]\r\nFood2[2]\r\nFood3[3]\r\nor back to store front[b]");
+                                        Console.WriteLine($"Rupees = {pl.rupees}\r\nHunger : {pl.hunger}\r\nHealth : {pl.health}\r\n---------------\r\n");
+                                        Console.WriteLine("Here is what I have available for today!\r\n");
+                                        Console.WriteLine($"{jfoodArray[jfoodRandomizer].foodString}[1]\r\n{hfoodArray[hfoodRandomizer].foodString}[2]\r\n{mfoodArray[mfoodRandomizer].foodString}[3]\r\n{jobUpgradeArray[currentWeapon+1].jobUpgradeName}[4]\r\nor back to store front[b]\r\n");
                                         string foodAsk = re.Ask("What would you like to do? >");
                                         if (foodAsk == "b" || foodAsk == "b")
                                         {
@@ -96,43 +135,190 @@ namespace RPG_GrassCutting
                                         Int32.TryParse(foodAsk, out foodSure);
 
                                         switch (foodSure)
-                                        {   //Food 1
+                                        {   //Junk Food 
                                             case 1:
                                                 Console.Clear();
-                                                Console.WriteLine($"Rupees = {pl.rupees}");
-                                                string purchaseAsk = re.Ask($"{foodArray[foodRandomizer].foodString}\r\n" +
-                                                $"Price : {foodArray[foodRandomizer].price} \r\n" +
-                                                $"Quanity : {foodArray[foodRandomizer].quantity} \r\n" +
-                                                $"Health Gain : {foodArray[foodRandomizer].healthGain} \r\n" +
-                                                $"Hunger Gain : {foodArray[foodRandomizer].hungerGain}\r\n" +
+                                                Console.WriteLine($"Rupees = {pl.rupees}\r\nHunger : {pl.hunger}\r\nHealth : {pl.health}\r\n---------------\r\n");
+                                                purchaseAsk = re.Ask($"You have selected the {jfoodArray[jfoodRandomizer].foodString}\r\n\r\n{jfoodArray[jfoodRandomizer].foodString}\r\n" +
+                                                $"Price : {jfoodArray[jfoodRandomizer].price} \r\n" +
+                                                $"Quanity : {jfoodArray[jfoodRandomizer].quantity} \r\n" +
+                                                $"Health Gain : {jfoodArray[jfoodRandomizer].healthGain} \r\n" +
+                                                $"Hunger Gain : {jfoodArray[jfoodRandomizer].hungerGain}\r\n\r\n" +
                                                 $"Are you sure you would like to purchase this? [y] [n]? >");
 
-                                                if ((purchaseAsk == "y" || purchaseAsk == "Y") && foodArray[foodRandomizer].quantity > 0)
+                                                if (((purchaseAsk == "y" || purchaseAsk == "Y")) && ((jfoodArray[jfoodRandomizer].quantity > 0) && (pl.rupees >= jfoodArray[jfoodRandomizer].price)))
                                                 {
-                                                    foodArray[foodRandomizer].quantity -= 1;
-                                                    pl.rupees -= foodArray[foodRandomizer].price;
+                                                    jfoodArray[jfoodRandomizer].quantity -= 1;
+                                                    pl.hunger += jfoodArray[jfoodRandomizer].hungerGain;
+                                                    pl.health += jfoodArray[jfoodRandomizer].healthGain;
+                                                    pl.rupees -= jfoodArray[jfoodRandomizer].price;
+                                                    if (pl.health > pl.startHealth)
+                                                    {
+                                                        pl.health = pl.startHealth;
+                                                    }
+                                                    else if (pl.hunger > pl.startHunger)
+                                                    {
+                                                        pl.hunger = pl.startHunger;
+                                                    }
+                                                    Console.WriteLine($"Rupees = {pl.rupees}\r\nHunger : {pl.hunger}");
+                                                }
+                                                else if (((purchaseAsk == "y" || purchaseAsk == "Y")) && !((jfoodArray[jfoodRandomizer].quantity > 0) && (pl.rupees >= jfoodArray[jfoodRandomizer].price)))
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine($"Rupees = {pl.rupees}\r\nHunger : {pl.hunger}\r\nHealth : {pl.health}\r\n---------------\r\n");
+                                                    Console.WriteLine($"You have selected the {jfoodArray[jfoodRandomizer].foodString}\r\n\r\n{jfoodArray[jfoodRandomizer].foodString}\r\n" +
+                                                    $"Price : {jfoodArray[jfoodRandomizer].price} \r\n" +
+                                                    $"Quanity : {jfoodArray[jfoodRandomizer].quantity} \r\n" +
+                                                    $"Health Gain : ?\r\n" +
+                                                    $"Hunger Gain : ?\r\n\r\nEither you can't afford this, or there are none left in stock\r\nPress and key to go back >");
+                                                    Console.ReadKey();
+                                                }
+                                                break;
+
+
+                                            //Healthy Food
+                                            case 2:
+                                                Console.Clear();
+                                                Console.WriteLine($"Rupees = {pl.rupees}\r\nHunger : {pl.hunger}\r\nHealth : {pl.health}\r\n---------------\r\n");
+                                                purchaseAsk = re.Ask($"You have selected the {hfoodArray[hfoodRandomizer].foodString}\r\n\r\n{hfoodArray[hfoodRandomizer].foodString}\r\n" +
+                                                $"Price : {hfoodArray[hfoodRandomizer].price} \r\n" +
+                                                $"Quanity : {hfoodArray[hfoodRandomizer].quantity} \r\n" +
+                                                $"Health Gain : {hfoodArray[hfoodRandomizer].healthGain} \r\n" +
+                                                $"Hunger Gain : {hfoodArray[hfoodRandomizer].hungerGain}\r\n\r\n" +
+                                                $"Are you sure you would like to purchase this? [y] [n]? >");
+
+                                                if (((purchaseAsk == "y" || purchaseAsk == "Y")) && ((hfoodArray[hfoodRandomizer].quantity > 0) && (pl.rupees >= hfoodArray[hfoodRandomizer].price)))
+                                                {
+                                                    hfoodArray[hfoodRandomizer].quantity -= 1;
+                                                    pl.hunger += hfoodArray[hfoodRandomizer].hungerGain;
+                                                    pl.health += hfoodArray[hfoodRandomizer].healthGain;
+                                                    pl.rupees -= hfoodArray[hfoodRandomizer].price;
+                                                    if (pl.health > pl.startHealth)
+                                                    {
+                                                        pl.health = pl.startHealth;
+                                                    }
+                                                    else if (pl.hunger > pl.startHunger)
+                                                    {
+                                                        pl.hunger = pl.startHunger;
+                                                    }
+                                                    Console.WriteLine($"Rupees = {pl.rupees}");
+                                                }
+                                                else if (((purchaseAsk == "y" || purchaseAsk == "Y")) && !((hfoodArray[hfoodRandomizer].quantity > 0) && (pl.rupees >= hfoodArray[hfoodRandomizer].price)))
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine($"Rupees = {pl.rupees}\r\nHunger : {pl.hunger}\r\nHealth : {pl.health}\r\n---------------\r\n");
+                                                    Console.WriteLine($"You have selected the {hfoodArray[hfoodRandomizer].foodString}\r\n\r\n{hfoodArray[hfoodRandomizer].foodString}\r\n" +
+                                                    $"Price : {hfoodArray[hfoodRandomizer].price} \r\n" +
+                                                    $"Quanity : {hfoodArray[hfoodRandomizer].quantity} \r\n" +
+                                                    $"Health Gain : ?\r\n" +
+                                                    $"Hunger Gain : ?\r\n\r\nEither you can't afford this, or there are none left in stock\r\nPress and key to go back >");
+                                                    Console.ReadKey();
+                                                }
+
+                                                break;
+                                            //Mystery food
+                                            case 3:
+                                                Console.Clear();
+                                                Console.WriteLine($"Rupees = {pl.rupees}\r\nHunger : {pl.hunger}\r\nHealth : {pl.health}\r\n---------------\r\n");
+                                                purchaseAsk = re.Ask($"You have selected the {mfoodArray[mfoodRandomizer].foodString}\r\n\r\n{mfoodArray[mfoodRandomizer].foodString}\r\n" +
+                                                $"Price : {mfoodArray[mfoodRandomizer].price} \r\n" +
+                                                $"Quanity : {mfoodArray[mfoodRandomizer].quantity} \r\n" +
+                                                $"Health Gain : ?\r\n" +
+                                                $"Hunger Gain : ?\r\n\r\n" +
+                                                $"Are you sure you would like to purchase this? [y] [n]? >");
+
+                                                if (((purchaseAsk == "y" || purchaseAsk == "Y")) && ((mfoodArray[mfoodRandomizer].quantity > 0) && (pl.rupees >= mfoodArray[mfoodRandomizer].price)))
+                                                {
+                                                    mfoodArray[mfoodRandomizer].quantity -= 1;
+                                                    pl.hunger += mfoodArray[mfoodRandomizer].hungerGain;
+                                                    pl.health += mfoodArray[mfoodRandomizer].healthGain;
+                                                    pl.rupees -= mfoodArray[mfoodRandomizer].price;
+                                                    if (pl.health > pl.startHealth)
+                                                    {
+                                                        pl.health = pl.startHealth;
+                                                    }
+                                                    else if (pl.hunger > pl.startHunger)
+                                                    {
+                                                        pl.hunger = pl.startHunger;
+                                                    }
                                                     Console.WriteLine($"Rupees = {pl.rupees}");
 
                                                 }
-                                                break;
-                                            //Food 2
-                                            case 2:
+                                                else if (((purchaseAsk == "y" || purchaseAsk == "Y")) && !((mfoodArray[mfoodRandomizer].quantity > 0) && (pl.rupees >= mfoodArray[mfoodRandomizer].price)))
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine($"Rupees = {pl.rupees}\r\nHunger : {pl.hunger}\r\nHealth : {pl.health}\r\n---------------\r\n");
+                                                    Console.WriteLine($"You have selected the {mfoodArray[mfoodRandomizer].foodString}\r\n\r\n{mfoodArray[mfoodRandomizer].foodString}\r\n" +
+                                                    $"Price : {mfoodArray[mfoodRandomizer].price} \r\n" +
+                                                    $"Quanity : {mfoodArray[mfoodRandomizer].quantity} \r\n" +
+                                                    $"Health Gain : ?\r\n" +
+                                                    $"Hunger Gain : ?\r\n\r\nEither you can't afford this, or there are none left in stock\r\nPress and key to go back >");
+                                                    Console.ReadKey();
+                                                }
+                                                    break;
+
+                                                //Next available weapon
+                                            case 4:
+                                                Console.Clear();
+                                                if (jobUpgradeArray[currentWeapon+1].finalWeapon == false)
+                                                {
+                                                    Console.WriteLine($"Rupees = {pl.rupees}\r\nHunger : {pl.hunger}\r\nHealth : {pl.health}\r\n---------------\r\n");
+                                                    purchaseAsk = re.Ask($"You have selected the {jobUpgradeArray[currentWeapon+1].jobUpgradeName}\r\n\r\n{jobUpgradeArray[currentWeapon+1].jobUpgradeName}\r\n" +
+                                                    $"Price : {jobUpgradeArray[currentWeapon+1].price} \r\n" +
+                                                    $"Preformance : {jobUpgradeArray[currentWeapon+1].jobUpgrade} \r\n" +
+                                                    $"Description : {jobUpgradeArray[currentWeapon+1].upgradeDescription}\r\n\r\n" +
+                                                    $"Are you sure you would like to purchase this? [y] [n]? >");
+
+                                                    if (((purchaseAsk == "y") || (purchaseAsk == "Y")) && (pl.rupees >= jobUpgradeArray[currentWeapon+1].price))
+                                                    {
+                                                        pl.rupees -= jobUpgradeArray[currentWeapon+1].price;
+                                                        currentWeapon += 1;
+                                                        //mfoodArray[foodRandomizer1].quantity -= 1;
+                                                        //pl.rupees -= mfoodArray[foodRandomizer1].price;
+                                                    }
+                                                    else if (((purchaseAsk == "y" || purchaseAsk == "Y")) && !(pl.rupees >= jobUpgradeArray[currentWeapon+1].price))
+                                                    {
+                                                        Console.Clear();
+                                                        Console.WriteLine($"Rupees = {pl.rupees}\r\nHunger : {pl.hunger}\r\nHealth : {pl.health}\r\n---------------\r\n");
+                                                        Console.WriteLine($"You have selected the {jobUpgradeArray[currentWeapon + 1].jobUpgradeName}\r\n\r\n{jobUpgradeArray[currentWeapon + 1].jobUpgradeName}\r\n" +
+                                                        $"Price : {jobUpgradeArray[currentWeapon + 1].price} \r\n" +
+                                                        $"Preformance : {jobUpgradeArray[currentWeapon + 1].jobUpgrade} \r\n" +
+                                                        $"Description : {jobUpgradeArray[currentWeapon + 1].upgradeDescription}\r\n\r\n" +
+                                                        $"You can't afford this\r\nPress and key to go back >");
+                                                        Console.ReadKey();
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    Console.WriteLine($"Rupees = {pl.rupees}\r\nHunger : {pl.hunger}\r\nHealth : {pl.health}\r\n---------------\r\n");
+                                                    purchaseAsk = re.Ask($"{jobUpgradeArray[currentWeapon + 1].jobUpgradeName}\r\n" +
+                                                    $"Description : {jobUpgradeArray[currentWeapon + 1].upgradeDescription}\r\n\r\n" +
+                                                    $"Press and key to go back >");
+                                                }
 
                                                 break;
-                                            //Food 3
-                                            case 3:
 
-                                                break;
                                         }
                                         break;
 
                                     //Case for selling
                                     case 2:
+                                        goBack = false;
+                                        Console.WriteLine("Work in progress, press any key to continue >");
+                                        Console.ReadKey();
 
                                         break;
                                     //Case for renting
                                     case 3:
+                                        goBack = false;
+                                        Console.WriteLine("work in progress, press any key to continue >");
+                                        Console.ReadKey();
+                                        break;
 
+                                    default:
+                                        goBack = false;
+                                        Console.WriteLine("Incorrect input, press any key to continue >");
+                                        Console.ReadKey();
                                         break;
                                 }
                             }
@@ -140,33 +326,40 @@ namespace RPG_GrassCutting
                     }
                     break;
                 }
-
-                if(gameOn == false)
+                Console.Clear();
+                if (gameOn == false)
                 {
                     Console.Clear();
                     Console.WriteLine("Saving...\r\nNow Exiting.");
                     break;
                 }
-                int foundRupees = (rd.Next(1, 10) * currentWeapon);
-                pl.rupees += foundRupees;
-                Console.Clear();
-                Console.WriteLine($"Rupees = {pl.rupees}");
-                Console.WriteLine($"You head home, sleep, wake up, cut grass and find {foundRupees} Rupees\r\nPress Any Key To Continue >");
+
+                int foundRupees = 0;
+                goalDayAsked += re.Ask($"How many days would you like to sleep and work before returning home?");
+                Int32.TryParse(goalDayAsked, out goalDay);
+                for (int i = 0; i < goalDay; i++)
+                {
+                    pl.hunger -= rd.Next(0, 3);
+                    if (pl.health <= 0)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You starved to death, nice job");
+                        break;
+
+                    }
+                    if (pl.hunger < 0)
+                    {
+                        pl.hunger = 0;
+                    }
+                    foundRupees = (rd.Next(3, 11) * jobUpgradeArray[currentWeapon].jobUpgrade);
+                    pl.rupees += foundRupees;
+                    currentDay++;
+                }
+                Console.WriteLine($"Day {currentDay}: Rupees : {pl.rupees}\r\nHunger : {pl.hunger}\r\nHealth : {pl.health}\r\n---------------\r\n");
+                Console.WriteLine($"You head home, sleep, wake up, cut grass {goalDay} times, with your {jobUpgradeArray[currentWeapon].jobUpgradeName} and find {foundRupees} Rupees\r\n\r\nPress Any Key To Continue >");
+                goHome = false;
                 Console.ReadKey();
-                goHome = true;
             }
-
-
-            //foodFix[0] = pz.foodString[0];
-            //foodFix[1] = lt.foodString[0];
-            //foodFix[2] = ap.foodString[0];
-
-            //Console.WriteLine($"{pz.foodString[0]} \r\n {lt.foodString[1]} \r\n {ap.foodString[2]} ");
-            //Console.WriteLine($"{foodFix[0]} \r\n \r\n{foodFix[1]} \r\n \r\n{foodFix[2]}");
-            //Console.WriteLine(ap1.foodString);
-            //Console.WriteLine(pz1.foodString[0]);
-            //Console.WriteLine(lt1.foodString[0]);
-            //Console.WriteLine(ap1.foodString[0]);
             Console.ReadKey();
         }
     }
