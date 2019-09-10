@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +33,6 @@ namespace RPG_GrassCutting
 
             Random rd = new Random();
             Read re = new Read();
-            int slotChecker = 0;
             int jfoodRandomizer = 0;
             int hfoodRandomizer = 0;
             int mfoodRandomizer = 0;
@@ -47,13 +46,6 @@ namespace RPG_GrassCutting
             bool goHome = false;
             bool goBack = true;
             bool gameOn = true;
-            Inventory[] inv = new Inventory[9];
-            //Inventory slot1 = new Inventory(1, 1, 1, 1, "N/A");
-            Inventory[] inventoryArray = new Inventory[] { };
-            //inv[0] = slot1
-            //re.Ask(inv[0].foodString);
-
-
             JobUpgrade bst1 = new JobUpgrade(0, 1, "Bad Stick", "It's a stick, what did you expect?", false);
             JobUpgrade sh1 = new JobUpgrade(50, 2, "Sharp Stick", "Just a slightly sharpened stick", false);
             JobUpgrade wo1 = new JobUpgrade(200, 3, "Wooden Sword", "Just a sharp stick shaped like a sword", false);
@@ -152,24 +144,17 @@ namespace RPG_GrassCutting
                                                 if (((purchaseAsk == "y" || purchaseAsk == "Y")) && ((jfoodArray[jfoodRandomizer].quantity > 0) && (pl.rupees >= jfoodArray[jfoodRandomizer].price)))
                                                 {
                                                     jfoodArray[jfoodRandomizer].quantity -= 1;
-                                                    inv[slotChecker].price = jfoodArray[jfoodRandomizer].price;
-                                                    inv[slotChecker].quantity += 1;
-                                                    inv[slotChecker].healthGain = jfoodArray[jfoodRandomizer].healthGain;
-                                                    inv[slotChecker].hungerGain = jfoodArray[jfoodRandomizer].hungerGain;
-                                                    inv[slotChecker].foodString = jfoodArray[jfoodRandomizer].foodString;
-                                                    slotChecker++;
-
-                                                    //pl.hunger += jfoodArray[jfoodRandomizer].hungerGain;
-                                                    //pl.health += jfoodArray[jfoodRandomizer].healthGain;
-                                                    //pl.rupees -= jfoodArray[jfoodRandomizer].price;
-                                                    //if (pl.health > pl.startHealth)
-                                                    //{
-                                                    //    pl.health = pl.startHealth;
-                                                    //}
-                                                    //if (pl.hunger > pl.startHunger)
-                                                    //{
-                                                    //    pl.hunger = pl.startHunger;
-                                                    //}
+                                                    pl.hunger += jfoodArray[jfoodRandomizer].hungerGain;
+                                                    pl.health += jfoodArray[jfoodRandomizer].healthGain;
+                                                    pl.rupees -= jfoodArray[jfoodRandomizer].price;
+                                                    if (pl.health > pl.startHealth)
+                                                    {
+                                                        pl.health = pl.startHealth;
+                                                    }
+                                                    if (pl.hunger > pl.startHunger)
+                                                    {
+                                                        pl.hunger = pl.startHunger;
+                                                    }
                                                     Console.WriteLine($"Rupees = {pl.rupees}\r\nHunger : {pl.hunger}");
                                                 }
                                                 else if (((purchaseAsk == "y" || purchaseAsk == "Y")) && !((jfoodArray[jfoodRandomizer].quantity > 0) && (pl.rupees >= jfoodArray[jfoodRandomizer].price)))
