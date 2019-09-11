@@ -1,0 +1,34 @@
+//try
+                                                    //{
+                                                    //inv[slotChecker].price = jfoodArray[jfoodRandomizer].price;
+                                                    //inv[slotChecker].healthGain = jfoodArray[jfoodRandomizer].healthGain;
+                                                    //inv[slotChecker].hungerGain = jfoodArray[jfoodRandomizer].hungerGain;
+                                                    //inv[slotChecker].foodString = jfoodArray[jfoodRandomizer].foodString;
+                                                    //}
+                                                    //catch (System.IndexOutOfRangeException)
+                                                    //{
+                                                    //    Console.Clear();
+                                                    //    Console.WriteLine($"Day : {currentDay}\r\nRupees : {pl.rupees}\r\nHealth : {pl.health}\r\nHunger : {pl.hunger}\r\n---------------\r\n");
+                                                    //    Console.WriteLine("You're inventory is full!");
+                                                    //    Console.ReadKey();
+                                                    //    break;
+
+                                                    //}
+                                                    //jfoodArray[jfoodRandomizer].quantity -= 1;
+                                                    //pl.rupees -= jfoodArray[jfoodRandomizer].price;
+                                                    //slotChecker++;
+
+                                                    //inv[slotChecker].healthGain = jfoodArray[jfoodRandomizer].healthGain;
+                                                    //inv[slotChecker].hungerGain = jfoodArray[jfoodRandomizer].hungerGain;
+                                                    //inv[slotChecker].foodString = jfoodArray[jfoodRandomizer].foodString;
+
+                                                    //pl.hunger += jfoodArray[jfoodRandomizer].hungerGain;
+                                                    //pl.health += jfoodArray[jfoodRandomizer].healthGain;
+                                                    //if (pl.health > pl.startHealth)
+                                                    //{
+                                                    //    pl.health = pl.startHealth;
+                                                    //}
+                                                    //if (pl.hunger > pl.startHunger)
+                                                    //{
+                                                    //    pl.hunger = pl.startHunger;
+                                                    //}

@@ -23,7 +23,49 @@ namespace RPG_GrassCutting
         {
             public bool runInvSort =  true;
             Player pl = new Player();
-            public void InventorySorter(Inventory[] v1, int v2,JFood[] v3, int v4)
+            public void JInventorySorter(Inventory[] v1, int v2,JFood[] v3, int v4)
+            { // v1 inv v2 slotchecker v3 jfoodarray v4 jfood randomizer
+                try
+                {
+                    v1[v2].price = v3[v4].price;
+                    v1[v2].healthGain = v3[v4].healthGain;
+                    v1[v2].hungerGain = v3[v4].hungerGain;
+                    v1[v2].foodString = v3[v4].foodString;
+                    runInvSort = true;
+                }
+                catch (System.IndexOutOfRangeException)
+                {
+                    runInvSort = false;
+                    Console.WriteLine("You're inventory is full! You can't do that!");
+                    Console.ReadKey();
+                    //break; need to set this up as a boolean and then if bool true break
+
+                }
+                return;
+            }
+
+            public void HInventorySorter(Inventory[] v1, int v2, HFood[] v3, int v4)
+            { // v1 inv v2 slotchecker v3 jfoodarray v4 jfood randomizer
+                try
+                {
+                    v1[v2].price = v3[v4].price;
+                    v1[v2].healthGain = v3[v4].healthGain;
+                    v1[v2].hungerGain = v3[v4].hungerGain;
+                    v1[v2].foodString = v3[v4].foodString;
+                    runInvSort = true;
+                }
+                catch (System.IndexOutOfRangeException)
+                {
+                    runInvSort = false;
+                    Console.WriteLine("You're inventory is full! You can't do that!");
+                    Console.ReadKey();
+                    //break; need to set this up as a boolean and then if bool true break
+
+                }
+                return;
+            }
+
+            public void MInventorySorter(Inventory[] v1, int v2, MFood[] v3, int v4)
             { // v1 inv v2 slotchecker v3 jfoodarray v4 jfood randomizer
                 try
                 {
@@ -68,22 +110,23 @@ namespace RPG_GrassCutting
             int hfoodRandomizer = 0;
             int mfoodRandomizer = 0;
             int currentWeapon = 0;
-            string goalDayAsked = "";
-            string purchaseAsk;
-            string useAsk;
             int goalDay = 0;
             int currentDay = 1;
             int multiplierRupee = 0;
             int foundRupees = 0;
+            int use = 0;
+            string goalDayAsked = "";
+            string purchaseAsk;
+            string useAsk;
             bool goHome = false;
             bool goBack = true;
             bool gameOn = true;
             Inventory[] inv = new Inventory[9];
-            Inventory slotFill = new Inventory(1, 1, 1, "N/A");
-            Inventory[] inventoryArray = new Inventory[] { };
+            //Inventory slotFill = new Inventory(1, 1, 1, "N/A");
+            //Inventory[] inventoryArray = new Inventory[] { };
             for (int i = 0; i < 9; i++)
             {
-                inv[i] = slotFill;
+                inv[i] = new Inventory(0, 0, 0, "Blank");
             }
             //inv[0] = slot1
             //re.Ask(inv[0].foodString);
@@ -127,7 +170,9 @@ namespace RPG_GrassCutting
                 {
                     goBack = true;
                     Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"Day : {currentDay}\r\nRupees : {pl.rupees}\r\nHealth : {pl.health}\r\nHunger : {pl.hunger}\r\n---------------\r\n");
+                    Console.ForegroundColor = ConsoleColor.Gray;
                     string buysellrentask = re.Ask("Welcome to my shop mighty traveler \r\n\r\nWould you like to Buy[1], Sell[2], Rent[3]?, Check inventory[i]? go Home[g]? or quit [q] >");
                     buysellrentask = buysellrentask.ToLower();
                     int buysellrent = 0;
@@ -138,18 +183,52 @@ namespace RPG_GrassCutting
                             while (goBack == true)
                             {
                                 Console.Clear();
+                                Console.ForegroundColor = ConsoleColor.Green;
                                 Console.WriteLine($"Day : {currentDay}\r\nRupees : {pl.rupees}\r\nHealth : {pl.health}\r\nHunger : {pl.hunger}\r\n---------------\r\n");
-                                Console.WriteLine($"Item : {inventoryArray[1].foodString}\r\nHealth Gain : {inv[1].healthGain}\r\nHunger Gain : {inv[1].hungerGain}");
+                                Console.ForegroundColor = ConsoleColor.Gray;
+                                Console.WriteLine("Which item would you like to select between 0-8? Or type [b] to go back >\r\n");
                                 for (int i = 0; i < 9; i++)
                                 {
-                                Console.WriteLine($"Item : {inv[i].foodString}\r\nHealth Gain : {inv[i].healthGain}\r\nHunger Gain : {inv[i].hungerGain}");
-                                    Console.WriteLine(i+1);
+                                    Console.WriteLine($"\r\nItem Slot {i}");
+                                    Console.WriteLine($"Item : {inv[i].foodString}\r\nHealth Gain : {inv[i].healthGain}\r\nHunger Gain : {inv[i].hungerGain}");
                                 }
-                                Console.WriteLine($"Item : {inv[1].foodString}\r\nHealth Gain : {inv[1].healthGain}\r\nHunger Gain : {inv[1].hungerGain}");
-                                Console.ReadKey();
+                                useAsk = Console.ReadLine();
+                                useAsk = useAsk.ToLower();
+                                if (useAsk == "b" || useAsk == "b")
+                                {
+                                    goBack = false;
+                                    goHome = false;
+                                    break;
+                                }
+                                Int32.TryParse(useAsk, out use);
+                                
 
+                                for (int i = 0; i < 8; i++)
+                                {
+                                    inv[use] = inv[use + 1];
+                                    use++;
+                                }
+                                slotChecker--;
+                                goHome = false;
+                                break;
+                                //delete inv[use]
+
+                                //
+
+                                //switch (use)
+                                //{
+                                //    case 1:
+
+                                //        break;
+
+                                //default:
+                                //        goBack = false;
+                                //Console.WriteLine("Incorrect input, press any key to continue >");
+                                //Console.ReadKey();
+                                //break;
+                                
                             }
-                            break;
+                            continue;
 
                         case "g":
 
@@ -168,7 +247,9 @@ namespace RPG_GrassCutting
                                     //Case for buying
                                     case 1:
                                         Console.Clear();
+                                        Console.ForegroundColor = ConsoleColor.Green;
                                         Console.WriteLine($"Day : {currentDay}\r\nRupees : {pl.rupees}\r\nHealth : {pl.health}\r\nHunger : {pl.hunger}\r\n---------------\r\n");
+                                        Console.ForegroundColor = ConsoleColor.Gray;
                                         Console.WriteLine("Here is what I have available for today!\r\n");
                                         Console.WriteLine($"{jfoodArray[jfoodRandomizer].foodString}[1]\r\n{hfoodArray[hfoodRandomizer].foodString}[2]\r\n{mfoodArray[mfoodRandomizer].foodString}[3]\r\n{jobUpgradeArray[currentWeapon+1].jobUpgradeName}[4]\r\nor back to store front[b]\r\n");
                                         string foodAsk = re.Ask("What would you like to do? >");
@@ -186,7 +267,9 @@ namespace RPG_GrassCutting
                                             case 1:
                                                 //Note to self make void and when calling it here fill the parameter with j h or m
                                                 Console.Clear();
+                                                Console.ForegroundColor = ConsoleColor.Green;
                                                 Console.WriteLine($"Day : {currentDay}\r\nRupees : {pl.rupees}\r\nHealth : {pl.health}\r\nHunger : {pl.hunger}\r\n---------------\r\n");
+                                                Console.ForegroundColor = ConsoleColor.Gray;
                                                 purchaseAsk = re.Ask($"You have selected the {jfoodArray[jfoodRandomizer].foodString}\r\n\r\n{jfoodArray[jfoodRandomizer].foodString}\r\n" +
                                                 $"Price : {jfoodArray[jfoodRandomizer].price} \r\n" +
                                                 $"Quantity : {jfoodArray[jfoodRandomizer].quantity} \r\n" +
@@ -198,7 +281,7 @@ namespace RPG_GrassCutting
 
                                                 if (((purchaseAsk == "y" || purchaseAsk == "yes")) && ((jfoodArray[jfoodRandomizer].quantity > 0) && (pl.rupees >= jfoodArray[jfoodRandomizer].price)))
                                                 {
-                                                    invSort.InventorySorter(inv, slotChecker, jfoodArray, jfoodRandomizer);
+                                                    invSort.JInventorySorter(inv, slotChecker, jfoodArray, jfoodRandomizer);
                                                     if (invSort.runInvSort == true)
                                                     {
                                                         jfoodArray[jfoodRandomizer].quantity -= 1;
@@ -206,47 +289,14 @@ namespace RPG_GrassCutting
                                                         slotChecker++;
                                                         break;
                                                     }
-
-                                                    //try
-                                                    //{
-                                                    //inv[slotChecker].price = jfoodArray[jfoodRandomizer].price;
-                                                    //inv[slotChecker].healthGain = jfoodArray[jfoodRandomizer].healthGain;
-                                                    //inv[slotChecker].hungerGain = jfoodArray[jfoodRandomizer].hungerGain;
-                                                    //inv[slotChecker].foodString = jfoodArray[jfoodRandomizer].foodString;
-                                                    //}
-                                                    //catch (System.IndexOutOfRangeException)
-                                                    //{
-                                                    //    Console.Clear();
-                                                    //    Console.WriteLine($"Day : {currentDay}\r\nRupees : {pl.rupees}\r\nHealth : {pl.health}\r\nHunger : {pl.hunger}\r\n---------------\r\n");
-                                                    //    Console.WriteLine("You're inventory is full!");
-                                                    //    Console.ReadKey();
-                                                    //    break;
-
-                                                    //}
-                                                    //jfoodArray[jfoodRandomizer].quantity -= 1;
-                                                    //pl.rupees -= jfoodArray[jfoodRandomizer].price;
-                                                    //slotChecker++;
-
-                                                    //inv[slotChecker].healthGain = jfoodArray[jfoodRandomizer].healthGain;
-                                                    //inv[slotChecker].hungerGain = jfoodArray[jfoodRandomizer].hungerGain;
-                                                    //inv[slotChecker].foodString = jfoodArray[jfoodRandomizer].foodString;
-
-                                                    //pl.hunger += jfoodArray[jfoodRandomizer].hungerGain;
-                                                    //pl.health += jfoodArray[jfoodRandomizer].healthGain;
-                                                    //if (pl.health > pl.startHealth)
-                                                    //{
-                                                    //    pl.health = pl.startHealth;
-                                                    //}
-                                                    //if (pl.hunger > pl.startHunger)
-                                                    //{
-                                                    //    pl.hunger = pl.startHunger;
-                                                    //}
                                                     Console.WriteLine($"Rupees = {pl.rupees}\r\nHunger : {pl.hunger}");
                                                 }
                                                 else if (((purchaseAsk == "y" || purchaseAsk == "yes")) && !((jfoodArray[jfoodRandomizer].quantity > 0) && (pl.rupees >= jfoodArray[jfoodRandomizer].price)))
                                                 {
                                                     Console.Clear();
+                                                    Console.ForegroundColor = ConsoleColor.Green;
                                                     Console.WriteLine($"Day : {currentDay}\r\nRupees : {pl.rupees}\r\nHealth : {pl.health}\r\nHunger : {pl.hunger}\r\n---------------\r\n");
+                                                    Console.ForegroundColor = ConsoleColor.Gray;
                                                     Console.WriteLine($"You have selected the {jfoodArray[jfoodRandomizer].foodString}\r\n\r\n{jfoodArray[jfoodRandomizer].foodString}\r\n" +
                                                     $"Price : {jfoodArray[jfoodRandomizer].price} \r\n" +
                                                     $"Quantity : {jfoodArray[jfoodRandomizer].quantity} \r\n" +
@@ -260,7 +310,9 @@ namespace RPG_GrassCutting
                                             //Healthy Food
                                             case 2:
                                                 Console.Clear();
+                                                Console.ForegroundColor = ConsoleColor.Green;
                                                 Console.WriteLine($"Day : {currentDay}\r\nRupees : {pl.rupees}\r\nHealth : {pl.health}\r\nHunger : {pl.hunger}\r\n---------------\r\n");
+                                                Console.ForegroundColor = ConsoleColor.Gray;
                                                 purchaseAsk = re.Ask($"You have selected the {hfoodArray[hfoodRandomizer].foodString}\r\n\r\n{hfoodArray[hfoodRandomizer].foodString}\r\n" +
                                                 $"Price : {hfoodArray[hfoodRandomizer].price} \r\n" +
                                                 $"Quantity : {hfoodArray[hfoodRandomizer].quantity} \r\n" +
@@ -271,24 +323,22 @@ namespace RPG_GrassCutting
 
                                                 if (((purchaseAsk == "y" || purchaseAsk == "yes")) && ((hfoodArray[hfoodRandomizer].quantity > 0) && (pl.rupees >= hfoodArray[hfoodRandomizer].price)))
                                                 {
-                                                    hfoodArray[hfoodRandomizer].quantity -= 1;
-                                                    pl.hunger += hfoodArray[hfoodRandomizer].hungerGain;
-                                                    pl.health += hfoodArray[hfoodRandomizer].healthGain;
-                                                    pl.rupees -= hfoodArray[hfoodRandomizer].price;
-                                                    if (pl.health > pl.startHealth)
+                                                    invSort.HInventorySorter(inv, slotChecker, hfoodArray, hfoodRandomizer);
+                                                    if (invSort.runInvSort == true)
                                                     {
-                                                        pl.health = pl.startHealth;
+                                                        hfoodArray[hfoodRandomizer].quantity -= 1;
+                                                        pl.rupees -= hfoodArray[hfoodRandomizer].price;
+                                                        slotChecker++;
+                                                        break;
                                                     }
-                                                    if (pl.hunger > pl.startHunger)
-                                                    {
-                                                        pl.hunger = pl.startHunger;
-                                                    }
-                                                    Console.WriteLine($"Rupees = {pl.rupees}");
+                                                    Console.WriteLine($"Rupees = {pl.rupees}\r\nHunger : {pl.hunger}");
                                                 }
                                                 else if (((purchaseAsk == "y" || purchaseAsk == "yes")) && !((hfoodArray[hfoodRandomizer].quantity > 0) && (pl.rupees >= hfoodArray[hfoodRandomizer].price)))
                                                 {
                                                     Console.Clear();
+                                                    Console.ForegroundColor = ConsoleColor.Green;
                                                     Console.WriteLine($"Day : {currentDay}\r\nRupees : {pl.rupees}\r\nHealth : {pl.health}\r\nHunger : {pl.hunger}\r\n---------------\r\n");
+                                                    Console.ForegroundColor = ConsoleColor.Gray;
                                                     Console.WriteLine($"You have selected the {hfoodArray[hfoodRandomizer].foodString}\r\n\r\n{hfoodArray[hfoodRandomizer].foodString}\r\n" +
                                                     $"Price : {hfoodArray[hfoodRandomizer].price} \r\n" +
                                                     $"Quantity : {hfoodArray[hfoodRandomizer].quantity} \r\n" +
@@ -301,7 +351,9 @@ namespace RPG_GrassCutting
                                             //Mystery food
                                             case 3:
                                                 Console.Clear();
+                                                Console.ForegroundColor = ConsoleColor.Green;
                                                 Console.WriteLine($"Day : {currentDay}\r\nRupees : {pl.rupees}\r\nHealth : {pl.health}\r\nHunger : {pl.hunger}\r\n---------------\r\n");
+                                                Console.ForegroundColor = ConsoleColor.Gray;
                                                 purchaseAsk = re.Ask($"You have selected the {mfoodArray[mfoodRandomizer].foodString}\r\n\r\n{mfoodArray[mfoodRandomizer].foodString}\r\n" +
                                                 $"Price : {mfoodArray[mfoodRandomizer].price} \r\n" +
                                                 $"Quantity : {mfoodArray[mfoodRandomizer].quantity} \r\n" +
@@ -312,25 +364,22 @@ namespace RPG_GrassCutting
 
                                                 if (((purchaseAsk == "y" || purchaseAsk == "yes")) && ((mfoodArray[mfoodRandomizer].quantity > 0) && (pl.rupees >= mfoodArray[mfoodRandomizer].price)))
                                                 {
-                                                    mfoodArray[mfoodRandomizer].quantity -= 1;
-                                                    pl.hunger += mfoodArray[mfoodRandomizer].hungerGain;
-                                                    pl.health += mfoodArray[mfoodRandomizer].healthGain;
-                                                    pl.rupees -= mfoodArray[mfoodRandomizer].price;
-                                                    if (pl.health > pl.startHealth)
+                                                    invSort.MInventorySorter(inv, slotChecker, mfoodArray, mfoodRandomizer);
+                                                    if (invSort.runInvSort == true)
                                                     {
-                                                        pl.health = pl.startHealth;
+                                                        mfoodArray[mfoodRandomizer].quantity -= 1;
+                                                        pl.rupees -= mfoodArray[mfoodRandomizer].price;
+                                                        slotChecker++;
+                                                        break;
                                                     }
-                                                    if (pl.hunger > pl.startHunger)
-                                                    {
-                                                        pl.hunger = pl.startHunger;
-                                                    }
-                                                    Console.WriteLine($"Rupees = {pl.rupees}");
-
+                                                    Console.WriteLine($"Rupees = {pl.rupees}\r\nHunger : {pl.hunger}");
                                                 }
                                                 else if (((purchaseAsk == "y" || purchaseAsk == "yes")) && !((mfoodArray[mfoodRandomizer].quantity > 0) && (pl.rupees >= mfoodArray[mfoodRandomizer].price)))
                                                 {
                                                     Console.Clear();
+                                                    Console.ForegroundColor = ConsoleColor.Green;
                                                     Console.WriteLine($"Day : {currentDay}\r\nRupees : {pl.rupees}\r\nHealth : {pl.health}\r\nHunger : {pl.hunger}\r\n---------------\r\n");
+                                                    Console.ForegroundColor = ConsoleColor.Gray;
                                                     Console.WriteLine($"You have selected the {mfoodArray[mfoodRandomizer].foodString}\r\n\r\n{mfoodArray[mfoodRandomizer].foodString}\r\n" +
                                                     $"Price : {mfoodArray[mfoodRandomizer].price} \r\n" +
                                                     $"Quantity : {mfoodArray[mfoodRandomizer].quantity} \r\n" +
@@ -345,7 +394,9 @@ namespace RPG_GrassCutting
                                                 Console.Clear();
                                                 if (jobUpgradeArray[currentWeapon+1].finalWeapon == false)
                                                 {
+                                                    Console.ForegroundColor = ConsoleColor.Green;
                                                     Console.WriteLine($"Day : {currentDay}\r\nRupees : {pl.rupees}\r\nHealth : {pl.health}\r\nHunger : {pl.hunger}\r\n---------------\r\n");
+                                                    Console.ForegroundColor = ConsoleColor.Gray;
                                                     purchaseAsk = re.Ask($"You have selected the {jobUpgradeArray[currentWeapon+1].jobUpgradeName}\r\n\r\n{jobUpgradeArray[currentWeapon+1].jobUpgradeName}\r\n" +
                                                     $"Price : {jobUpgradeArray[currentWeapon+1].price} \r\n" +
                                                     $"Preformance : {jobUpgradeArray[currentWeapon+1].jobUpgrade} \r\n" +
@@ -363,7 +414,9 @@ namespace RPG_GrassCutting
                                                     else if (((purchaseAsk == "y" || purchaseAsk == "yes")) && !(pl.rupees >= jobUpgradeArray[currentWeapon+1].price))
                                                     {
                                                         Console.Clear();
+                                                        Console.ForegroundColor = ConsoleColor.Green;
                                                         Console.WriteLine($"Day : {currentDay}\r\nRupees : {pl.rupees}\r\nHealth : {pl.health}\r\nHunger : {pl.hunger}\r\n---------------\r\n");
+                                                        Console.ForegroundColor = ConsoleColor.Gray;
                                                         Console.WriteLine($"You have selected the {jobUpgradeArray[currentWeapon + 1].jobUpgradeName}\r\n\r\n{jobUpgradeArray[currentWeapon + 1].jobUpgradeName}\r\n" +
                                                         $"Price : {jobUpgradeArray[currentWeapon + 1].price} \r\n" +
                                                         $"Preformance : {jobUpgradeArray[currentWeapon + 1].jobUpgrade} \r\n" +
@@ -374,7 +427,9 @@ namespace RPG_GrassCutting
                                                 }
                                                 else
                                                 {
+                                                    Console.ForegroundColor = ConsoleColor.Green;
                                                     Console.WriteLine($"Day : {currentDay}\r\nRupees : {pl.rupees}\r\nHealth : {pl.health}\r\nHunger : {pl.hunger}\r\n---------------\r\n");
+                                                    Console.ForegroundColor = ConsoleColor.Gray;
                                                     purchaseAsk = re.Ask($"{jobUpgradeArray[currentWeapon + 1].jobUpgradeName}\r\n" +
                                                     $"Description : {jobUpgradeArray[currentWeapon + 1].upgradeDescription}\r\n\r\n" +
                                                     $"Press and key to go back >");
@@ -444,7 +499,9 @@ namespace RPG_GrassCutting
                 if (pl.health <= 0)
                 {
                     Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"Day : {currentDay}\r\nRupees : {pl.rupees}\r\nHealth : {pl.health}\r\nHunger : {pl.hunger}\r\n---------------\r\n");
+                    Console.ForegroundColor = ConsoleColor.Gray;
                     Console.WriteLine("You starved to death, nice job");
                     gameOn = false;
                     Console.ReadKey();
@@ -452,7 +509,9 @@ namespace RPG_GrassCutting
 
                 }
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"Day : {currentDay}\r\nRupees : {pl.rupees}\r\nHealth : {pl.health}\r\nHunger : {pl.hunger}\r\n---------------\r\n");
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine($"You work and sleep for {goalDay} days\r\nWith your {jobUpgradeArray[currentWeapon].jobUpgradeName} you mananged to get {foundRupees} Rupees\r\n\r\nPress Any Key To Continue >");
                 multiplierRupee = 0;
                 foundRupees = 0;
