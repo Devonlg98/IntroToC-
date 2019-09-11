@@ -36,8 +36,7 @@ namespace RPG_GrassCutting
                 catch (System.IndexOutOfRangeException)
                 {
                     runInvSort = false;
-                    Console.Clear();
-                    Console.WriteLine("You're inventory is full!");
+                    Console.WriteLine("You're inventory is full! You can't do that!");
                     Console.ReadKey();
                     //break; need to set this up as a boolean and then if bool true break
 
@@ -70,11 +69,12 @@ namespace RPG_GrassCutting
             int mfoodRandomizer = 0;
             int currentWeapon = 0;
             string goalDayAsked = "";
+            string purchaseAsk;
+            string useAsk;
             int goalDay = 0;
             int currentDay = 1;
             int multiplierRupee = 0;
             int foundRupees = 0;
-            string purchaseAsk;
             bool goHome = false;
             bool goBack = true;
             bool gameOn = true;
@@ -134,6 +134,15 @@ namespace RPG_GrassCutting
                     Int32.TryParse(buysellrentask, out buysellrent);
                     switch (buysellrentask)
                     {
+                        case "i":
+                            while (goBack == true)
+                            {
+                                Console.Clear();
+                                Console.WriteLine($"Day : {currentDay}\r\nRupees : {pl.rupees}\r\nHealth : {pl.health}\r\nHunger : {pl.hunger}\r\n---------------\r\n");
+
+                            }
+                            break;
+
                         case "g":
 
                             goHome = true;
@@ -151,7 +160,6 @@ namespace RPG_GrassCutting
                                     //Case for buying
                                     case 1:
                                         Console.Clear();
-
                                         Console.WriteLine($"Day : {currentDay}\r\nRupees : {pl.rupees}\r\nHealth : {pl.health}\r\nHunger : {pl.hunger}\r\n---------------\r\n");
                                         Console.WriteLine("Here is what I have available for today!\r\n");
                                         Console.WriteLine($"{jfoodArray[jfoodRandomizer].foodString}[1]\r\n{hfoodArray[hfoodRandomizer].foodString}[2]\r\n{mfoodArray[mfoodRandomizer].foodString}[3]\r\n{jobUpgradeArray[currentWeapon+1].jobUpgradeName}[4]\r\nor back to store front[b]\r\n");
