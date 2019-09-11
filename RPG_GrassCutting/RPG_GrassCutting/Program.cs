@@ -139,6 +139,14 @@ namespace RPG_GrassCutting
                             {
                                 Console.Clear();
                                 Console.WriteLine($"Day : {currentDay}\r\nRupees : {pl.rupees}\r\nHealth : {pl.health}\r\nHunger : {pl.hunger}\r\n---------------\r\n");
+                                Console.WriteLine($"Item : {inventoryArray[1].foodString}\r\nHealth Gain : {inv[1].healthGain}\r\nHunger Gain : {inv[1].hungerGain}");
+                                for (int i = 0; i < 9; i++)
+                                {
+                                Console.WriteLine($"Item : {inv[i].foodString}\r\nHealth Gain : {inv[i].healthGain}\r\nHunger Gain : {inv[i].hungerGain}");
+                                    Console.WriteLine(i+1);
+                                }
+                                Console.WriteLine($"Item : {inv[1].foodString}\r\nHealth Gain : {inv[1].healthGain}\r\nHunger Gain : {inv[1].hungerGain}");
+                                Console.ReadKey();
 
                             }
                             break;
@@ -196,6 +204,7 @@ namespace RPG_GrassCutting
                                                         jfoodArray[jfoodRandomizer].quantity -= 1;
                                                         pl.rupees -= jfoodArray[jfoodRandomizer].price;
                                                         slotChecker++;
+                                                        break;
                                                     }
 
                                                     //try
