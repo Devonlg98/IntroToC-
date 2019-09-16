@@ -29,6 +29,7 @@ namespace RPG_GrassCutting
                     v1[v2].healthGain = v3[v4].healthGain;
                     v1[v2].hungerGain = v3[v4].hungerGain;
                     v1[v2].foodString = v3[v4].foodString;
+                    v1[v2].slotFilled = v3[v4].slotFilled;
                     runInvSort = true;
                 }
                 catch (System.IndexOutOfRangeException)
@@ -50,6 +51,7 @@ namespace RPG_GrassCutting
                     v1[v2].healthGain = v3[v4].healthGain;
                     v1[v2].hungerGain = v3[v4].hungerGain;
                     v1[v2].foodString = v3[v4].foodString;
+                    v1[v2].slotFilled = v3[v4].slotFilled;
                     runInvSort = true;
                 }
                 catch (System.IndexOutOfRangeException)
@@ -71,6 +73,7 @@ namespace RPG_GrassCutting
                     v1[v2].healthGain = v3[v4].healthGain;
                     v1[v2].hungerGain = v3[v4].hungerGain;
                     v1[v2].foodString = v3[v4].foodString;
+                    v1[v2].slotFilled = v3[v4].slotFilled;
                     runInvSort = true;
                 }
                 catch (System.IndexOutOfRangeException)
@@ -86,8 +89,6 @@ namespace RPG_GrassCutting
         }
 
 
-
-        
         static void Main(string[] args)
         {
 
@@ -117,6 +118,7 @@ namespace RPG_GrassCutting
             JobUpgrade fw1 = new JobUpgrade(9^9, 4, "Sold Out", "Currently there are no more upgrades available", true);
             JobUpgrade[] jobUpgradeArray = new JobUpgrade[] {bst1, sh1, wo1, st1, fw1};
             //v1 price, v2 jobupgrade, v3jobupgradename, v4 jobupgrade description
+
             int slotChecker = 0;
             int jfoodRandomizer = 0;
             int hfoodRandomizer = 0;
@@ -131,10 +133,12 @@ namespace RPG_GrassCutting
             string goalDayAsked = "";
             string purchaseAsk = "";
             string useAsk = "";
+            bool slotFound = false; 
             bool goHome = false;
             bool goBack = true;
             bool gameOn = true;
             bool startGame = false;
+            string[] invValue = new string[9] { "inv1.txt", "inv2.txt", "inv3.txt", "inv4.txt", "inv5.txt", "inv6.txt", "inv7.txt", "inv8.txt", "inv9.txt" };
             pl.hunger = pl.startHunger;
             pl.health = pl.startHealth;
             //for (int i = 0; i < 20; i++)
@@ -143,7 +147,7 @@ namespace RPG_GrassCutting
             //}
             for (int i = 0; i < 9; i++)
             {
-                inv[i] = new Inventory(0, 0, 0, "Blank");
+                inv[i] = new Inventory(0, 0, 0, "Blank", false);
             }
 
 
@@ -164,7 +168,7 @@ namespace RPG_GrassCutting
                 Console.WriteLine($"\r\n---------------\r\n");
                 return;
             }
-
+            
 
             // reprints UI at the top of the screen, it being like this allows for quick edits
             saveAsk = re.Ask($"Welcome to my game, RPG Grass Cutting Store!\r\nType [load] to load the previous game\r\nType [new] to start a new game and overwrite the save");
@@ -203,9 +207,9 @@ namespace RPG_GrassCutting
                             Int32.TryParse(currentDaySave, out currentDay);
                             readerCurrentDay.Close();
 
-
-
-                            StreamReader readerInv1 = new StreamReader("inv1.txt");
+                            
+                            
+                            StreamReader readerInv1 = new StreamReader("../../TextFiles/inv1.txt");
                             inv[0].foodString = readerInv1.ReadLine();
                             string invHealth1Save = readerInv1.ReadLine();
                             Int32.TryParse(invHealth1Save, out inv[0].healthGain);
@@ -213,7 +217,7 @@ namespace RPG_GrassCutting
                             Int32.TryParse(invHunger1Save, out inv[0].hungerGain);
                             readerInv1.Close();
 
-                            StreamReader readerInv2 = new StreamReader("inv2.txt");
+                            StreamReader readerInv2 = new StreamReader("../../TextFiles/inv2.txt");
                             inv[1].foodString = readerInv2.ReadLine();
                             string invHealth2Save = readerInv2.ReadLine();
                             Int32.TryParse(invHealth2Save, out inv[1].healthGain);
@@ -221,7 +225,7 @@ namespace RPG_GrassCutting
                             Int32.TryParse(invHunger2Save, out inv[1].hungerGain);
                             readerInv2.Close();
 
-                            StreamReader readerInv3 = new StreamReader("inv3.txt");
+                            StreamReader readerInv3 = new StreamReader("../../TextFiles/inv3.txt");
                             inv[2].foodString = readerInv3.ReadLine();
                             string invHealth3Save = readerInv3.ReadLine();
                             Int32.TryParse(invHealth3Save, out inv[2].healthGain);
@@ -229,7 +233,7 @@ namespace RPG_GrassCutting
                             Int32.TryParse(invHunger3Save, out inv[2].hungerGain);
                             readerInv3.Close();
 
-                            StreamReader readerInv4 = new StreamReader("inv4.txt");
+                            StreamReader readerInv4 = new StreamReader("../../TextFiles/inv4.txt");
                             inv[3].foodString = readerInv4.ReadLine();
                             string invHealth4Save = readerInv4.ReadLine();
                             Int32.TryParse(invHealth4Save, out inv[3].healthGain);
@@ -237,7 +241,7 @@ namespace RPG_GrassCutting
                             Int32.TryParse(invHunger4Save, out inv[3].hungerGain);
                             readerInv4.Close();
 
-                            StreamReader readerInv5 = new StreamReader("inv5.txt");
+                            StreamReader readerInv5 = new StreamReader("../../TextFiles/inv5.txt");
                             inv[4].foodString = readerInv5.ReadLine();
                             string invHealth5Save = readerInv5.ReadLine();
                             Int32.TryParse(invHealth5Save, out inv[4].healthGain);
@@ -245,7 +249,7 @@ namespace RPG_GrassCutting
                             Int32.TryParse(invHunger5Save, out inv[4].hungerGain);
                             readerInv5.Close();
 
-                            StreamReader readerInv6 = new StreamReader("inv6.txt");
+                            StreamReader readerInv6 = new StreamReader("../../TextFiles/inv6.txt");
                             inv[5].foodString = readerInv6.ReadLine();
                             string invHealth6Save = readerInv6.ReadLine();
                             Int32.TryParse(invHealth6Save, out inv[5].healthGain);
@@ -253,7 +257,7 @@ namespace RPG_GrassCutting
                             Int32.TryParse(invHunger6Save, out inv[5].hungerGain);
                             readerInv6.Close();
 
-                            StreamReader readerInv7 = new StreamReader("inv7.txt");
+                            StreamReader readerInv7 = new StreamReader("../../TextFiles/inv7.txt");
                             inv[6].foodString = readerInv7.ReadLine();
                             string invHealth7Save = readerInv7.ReadLine();
                             Int32.TryParse(invHealth7Save, out inv[6].healthGain);
@@ -262,7 +266,7 @@ namespace RPG_GrassCutting
                             readerInv7.Close();
 
 
-                            StreamReader readerInv8 = new StreamReader("inv8.txt");
+                            StreamReader readerInv8 = new StreamReader("../../TextFiles/inv8.txt");
                             inv[7].foodString = readerInv8.ReadLine();
                             string invHealth8Save = readerInv8.ReadLine();
                             Int32.TryParse(invHealth8Save, out inv[7].healthGain);
@@ -270,7 +274,7 @@ namespace RPG_GrassCutting
                             Int32.TryParse(invHunger8Save, out inv[7].hungerGain);
                             readerInv8.Close();
 
-                            StreamReader readerInv9 = new StreamReader("inv9.txt");
+                            StreamReader readerInv9 = new StreamReader("../../TextFiles/inv9.txt");
                             inv[8].foodString = readerInv9.ReadLine();
                             string invHealth9Save = readerInv9.ReadLine();
                             Int32.TryParse(invHealth9Save, out inv[8].healthGain);
@@ -310,17 +314,17 @@ namespace RPG_GrassCutting
                     }
                 }
                 // 1 2 or 3 for each case
-                JFood pz1 = new JFood(3, 8, 0, 2, ($"Pizza Slice"));
-                JFood dt1 = new JFood(2, 12, 0, 1, ("Donut"));
-                JFood bs1 = new JFood(6, 2, 1, 6, ("BLT Sammy"));
+                JFood pz1 = new JFood(3, 8, 0, 2, ($"Pizza Slice"), true);
+                JFood dt1 = new JFood(2, 12, 0, 1, ("Donut"), true);
+                JFood bs1 = new JFood(6, 2, 1, 6, ("BLT Sammy"), true);
                 // Banana Apple Orange
-                HFood ba1 = new HFood(10, 3, 1, 3, ("Banana"));
-                HFood ap1 = new HFood(10, 1, 3, 1, ("Apple"));
-                HFood or1 = new HFood(8, 1, 2, 2, ("Orange"));
+                HFood ba1 = new HFood(10, 3, 1, 3, ("Banana"), true);
+                HFood ap1 = new HFood(10, 1, 3, 1, ("Apple"), true);
+                HFood or1 = new HFood(8, 1, 2, 2, ("Orange"), true);
                 // OctoPopRocs, SugarSkullTulas, DekuPeanuts
-                MFood oc1 = new MFood(4, 10, -1, 1, ("OctoPopRocs"));
-                MFood su1 = new MFood(5, 5, -1, 0, ("SugarSkullTulas"));
-                MFood de1 = new MFood(9, 3, -2, 3, ("DekuPeanuts"));
+                MFood oc1 = new MFood(4, 10, -1, 1, ("OctoPopRocs"), true);
+                MFood su1 = new MFood(5, 5, -1, 0, ("SugarSkullTulas"), true);
+                MFood de1 = new MFood(9, 3, -2, 3, ("DekuPeanuts"), true);
                 JFood[] jfoodArray = new JFood[3] { pz1, dt1, bs1 };
                 HFood[] hfoodArray = new HFood[3] { ba1, ap1, or1 };
                 MFood[] mfoodArray = new MFood[3] { oc1, su1, de1 };
@@ -341,6 +345,7 @@ namespace RPG_GrassCutting
                         case "i":
                             while (goBack == true)
                             {
+                                 
                                 Console.Clear();
                                 UI();
                                 Console.WriteLine("Which item would you like to select between 1-9? Or type [b] to go back >\r\n");
@@ -358,16 +363,17 @@ namespace RPG_GrassCutting
                                     break;
                                 }
                                 Int32.TryParse(useAsk, out use);
-
-                                if(use < 10 && use > 0)
+                                // if there is an item ask the player if they want to use it.
+                                if ((use < 10 && use > 0) && (inv[use-1].slotFilled == true))
                                 {
-                                        use -= 1;
+                                    use -= 1;
                                     Console.Clear();
                                     UI();
                                     useAsk = re.Ask($"You have selected Item : {inv[use].foodString}\r\nHealth Gain : {inv[use].healthGain}\r\nHunger Gain : {inv[use].hungerGain}\r\n\r\nWould you like to use this? [y]es or [n]o >");
                                     useAsk = useAsk.ToLower();
                                     if (useAsk == "y" || useAsk == "yes")
                                     {
+
                                         Console.WriteLine($"You eat the {inv[use].foodString}");
                                         Console.ReadKey();
                                         pl.health += inv[use].healthGain;
@@ -380,18 +386,19 @@ namespace RPG_GrassCutting
                                         {
                                             pl.health = pl.startHealth;
                                         }
-                                        inv[use] = new Inventory(0, 0, 0, "Blank");
                                         for (int i = use; i < 8; i++)
                                         {
-                                            inv[use] = inv[use + 1];
-                                            use++;
+                                            inv[i] = inv[i + 1];
                                         }
+                                        inv[8] = new Inventory(0, 0, 0, "Blank", false);
+                                        slotFound = true;
+
                                         slotChecker--;
                                         if (slotChecker < 0)
                                         {
                                             slotChecker = 0;
                                         }
-                                        
+
                                     }
                                     goBack = true;
                                     
@@ -428,7 +435,7 @@ namespace RPG_GrassCutting
                                         Console.WriteLine($"{jfoodArray[jfoodRandomizer].foodString}[1]\r\n{hfoodArray[hfoodRandomizer].foodString}[2]\r\n{mfoodArray[mfoodRandomizer].foodString}[3]\r\n{jobUpgradeArray[currentWeapon+1].jobUpgradeName}[4]\r\nor back to store front[b]\r\n");
                                         string foodAsk = re.Ask("What would you like to do? >");
                                         foodAsk = foodAsk.ToLower();
-                                        if (foodAsk == "b" || foodAsk == "b")
+                                        if (foodAsk == "b" )
                                         {
                                             goBack = false;
                                             break;
@@ -453,17 +460,33 @@ namespace RPG_GrassCutting
 
                                                 if (((purchaseAsk == "y" || purchaseAsk == "yes")) && ((jfoodArray[jfoodRandomizer].quantity > 0) && (pl.rupees >= jfoodArray[jfoodRandomizer].price)))
                                                 {
-                                                    invSort.JInventorySorter(inv, slotChecker, jfoodArray, jfoodRandomizer);
-                                                    if (invSort.runInvSort == true)
+                                                    slotFound = false;
+                                                    while(slotFound == false)
                                                     {
-                                                        jfoodArray[jfoodRandomizer].quantity -= 1;
-                                                        pl.rupees -= jfoodArray[jfoodRandomizer].price;
+                                                        if (slotChecker > 8)
+                                                        {
+                                                            Console.WriteLine("You can't do that your inventory is full!");
+                                                            Console.ReadKey();
+                                                            break;
+                                                        }
+                                                        if (inv[slotChecker].slotFilled == false)
+                                                        {
+                                                            invSort.JInventorySorter(inv, slotChecker, jfoodArray, jfoodRandomizer);
+                                                            if (invSort.runInvSort == true)
+                                                            {
+                                                                jfoodArray[jfoodRandomizer].quantity -= 1;
+                                                                pl.rupees -= jfoodArray[jfoodRandomizer].price;
+                                                                slotChecker++;
+                                                                //I honestly think it's annoying you have to hit another button here, but I had to add it
+                                                                //if the player purchases items too fast, the array bugs out and assigns everything to the same item
+                                                                Console.WriteLine("You stow the item into your inventory");
+                                                                Console.ReadKey();
+                                                                slotFound = true;
+                                                                break;
+                                                            }
+                                                        }
+
                                                         slotChecker++;
-                                                        //I honestly think it's annoying you have to hit another button here, but I had to add it
-                                                        //if the player purchases items too fast, the array bugs out and assigns everything to the same item
-                                                        Console.WriteLine("You stow the item into your inventory");
-                                                        Console.ReadKey();
-                                                        break;
                                                     }
                                                     Console.WriteLine($"Rupees = {pl.rupees}\r\nHunger : {pl.hunger}");
                                                 }
@@ -475,7 +498,7 @@ namespace RPG_GrassCutting
                                                     $"Price : {jfoodArray[jfoodRandomizer].price} \r\n" +
                                                     $"Quantity : {jfoodArray[jfoodRandomizer].quantity} \r\n" +
                                                     $"Health Gain : {jfoodArray[jfoodRandomizer].healthGain}\r\n" +
-                                                    $"Hunger Gain : {jfoodArray[jfoodRandomizer].hungerGain}\r\n\r\nEither you can't afford this, or there are none left in stock\r\nPress and key to go back >");
+                                                    $"Hunger Gain : {jfoodArray[jfoodRandomizer].hungerGain}\r\n\r\nEither you can't afford this, or there are none left in stock\r\nPress any key to go back >");
                                                     Console.ReadKey();
                                                 }
                                                 break;
@@ -641,7 +664,7 @@ namespace RPG_GrassCutting
                                                 pl.rupees += (inv[use].price/2);
                                                 Console.ReadKey();
 
-                                                inv[use] = new Inventory(0, 0, 0, "Blank");
+                                                inv[use] = new Inventory(0, 0, 0, "Blank", false);
                                                 for (int i = use; i < 8; i++)
                                                 {
                                                     inv[use] = inv[use + 1];
@@ -726,7 +749,7 @@ namespace RPG_GrassCutting
 
                     for (int i = 0; i <9; i++)
                     {
-                    writer = new StreamWriter($"inv{i+1}.txt");
+                    writer = new StreamWriter($"{i+1}");
                     writer.WriteLine(inv[i].foodString);
                     writer.WriteLine(inv[i].healthGain);
                     writer.WriteLine(inv[i].hungerGain);

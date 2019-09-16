@@ -13,14 +13,16 @@ namespace RPG_GrassCutting
             public int healthGain = 0;
             public int hungerGain = 0;
             public string foodString;
+            public bool slotFilled = false;
 
-            public JFood(int v1, int v2, int v3, int v4, string v5)
+            public JFood(int v1, int v2, int v3, int v4, string v5, bool v6)
             {
                 this.price = v1;
                 this.quantity = v2;
                 this.healthGain = v3;
                 this.hungerGain = v4;
                 this.foodString = v5;
+                this.slotFilled = v6;
             }
         }
 
@@ -32,14 +34,15 @@ namespace RPG_GrassCutting
             public int healthGain = 0;
             public int hungerGain = 0;
             public string foodString;
-
-            public HFood(int v1, int v2, int v3, int v4, string v5)
+            public bool slotFilled = false;
+            public HFood(int v1, int v2, int v3, int v4, string v5, bool v6)
             {
                 this.price = v1;
                 this.quantity = v2;
                 this.healthGain = v3;
                 this.hungerGain = v4;
                 this.foodString = v5;
+                this.slotFilled = v6;
             }
         }
 
@@ -51,14 +54,15 @@ namespace RPG_GrassCutting
             public int healthGain = 0;
             public int hungerGain = 0;
             public string foodString;
-
-            public MFood(int v1, int v2, int v3, int v4, string v5)
+            public bool slotFilled = false;
+            public MFood(int v1, int v2, int v3, int v4, string v5, bool v6)
             {
                 this.price = v1;
                 this.quantity = v2;
                 this.healthGain = v3;
                 this.hungerGain = v4;
                 this.foodString = v5;
+                this.slotFilled = v6;
             }
         }
 }
