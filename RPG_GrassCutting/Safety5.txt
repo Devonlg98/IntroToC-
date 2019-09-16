@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -109,7 +109,6 @@ namespace RPG_GrassCutting
             Random rd = new Random();
             Read re = new Read();
             Inventory[] inv = new Inventory[9];
-            Inventory[] storage = new Inventory[4];
             JobUpgrade bst1 = new JobUpgrade(0, 1, "Bad Stick", "It's a stick, what did you expect?", false);
             JobUpgrade sh1 = new JobUpgrade(50, 2, "Sharp Stick", "Just a slightly sharpened stick", false);
             JobUpgrade wo1 = new JobUpgrade(200, 3, "Wooden Sword", "Just a sharp stick shaped like a sword", false);
@@ -137,10 +136,6 @@ namespace RPG_GrassCutting
             bool startGame = false;
             pl.hunger = pl.startHunger;
             pl.health = pl.startHealth;
-            //for (int i = 0; i < 20; i++)
-            //{
-            //    inv[i] = new Inventory(0, 0, 0, "Blank");
-            //}
             for (int i = 0; i < 9; i++)
             {
                 inv[i] = new Inventory(0, 0, 0, "Blank");
@@ -332,7 +327,7 @@ namespace RPG_GrassCutting
                     goBack = true;
                     Console.Clear();
                     UI();
-                    string buysellrentask = re.Ask("Welcome to my shop mighty traveler \r\n\r\nWould you like to Buy[1], Sell[2], Check inventory[i], go Home[g], or quit and save? [q] >");
+                    string buysellrentask = re.Ask("Welcome to my shop mighty traveler \r\n\r\nWould you like to Buy[1], Sell[2], Rent[3]?, Check inventory[i]? go Home[g]? or quit and save? [q] >");
                     buysellrentask = buysellrentask.ToLower();
                     int buysellrent = 0;
                     Int32.TryParse(buysellrentask, out buysellrent);
@@ -736,18 +731,10 @@ namespace RPG_GrassCutting
 
                     break;
                 }
-                Console.Clear();
-                UI();
-                useAsk = re.Ask($"Would you like to [w]ork/sleep or check your [s]torage? >");
-                switch (useAsk)
-                {
-                    case "w":
-                        Console.Clear();
-                        UI();
                 goalDay = 0;
                 multiplierRupee = 0;
                 goalDayAsked = "";
-                goalDayAsked += re.Ask($"How many days would you like to sleep and work before returning to the shop? >");
+                goalDayAsked += re.Ask($"How many days would you like to sleep and work before returning to the shop");
                 Int32.TryParse(goalDayAsked, out goalDay);
                 for (int i = 0; i < goalDay; i++)
                 {
@@ -766,16 +753,6 @@ namespace RPG_GrassCutting
                     pl.rupees += multiplierRupee;
                     foundRupees += multiplierRupee;
                     currentDay++;
-                }
-                            break;
-
-                    case "s":
-
-                        break;
-
-                    default:
-
-                        break;
                 }
 
                 if (pl.health <= 0)
