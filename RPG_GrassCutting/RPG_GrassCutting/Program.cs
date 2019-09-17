@@ -749,7 +749,7 @@ namespace RPG_GrassCutting
 
                     for (int i = 0; i <9; i++)
                     {
-                    writer = new StreamWriter($"{i+1}");
+                    writer = new StreamWriter($"../../TextFiles/inv{i+1}.txt");
                     writer.WriteLine(inv[i].foodString);
                     writer.WriteLine(inv[i].healthGain);
                     writer.WriteLine(inv[i].hungerGain);
