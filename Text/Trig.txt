@@ -1,0 +1,69 @@
+Degrees = (Radians/PI)*180
+Degrees = arcsin(x/y)
+
+1. The lecture mentioned that one radian is approximately 57 degrees. What is it exactly (or to
+at least three decimal places)? 
+57.2958
+
+2.A typical field of view used in 3D games is sixty degrees. What is this in radians?
+radian = 57.2958
+60/57.2958 = 1.0472
+1.0472 radians
+
+3.in trig sln
+
+4.eh
+
+5.Again consider the three stakes laid out by the Egyptians to form a right-angled triangle.
+Given that one of the angles is a right angle, what are the other two angles?
+Hint: Use sine and cosine. 
+180-90= 90, 90/2 = 45
+the other two angles would both be 45 degrees.
+
+6.For the next two exercises, you’ll need a calculator equipped with trig functions.
+Alternatively, you can use the calculator built in to Windows, but you’ll need to set it up for
+‘Scientific’ operations (one of the options on the View menu).
+Given the following triangle:
+
+find the length of ‘x’.
+Hint: Use the Sine Rule. Re-arrange the terms so that one of the lengths is on the left-hand
+side of the equation
+180-79-37 = 64
+3rd angle =64
+
+sin 37 = sin 79
+13  =   x
+
+0.602 = 0.982
+13  =   x
+
+13  =   x
+0.602 = 0.982
+
+13  =   21.206
+0.602 = 0.982
+
+7.Given the following triangle:
+Find the size of the specified angle.
+
+a = 8, b = 6, c =9
+
+Sin A = ?
+
+Sin A = 8/9 a/c
+
+0.01551341547
+
+Degree A = (sin(8/9)
+           (   PI  )  * 180  
+
+.8888532322
+
+angle x = .889
+
+9^2 = 8^2 + 6^2 -2ab cos(C)
+
+cos A = 6^2 +9^2 - 8^2
+              2bc
+
+?
