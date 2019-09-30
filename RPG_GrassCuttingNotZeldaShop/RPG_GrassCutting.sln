@@ -6,9 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPG_GrassCutting", "RPG_GrassCutting\RPG_GrassCutting.csproj", "{A8B9F5DC-CD78-4315-8D98-34624A89E467}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CE5C79E9-EF37-48E9-9886-6942AEDDFBD1}"
-	ProjectSection(SolutionItems) = preProject
-		MarketText.txt = MarketText.txt
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

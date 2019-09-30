@@ -87,13 +87,19 @@ namespace RPG_GrassCutting
 
 
         static void Main(string[] args)
-        {   
+        {
             TryCatch invSort = new TryCatch();
             Player pl = new Player();
             Random rd = new Random();
             Read re = new Read();
+            Pet[] petArray = new Pet[6];
             Inventory[] inv = new Inventory[9];
-            Inventory[] storage = new Inventory[4];
+            petArray[0] = new Wolf(1, 1, "Grey Wolf");
+            petArray[1] = new Wolf(2, 3, "Winter Wolf");
+            petArray[2] = new Wolf(3, 4, "Golden Wolf");
+            petArray[3] = new Fox(1, 1, "Grey Fox");
+            petArray[4] = new Fox(2, 3, "Orange Fox");
+            petArray[5] = new Fox(3, 4, "Platinum Fox");
             //All of the item/job upgrades you can buy in the shop to progress faster
             JobUpgrade bst1 = new JobUpgrade(0, 1, "Bad Stick", "It's a stick, what did you expect?", false);
             JobUpgrade sh1 = new JobUpgrade(50, 2, "Sharp Stick", "Just a slightly sharpened stick", false);
@@ -113,6 +119,7 @@ namespace RPG_GrassCutting
             int jfoodRandomizer = 0;
             int hfoodRandomizer = 0;
             int mfoodRandomizer = 0;
+            int petRandomizer = 0;
             int currentWeapon = 0;
             int goalDay = 0;
             int currentDay = 1;
@@ -273,12 +280,13 @@ namespace RPG_GrassCutting
                             break;
 
                         case "new":
+                            petRandomizer = rd.Next(0, 7);
                             Console.Clear();
                             Console.WriteLine("After turning 11, like every video game adventurer, you finally decided it was time to move out and adventure.\r\n" +
                                 "You decide Cacirco Village would be a nice place to live, but you need 50,000 rupees to afford a new house there. \r\nPress any key to continue >");
                             Console.ReadKey();
                             Console.Clear();
-                            Console.WriteLine("You walk out into Cocori Forest and find a nearby stick and begin cutting grass, finding a whole 10 rupees!" +
+                            Console.WriteLine($"You walk out into Cocori Forest and find a nearby stick and begin cutting grass, finding a whole 10 rupees! As well as a new pet {petArray[petRandomizer].PType}" +
                                 "\r\nYou decide to go to the local shop and see what they have available. \r\nPress any key to continue >");
                             Console.ReadKey();
 
@@ -323,7 +331,7 @@ namespace RPG_GrassCutting
                     goBack = true;
                     Console.Clear();
                     UI();
-                    string buysellask = re.Ask("Welcome to my shop mighty traveler \r\n\r\nWould you like to Buy[1], Sell[2], Check inventory[i], go Home[g], or quit and save? [q] >");
+                    string buysellask = re.Ask("Welcome to my shop mighty traveler \r\n\r\nWould you like to Buy[1], Sell[2], Check [i]nventory, [g]o Home, [p]et your animal? or [q]uit and save? >");
                     buysellask = buysellask.ToLower();
                     int buysell = 0;
                     Int32.TryParse(buysellask, out buysell);
@@ -408,6 +416,10 @@ namespace RPG_GrassCutting
                             //breaks out of the main gameplay loop and saves the game
                         case "q":
                             gameOn = false;
+                            break;
+
+                        case "p":
+
                             break;
 
                         default:
@@ -841,6 +853,7 @@ namespace RPG_GrassCutting
                 {
                 Console.WriteLine($"You work and sleep for {goalDay} days\r\nWith your {jobUpgradeArray[currentWeapon].jobUpgradeName} you mananged to get {foundRupees} Rupees\r\n\r\nPress Any Key To Continue >");
                 }
+                (petArray[petRandomizer]).HeadPat();
                 multiplierRupee = 0;
                 foundRupees = 0;
                 goHome = false;
