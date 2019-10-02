@@ -16,8 +16,13 @@ namespace TutorialPandV
             Vector2 firstVector2 = new Vector2(-2, 5.5f);
             Vector2 secondVector2 = new Vector2(9, -22);
 
+            Vector2 firstVector22 = new Vector2(1, 0);
+            Vector2 secondVector22 = new Vector2(0, 1);
+
+
             Console.WriteLine(firstVector2.Distance(secondVector2));
             Console.WriteLine(firstVector3.Distance(secondVector3));
+
             Console.ReadKey();
         }
     }
@@ -47,6 +52,11 @@ namespace TutorialPandV
             float diffY = y - other.y;
             return (float)Math.Sqrt(diffX * diffX + diffY * diffY);
         }
+
+        public float Dot(Vector2 rhs)
+        {
+            return x * rhs.x + y * rhs.y;
+        }
     }
     public struct Vector3
     {
@@ -65,6 +75,15 @@ namespace TutorialPandV
             float diffZ = z - other.z;
             return (float)Math.Sqrt(diffX * diffX + diffY * diffY + diffZ * diffZ);
         }
-
+        public float Dot(Vector3 rhs)
+        {
+            return x * rhs.x + y * rhs.y + z * rhs.z;
+        }        public Vector3 Cross(Vector3 rhs)
+        {
+            return new Vector3(
+           y * rhs.z - z * rhs.y,
+           z * rhs.x - x * rhs.z,
+           x * rhs.y - y * rhs.x);
+        }
     }
 }
