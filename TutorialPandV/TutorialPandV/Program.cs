@@ -19,14 +19,18 @@ namespace TutorialPandV
             Vector2 firstVector22 = new Vector2(1, 0);
             Vector2 secondVector22 = new Vector2(0, 1);
 
+            Vector3 firstVector32 = new Vector3(2, 3, 1);
+            Vector3 secondVector32 = new Vector3(-3, 1, 2);
+
 
             Console.WriteLine(firstVector2.Distance(secondVector2));
             Console.WriteLine(firstVector3.Distance(secondVector3));
+            Console.WriteLine(firstVector32.Dot(secondVector32));
 
             Console.ReadKey();
         }
     }
-    
+
     public struct Vector2
     {
         public float x, y;
@@ -38,7 +42,7 @@ namespace TutorialPandV
 
         public float Magnitude()
         {
-            return (float)Math.Sqrt(x*x + y*y);
+            return (float)Math.Sqrt(x * x + y * y);
         }
 
         public float MagnitudeSqrt()
@@ -56,13 +60,15 @@ namespace TutorialPandV
         public float Dot(Vector2 rhs)
         {
             return x * rhs.x + y * rhs.y;
-        }
+        }
+
     }
     public struct Vector3
     {
 
         public float x, y, z;
-        public Vector3(float xValue,float yValue,float zValue)
+
+        public Vector3(float xValue, float yValue, float zValue)
         {
             x = xValue;
             y = yValue;
@@ -75,6 +81,10 @@ namespace TutorialPandV
             float diffZ = z - other.z;
             return (float)Math.Sqrt(diffX * diffX + diffY * diffY + diffZ * diffZ);
         }
+        public float Magnitude()
+        {
+            return (float)Math.Sqrt(x * x + y * y + z * z);
+        }
         public float Dot(Vector3 rhs)
         {
             return x * rhs.x + y * rhs.y + z * rhs.z;
@@ -85,5 +95,10 @@ namespace TutorialPandV
            z * rhs.x - x * rhs.z,
            x * rhs.y - y * rhs.x);
         }
-    }
+        public void Normalize()
+        {
+            float m = Magnitude();
+            this.x /= m; this.y /= m; this.z /= m;
+        }
+    }
 }
