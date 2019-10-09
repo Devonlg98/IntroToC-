@@ -100,5 +100,40 @@ namespace TutorialPandV
             float m = Magnitude();
             this.x /= m; this.y /= m; this.z /= m;
         }
+
     }
+    public struct Matrix3
+    {
+        public float m1, m2, m3, m4, m5, m6, m7, m8, m9;
+        public Matrix3(float val_1, float val_2, float val_3, float val_4, float val_5, float val_6, float val_7, float val_8, float val_9)
+        {
+            m1 = 1; m2 = 0; m3 = 0;
+            m4 = 0; m5 = 1; m6 = 0;
+            m7 = 0; m8 = 0; m9 = 1;
+        }
+        public static Matrix3 operator *(Matrix3 lhs, Matrix3 rhs)
+        {
+            return new Matrix3(
+            lhs.m1 * rhs.m1 + lhs.m2 * rhs.m4 + lhs.m3 * rhs.m7, 
+            lhs.m1 * rhs.m2 + lhs.m2 * rhs.m5 + lhs.m3 * rhs.m8,
+            lhs.m1 * rhs.m3 + lhs.m2 * rhs.m6 + lhs.m3 * rhs.m9,
+
+            lhs.m4 * rhs.m1 + lhs.m5 * rhs.m4 + lhs.m6 * rhs.m7,
+            lhs.m4 * rhs.m2 + lhs.m5 * rhs.m5 + lhs.m6 * rhs.m8,
+            lhs.m4 * rhs.m3 + lhs.m5 * rhs.m6 + lhs.m6 * rhs.m9,
+
+            lhs.m7 * rhs.m1 + lhs.m8 * rhs.m4 + lhs.m9 * rhs.m7,
+            lhs.m7 * rhs.m2 + lhs.m8 * rhs.m5 + lhs.m9 * rhs.m8,
+            lhs.m7 * rhs.m3 + lhs.m8 * rhs.m6 + lhs.m9 * rhs.m9);
+        }
+        public static Vector3 operator *(Matrix3 lhs, Vector3 rhs)
+        {
+            return new Vector3
+               ((lhs.m1 * rhs.x) + (lhs.m2 * rhs.y) + (lhs.m3 * rhs.z),
+                (lhs.m4 * rhs.x) + (lhs.m5 * rhs.y) + (lhs.m6 * rhs.z),
+                (lhs.m7 * rhs.x) + (lhs.m8 * rhs.y) + (lhs.m9 * rhs.z));
+        }
+
+    }
+
 }
