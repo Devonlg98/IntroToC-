@@ -1,69 +1,28 @@
-﻿using Raylib;
-using rl = Raylib.Raylib;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static Raylib.Raylib;
+using Raylib;
 
 namespace ConsoleApp1
 {
-    public class SceneObject
+    class Program
     {
-        protected SceneObject parent = null;
-        protected List<SceneObject> children = new List<SceneObject>();
-        public SceneObject Parent
-        {
-            get { return parent; }
-        }
-        public SceneObject()
-        {
-        }
-        public int GetChildCount()
-        {
-            return children.Count;
-        }
-        public SceneObject GetChild(int index)
-        {
-            return children[index];
-        }
-    }
-    static class Program
-    {
-        public static int Main()
-        {
 
-            // Initialization
-            //--------------------------------------------------------------------------------------
-            int screenWidth = 800;
-            int screenHeight = 450;
-
-            rl.InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
-
-            rl.SetTargetFPS(60);
-            //--------------------------------------------------------------------------------------
-
-            // Main game loop
-            while (!rl.WindowShouldClose())    // Detect window close button or ESC key
+        static void Main(string[] args)
+        {
+            Game game = new Game();
+            InitWindow(640, 480, "Tanks for Everything!");
+            game.Init();
+            while (!WindowShouldClose())
             {
-                // Update
-                //----------------------------------------------------------------------------------
-                // TODO: Update your variables here
-                //----------------------------------------------------------------------------------
-
-                // Draw
-                //----------------------------------------------------------------------------------
-                rl.BeginDrawing();
-
-                rl.ClearBackground(Color.RAYWHITE);
-
-                rl.DrawText("Congrats! You created your first window!", 190, 200, 20, Color.LIGHTGRAY);
-
-                rl.EndDrawing();
-                //----------------------------------------------------------------------------------
+                game.Update();
+                game.Draw();
             }
-
-            // De-Initialization
-            //--------------------------------------------------------------------------------------
-            rl.CloseWindow();        // Close window and OpenGL context
-                                     //--------------------------------------------------------------------------------------
-
-            return 0;
+            game.Shutdown();
+            CloseWindow();
         }
     }
 }
