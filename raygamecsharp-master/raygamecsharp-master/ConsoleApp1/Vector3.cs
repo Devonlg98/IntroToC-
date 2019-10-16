@@ -23,12 +23,16 @@ namespace ConsoleApp1
         public static Vector3 operator -(Vector3 lhs, Vector3 rhs)
         {
             return new Vector3(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z);
-        }        public static Vector3 operator *(Vector3 lhs, float rhs)
+        }
+
+        public static Vector3 operator *(Vector3 lhs, float rhs)
         {
-            return new Vector3(lhs.x * rhs, lhs.y * rhs, lhs.z * rhs);        }
+            return new Vector3(lhs.x * rhs, lhs.y * rhs, lhs.z * rhs);
+        }
         public static Vector3 operator *(float lhs, Vector3 rhs)
         {
-            return (rhs * lhs);        }
+            return (rhs * lhs);
+        }
         public static Vector3 operator *(Vector3 lhs, Vector3 rhs)
         {
             return new Vector3(
@@ -58,12 +62,14 @@ namespace ConsoleApp1
         public float Dot(Vector3 rhs)
         {
             return x * rhs.x + y * rhs.y + z * rhs.z;
-        }        public Vector3 Cross(Vector3 rhs)
+        }
+        public Vector3 Cross(Vector3 rhs)
         {
             return new Vector3(
            y * rhs.z - z * rhs.y,
            z * rhs.x - x * rhs.z,
-           x * rhs.y - y * rhs.x);
+           x * rhs.y - y * rhs.x);
+
         }
         public void Normalize()
         {
