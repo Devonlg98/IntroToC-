@@ -17,17 +17,13 @@ namespace ConsoleApp1
         SpriteObject turretSprite = new SpriteObject();
 
 
-        Stopwatch stopwatch = new Stopwatch();
-        private long currentTime = 0;
-        private long lastTime = 0;
+        Timer gameTime = new Timer();
         private float timer = 0;
         private int fps = 1;
         private int frames;
-        private float deltaTime = 0.005f;
+        private float deltaTime;
         public void Init()
         {
-            stopwatch.Start();
-            lastTime = stopwatch.ElapsedMilliseconds;
 
             tankSprite.Load("Resources/topdowntanks/PNG/Tanks/tankGreen_outline.png");
             // sprite is facing the wrong way... fix that here
@@ -60,9 +56,7 @@ namespace ConsoleApp1
         }
         public void Update()
         {
-            currentTime = stopwatch.ElapsedMilliseconds;
-            deltaTime = (currentTime - lastTime) / 1000.0f;
-
+            deltaTime = gameTime.GetDeltaTime();
             timer += deltaTime;
             if (timer >= 1)
             {
@@ -70,9 +64,7 @@ namespace ConsoleApp1
                 frames = 0;
                 timer -= 1;
             }
-            frames++;
-            tankObject.Update(deltaTime);
-            lastTime = currentTime;
+            frames++;
 
             if (IsKeyDown(KeyboardKey.KEY_A))
             {
@@ -106,8 +98,9 @@ namespace ConsoleApp1
             {
                 turretObject.Rotate(deltaTime);
             }
-        }
-        public void Draw()
+        }
+
+    public void Draw()
         {
             BeginDrawing();
             ClearBackground(Color.WHITE);

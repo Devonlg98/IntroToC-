@@ -8,9 +8,15 @@ public class MathsUtils : MonoBehaviour
     // return true if the point is on the right side of the given Transform
     public static bool IsOnLeft(Transform user, Vector3 point)
     {
-        // use the dot product
 
+
+        float angle = user.position.x * point.x + user.position.y * point.y + user.position.z * point.z;
+        // use the dot product
+        if(angle > 180 && angle < 0)
+        {
         return true;
+
+        }
     }
 
     // returns true if the point position is inside a cone starting at origin, with a forward vector, angle in degrees and a range in units
@@ -66,6 +72,7 @@ public class MathsUtils : MonoBehaviour
 
     public static void FollowImmediate(Transform user, Vector3 target)
     {
+        user.transform.Rotate(0f, 0, 0f);
         // this can be done in one line of code.
         // consider all the ways of setting rotation in Unity's Transform class
 
