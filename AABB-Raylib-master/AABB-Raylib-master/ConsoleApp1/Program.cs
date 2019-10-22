@@ -16,24 +16,29 @@ namespace ConsoleApp1
 
             rl.SetTargetFPS(60);
             //--------------------------------------------------------------------------------------
+
             MyShape triangle = new MyShape();
-            triangle.MyPoints.Add(new Vector2(10, 10));
-            triangle.MyPoints.Add(new Vector2(20, 30));
-            triangle.MyPoints.Add(new Vector2(30, 10));
-            triangle.MyPoints.Add(new Vector2(10, 10));
-            triangle.MyPoints.Add(new Vector2(40, 30));
-            triangle.MyPoints.Add(new Vector2(50, 10));
+            triangle.MyPoints.Add(new Raylib.Vector2(10, 10));
+            triangle.MyPoints.Add(new Raylib.Vector2(20, 30));
+            triangle.MyPoints.Add(new Raylib.Vector2(30, 10));
+            triangle.MyPoints.Add(new Raylib.Vector2(10, 10));
+            triangle.MyPoints.Add(new Raylib.Vector2(40, 30));
+            triangle.MyPoints.Add(new Raylib.Vector2(50, 10));
             triangle.position = new Vector2(100, 100);
 
             MyShape satan = new MyShape();
-            satan.MyPoints.Add(new Vector2(0, 10));
-            satan.MyPoints.Add(new Vector2(-10, -10));
-            satan.MyPoints.Add(new Vector2(10, 0));
-            satan.MyPoints.Add(new Vector2(-10, 0));
-            satan.MyPoints.Add(new Vector2(10, -10));
-            satan.MyPoints.Add(new Vector2(0, 10));
-            satan.position.x = 100;
-            satan.position.y = 100;
+            satan.MyPoints.Add(new Raylib.Vector2(0, 11));
+            satan.MyPoints.Add(new Raylib.Vector2(-10, -10));
+            satan.MyPoints.Add(new Raylib.Vector2(13, 3));
+            satan.MyPoints.Add(new Raylib.Vector2(-13, 3));
+            satan.MyPoints.Add(new Raylib.Vector2(10, -10));
+            satan.MyPoints.Add(new Raylib.Vector2(0, 11));
+            satan.position.x = 60;
+            satan.position.y = 120;
+
+            //Vector2 satanVector = new Vector2();
+
+            //AABB aabb = new AABB();
 
             //TODO:Create another object with a different shape
 
@@ -56,7 +61,10 @@ namespace ConsoleApp1
                 triangle.Draw();
                 triangle.position.x += .2f;
                 satan.Draw();
-                satan.position.x += .2f;
+                satan.position.x += .6f;
+                satan.Draw(satan.blankHitBox.Overlaps(triangle.blankHitBox));
+                triangle.Draw(triangle.blankHitBox.Overlaps(satan.blankHitBox));
+
 
                 //TODO:Move the 2nd object so that it is on a collision course with the triangle
                 //TODO:Implement AABB Collision detection so you know when they hit.

@@ -26,7 +26,8 @@ namespace ConsoleApp1
         private float timer = 0;
         private int fps = 1;
         private int frames;
-        private float deltaTime;
+        private float deltaTime;
+
         public void Init()
         {
 
@@ -79,7 +80,8 @@ namespace ConsoleApp1
                 frames = 0;
                 timer -= 1;
             }
-            frames++;
+            frames++;
+
             //Player 1 movement
             if (IsKeyDown(KeyboardKey.KEY_A))
             {
@@ -147,8 +149,11 @@ namespace ConsoleApp1
             if (IsKeyDown(KeyboardKey.KEY_KP_9))
             {
                 turretObject2.Rotate(deltaTime);
-            }
-        }
+            }
+
+
+        }
+
 
     public void Draw()
         {
