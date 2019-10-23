@@ -14,6 +14,7 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             Game game = new Game();
+            MyShape shape = new MyShape();
             InitWindow(640, 480, "Tanks for Everything!");
             game.Init();
             while (!WindowShouldClose())

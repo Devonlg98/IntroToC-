@@ -15,6 +15,10 @@ namespace ConsoleApp1
         SceneObject turretObject = new SceneObject();
         SpriteObject tankSprite = new SpriteObject();
         SpriteObject turretSprite = new SpriteObject();
+        SceneObject tankHitBoxBL = new SceneObject();
+        SceneObject tankHitBoxBR = new SceneObject();
+        SceneObject tankHitBoxTL = new SceneObject();
+        SceneObject tankHitBoxTR = new SceneObject();
 
         SceneObject tankObject2 = new SceneObject();
         SceneObject turretObject2 = new SceneObject();
@@ -36,7 +40,7 @@ namespace ConsoleApp1
             tankSprite.SetRotate(-90 * (float)(Math.PI / 180.0f));
             // sets an offset for the base, so it rotates around the centre
             tankSprite.SetPosition(-tankSprite.Width / 2.0f, tankSprite.Height /2.0f);
-
+            
             turretSprite.Load("Resources/topdowntanks/PNG/Tanks/barrelGreen.png");
             turretSprite.SetRotate(-90 * (float)(Math.PI / 180.0f));
             // set the turret offset from the tank base
@@ -47,12 +51,22 @@ namespace ConsoleApp1
             turretObject.AddChild(turretSprite);
             tankObject.AddChild(tankSprite);
             tankObject.AddChild(turretObject);
+            tankObject.AddChild(tankHitBoxTL);
+            tankObject.AddChild(tankHitBoxTR);
+            tankObject.AddChild(tankHitBoxBR);
+            tankObject.AddChild(tankHitBoxBL);
+            tankHitBoxTL.SetPosition((-tankSprite.Width / 2.0f), -tankSprite.Height / 2.0f);    //(0,0)
+            tankHitBoxTR.SetPosition((tankSprite.Width / 2.0f), -tankSprite.Height / 2.0f);     //(1,0)
+            tankHitBoxBR.SetPosition((tankSprite.Width / 2.0f), tankSprite.Height / 2.0f);      //(1,1)
+            tankHitBoxBL.SetPosition((-tankSprite.Width / 2.0f), tankSprite.Height / 2.0f);     //(0,1)
+
+
 
             // having an empty object for the tank parent means we can set the
             // position/rotation of the tank without
             // affecting the offset of the base sprite
             tankObject.SetPosition((GetScreenWidth() / 2.0f) - 100f, GetScreenHeight() / 2.0f);
-
+            
             tankSprite2.Load("Resources/topdowntanks/PNG/Tanks/tankBlue_outline.png");
             tankSprite2.SetRotate(-90 * (float)(Math.PI / 180.0f));
             tankSprite2.SetPosition(-tankSprite2.Width / 2.0f, tankSprite2.Height /2.0f);
@@ -63,7 +77,7 @@ namespace ConsoleApp1
             tankObject2.AddChild(tankSprite2);
             tankObject2.AddChild(turretObject2);
             tankObject2.SetPosition((GetScreenWidth() / 2.0f)+100f, GetScreenHeight() / 2.0f);
-
+            //TankObjectAddChild4ChildCorners so they rotate with the tank
 
         }
         public void Shutdown()

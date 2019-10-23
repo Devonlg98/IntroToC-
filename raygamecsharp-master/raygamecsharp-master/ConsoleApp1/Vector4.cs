@@ -28,10 +28,12 @@ namespace ConsoleApp1
         }
         public static Vector4 operator *(Vector4 lhs, float rhs)
         {
-            return new Vector4(lhs.x * rhs, lhs.y * rhs, lhs.z * rhs, lhs.w * rhs);        }
+            return new Vector4(lhs.x * rhs, lhs.y * rhs, lhs.z * rhs, lhs.w * rhs);
+        }
         public static Vector4 operator *(float lhs, Vector4 rhs)
         {
-            return (rhs * lhs);        }
+            return (rhs * lhs);
+        }
         public static Vector4 operator *(Vector4 lhs, Vector4 rhs)
         {
             return new Vector4(
@@ -64,12 +66,14 @@ namespace ConsoleApp1
         public float Dot(Vector4 rhs)
         {
             return x * rhs.x + y * rhs.y + z * rhs.z + rhs.w * w;
-        }        public Vector4 Cross(Vector4 rhs)
+        }
+        public Vector4 Cross(Vector4 rhs)
         {
             return new Vector4(
            y * rhs.z - z * rhs.y,
            z * rhs.x - x * rhs.z,
-           x * rhs.y - y * rhs.x,           0);
+           x * rhs.y - y * rhs.x,
+           0);
         }
         public void Normalize()
         {
@@ -78,6 +82,8 @@ namespace ConsoleApp1
             this.y /= m;
             this.z /= m;
             this.w /= m;
-        }
+        }
+
+
     }
 }

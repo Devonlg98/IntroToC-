@@ -23,15 +23,15 @@ public class MathsUtils : MonoBehaviour
     public static bool IsInCone(Vector3 position, Vector3 origin, Vector3 forward, float angle, float range)
     {
         //Vector 3 position of object, vector 3 position of player/cone, vector 3 of cones forward faceing angle, float angle of the cone, float Range of the cone
-        Vector3 TheCone = new Vector3(position.x - origin.x, position.y - origin.y, position.y - origin.y);
+        
 
 
         // you'll want to transform position into the cooridinate space of the cone, and decompose it into a forward component
         // and sideways component. 
-        // You'll want to transform the position of the object into the cone's space, and break it down into a forward compennent
+        // You'll want to transform the position of the object into the cone's space, and break it down into a forward compenent
 
         // The forward component should be between 0 and range, and the sideways component should be less than a vale representing the radius
-        // of the cone at that distance.
+        // of the cone at that distance.    
 
         // a 45 degrees cone means that sideways has to be less than or equals to 1 * range. A tigher cone has a smaller multipler.
         // what trig do we use to get this multipler?

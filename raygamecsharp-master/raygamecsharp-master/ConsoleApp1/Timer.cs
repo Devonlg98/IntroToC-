@@ -28,5 +28,6 @@ namespace ConsoleApp1
             deltaTime = (currentTime - lastTime) / 1000.0f;
             return deltaTime;
         }
-    }
+    }
+
 }

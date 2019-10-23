@@ -204,6 +204,20 @@ namespace Raylib
             this.x = x;
             this.y = y;
         }
+        public float Distance(Vector2 other)
+        {
+            float diffX = x - other.x;
+            float diffY = y - other.y;
+            return (float)Math.Sqrt(diffX * diffX + diffY * diffY);
+        }
+        public float Magnitude()
+        {
+            return (float)Math.Sqrt(x * x + y * y);
+        }
+        public float MagnitudeSqr()
+        {
+            return (x * x + y * y);
+        }
 
         public Vector2(float value)
         {
@@ -243,11 +257,11 @@ namespace Raylib
         public static Vector2 UnitY { get { return new Vector2(0, 1); } }
 
         // convienient operators
-        public static bool operator ==(Vector2 v1, Vector2 v2) 
+        public static bool operator ==(Vector2 v1, Vector2 v2)
         {
             return (v1.x == v2.x && v1.y == v2.y);
         }
-        
+
         public static bool operator !=(Vector2 v1, Vector2 v2)
         {
             return !(v1 == v2);
@@ -318,6 +332,10 @@ namespace Raylib
             result = Raylib.Vector2DotProduct(v1, v2);
         }
 
+        public float Dot(Vector2 rhs)
+        {
+            return x * rhs.x + y * rhs.y;
+        }
         public static float DotProduct(Vector2 v1, Vector2 v2)
         {
             return Raylib.Vector2DotProduct(v1, v2);
@@ -363,6 +381,12 @@ namespace Raylib
         {
             return Raylib.Vector2Normalize(v);
         }
+        public Vector2 GetNormalised()
+        {
+            return (this / Magnitude());
+        }
+
+
 
         // Creates a new <see cref="Vector2"/> that contains a maximal values from the two vectors.
         public static Vector2 Max(Vector2 v1, Vector2 v2)
@@ -430,61 +454,61 @@ namespace Raylib
         public static Vector3 UnitZ { get { return new Vector3(0, 0, 1); } }
 
         // convienient operators
-        public static bool operator ==(Vector3 v1, Vector3 v2) 
-        { return (v1.x == v2.x && v1.y == v2.y && v1.z == v2.z);}
+        public static bool operator ==(Vector3 v1, Vector3 v2)
+        { return (v1.x == v2.x && v1.y == v2.y && v1.z == v2.z); }
 
-        public static bool operator !=(Vector3 v1, Vector3 v2) 
+        public static bool operator !=(Vector3 v1, Vector3 v2)
         {
             return !(v1 == v2);
-            }
+        }
 
-        public static bool operator >(Vector3 v1, Vector3 v2) 
-        { 
-            return v1.x > v2.x && v1.y > v2.y && v1.z > v2.z;
-            }
-
-        public static bool operator <(Vector3 v1, Vector3 v2) 
+        public static bool operator >(Vector3 v1, Vector3 v2)
         {
-            return  v1.x < v2.x && v1.y < v2.y && v1.z < v2.z;
-            }
+            return v1.x > v2.x && v1.y > v2.y && v1.z > v2.z;
+        }
 
-        public static Vector3 operator +(Vector3 v1, Vector3 v2) 
-        { 
+        public static bool operator <(Vector3 v1, Vector3 v2)
+        {
+            return v1.x < v2.x && v1.y < v2.y && v1.z < v2.z;
+        }
+
+        public static Vector3 operator +(Vector3 v1, Vector3 v2)
+        {
             return Raylib.Vector3Add(v1, v2);
         }
 
-        public static Vector3 operator -(Vector3 v1, Vector3 v2) 
-        { 
+        public static Vector3 operator -(Vector3 v1, Vector3 v2)
+        {
             return Raylib.Vector3Subtract(v1, v2);
         }
 
-        public static Vector3 operator *(Vector3 v1, Vector3 v2) 
-        { 
+        public static Vector3 operator *(Vector3 v1, Vector3 v2)
+        {
             return Raylib.Vector3MultiplyV(v1, v2);
         }
 
-        public static Vector3 operator *(Vector3 v, float scale) 
-        { 
+        public static Vector3 operator *(Vector3 v, float scale)
+        {
             return Raylib.Vector3Scale(v, scale);
         }
 
-        public static Vector3 operator *(float scale, Vector3 v) 
-        { 
+        public static Vector3 operator *(float scale, Vector3 v)
+        {
             return Raylib.Vector3Scale(v, scale);
         }
 
-        public static Vector3 operator /(Vector3 v1, Vector3 v2) 
-        { 
+        public static Vector3 operator /(Vector3 v1, Vector3 v2)
+        {
             return Raylib.Vector3DivideV(v1, v2);
         }
 
-        public static Vector3 operator /(Vector3 v1, float div) 
-        { 
+        public static Vector3 operator /(Vector3 v1, float div)
+        {
             return Raylib.Vector3Divide(v1, div);
         }
 
-        public static Vector3 operator -(Vector3 v1) 
-        { 
+        public static Vector3 operator -(Vector3 v1)
+        {
             return Raylib.Vector3Negate(v1);
         }
     }
@@ -524,17 +548,17 @@ namespace Raylib
         }
 
         // convienient operators
-        public static bool operator ==(Vector4 v1, Vector4 v2) 
-        { 
+        public static bool operator ==(Vector4 v1, Vector4 v2)
+        {
             return (v1.x == v2.x && v1.y == v2.y && v1.z == v2.z && v1.w == v2.w);
         }
 
-        public static bool operator !=(Vector4 v1, Vector4 v2) 
-        { 
+        public static bool operator !=(Vector4 v1, Vector4 v2)
+        {
             return !(v1 == v2);
         }
 
-        public static bool operator >(Vector4 v1, Vector4 v2) 
+        public static bool operator >(Vector4 v1, Vector4 v2)
         {
             return v1.x > v2.x && v1.y > v2.y && v1.z > v2.z && v1.w > v2.w;
         }
