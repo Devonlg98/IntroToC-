@@ -204,6 +204,20 @@ namespace Raylib
             this.x = x;
             this.y = y;
         }
+        public float Distance(Vector2 other)
+        {
+            float diffX = x - other.x;
+            float diffY = y - other.y;
+            return (float)Math.Sqrt(diffX * diffX + diffY * diffY);
+        }
+        public float Magnitude()
+        {
+            return (float)Math.Sqrt(x * x + y * y);
+        }
+        public float MagnitudeSqr()
+        {
+            return (x * x + y * y);
+        }
 
         public Vector2(float value)
         {
@@ -318,6 +332,10 @@ namespace Raylib
             result = Raylib.Vector2DotProduct(v1, v2);
         }
 
+        public float Dot(Vector2 rhs)
+        {
+            return x * rhs.x + y * rhs.y;
+        }
         public static float DotProduct(Vector2 v1, Vector2 v2)
         {
             return Raylib.Vector2DotProduct(v1, v2);
@@ -363,6 +381,12 @@ namespace Raylib
         {
             return Raylib.Vector2Normalize(v);
         }
+        public Vector2 GetNormalised()
+        {
+            return (this / Magnitude());
+        }
+
+
 
         // Creates a new <see cref="Vector2"/> that contains a maximal values from the two vectors.
         public static Vector2 Max(Vector2 v1, Vector2 v2)

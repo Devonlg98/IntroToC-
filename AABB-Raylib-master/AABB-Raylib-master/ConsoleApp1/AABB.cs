@@ -12,7 +12,9 @@ namespace ConsoleApp1
        float.NegativeInfinity);
         public Vector2 max = new Vector2(float.PositiveInfinity,
        float.PositiveInfinity);
-        //Finding minimum and maximum of vector3
+
+         
+        //Finding minimum and maximum of vector2
         public AABB(Vector2 min, Vector2 max)
         {
             this.min = min;
@@ -43,6 +45,7 @@ namespace ConsoleApp1
                max = Vector2.Max(max, p);
            }
         }
+
         public bool Overlaps(Vector2 p)
         {
             // test for not overlapped as it exits faster
@@ -71,7 +74,6 @@ namespace ConsoleApp1
             corners[3] = new Vector2(max.x, min.y);
             return corners;
         }
-
 
     }
 }
