@@ -58,8 +58,8 @@ namespace ConsoleApp1
                 rl.ClearBackground(Color.RAYWHITE);
 
                 rl.DrawText("Congrats! You created your first window!", 190, 200, 20, Color.LIGHTGRAY);
-                triangle.Draw();
-                satan.Draw();
+                //triangle.Draw();
+                //satan.Draw();
                 satan.Draw(satan.blankHitBox.Overlaps(triangle.blankHitBox));
                 triangle.Draw(triangle.blankHitBox.Overlaps(satan.blankHitBox));
 

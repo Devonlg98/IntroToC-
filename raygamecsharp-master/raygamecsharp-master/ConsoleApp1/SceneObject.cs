@@ -134,7 +134,14 @@ namespace ConsoleApp1
             localTransform.Scale(width, height, 1);
             UpdateTransform();
         }
+        public Vector2 Position
+        {
+            get { return new Vector2(GlobalTransform.m7, GlobalTransform.m8); }
 
-
+        }
+        public void Set(SceneObject everything)
+        {
+            localTransform.Set(everything.globalTransform);
+        }
     }
 }
