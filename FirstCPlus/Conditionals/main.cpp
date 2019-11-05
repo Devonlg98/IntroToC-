@@ -30,6 +30,12 @@ int main()
 		std::cout << i << std::endl;
 
 	}
+	//From 100 to 1
+	for (int i = 100; i > 0; i--)
+	{
+		std::cout << i << std::endl;
+
+	}
 
 	//Age Gate
 
@@ -87,6 +93,74 @@ int main()
 	{
 		std::cout << "That's a mighty fine ODD numba";
 	}
+
+	//All leap years
+
+	for (int i = 0; i < 3001; i++)
+	{
+		if (!(i % 4 == 0)) 
+		{
+
+		}
+		else if (!(i % 100 == 0)) 
+		{
+			std::cout << i << std::endl;
+		}
+		else if (!(i % 400 == 0))
+		{
+
+		}
+		else
+		{
+			std::cout << i << std::endl;
+		}
+
+
+	}
+	//from 1995 to 2019
+
+	std::cout << "\r\n";
+	for (int i = 1995; i < 2020; i++) 
+	{
+		std::cout << i << "\r\n";
+	}
+
+	//Printing multiples of five
+	int first5;
+	int second5;
+	std::cout << "\r\nWhat multiple of 5 would you like to start on?\r\n";
+	std::cin >> first5;
+	std::cout << "\r\nWhat multiple of 5 would you like to end on?\r\n";
+	std::cin >> second5;
+
+
+	for (int i = first5*5; i <= second5*5; i++)
+	{
+		if (i % 5 == 0) 
+		{
+		std::cout << i << "\r\n";
+
+		}
+	}
+
+	//clamp the number
+	int clamp;
+	std::cout << "\r\nInput a number between 15 or 30 or else\r\n";
+	std::cin >> clamp;
+
+	if (clamp < 15) 
+	{
+		clamp = 15;
+	}
+	else if (clamp > 30) 
+	{
+		clamp = 30;
+	}
+	std::cout << "\r\nYour number is " << clamp;
+
+	//function disposable calculator
+
+
 
 	while (true) {}
 
