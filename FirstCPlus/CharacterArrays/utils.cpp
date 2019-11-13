@@ -47,3 +47,26 @@ void favoriteColorCheck(char * userColor)
 	}
 
 }
+
+void toUpperFunc(char userInput[])
+{
+
+	for (int i = 0; i< strlen(userInput); i++)
+	{
+		userInput[i] = toupper(userInput[i]);
+	}
+}
+
+void removeEmptySpaces(char userInput[])
+{
+	int temp = strlen(userInput);
+
+	for (int i = 0; i < strlen(userInput); i++)
+	{
+		if (userInput[i] == ' ')
+		{
+			 += userInput[i];
+		}
+			
+	}
+}

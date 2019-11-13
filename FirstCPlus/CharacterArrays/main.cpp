@@ -6,13 +6,16 @@ int main()
 {
 	int anything;
 	int choice = 0;
+	char sentence[50] = {};
 	bool gameOn = true;
+
 	while (gameOn == true)
 	{
 		system("cls");
 		std::cout << "Welcome to character arrays, type the number of the exercise you'd like to view!\r\nGreeting[1]\r\n";
 		std::cin >> choice;
-
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		switch (choice)
 		{
 		case 1:
@@ -40,24 +43,61 @@ int main()
 			
 
 		case 3:
-			char sentence[50] = {};
 			std::cout << "\r\nType a sentence\n";
-			std::cin >> sentence;
-			std::cin.getline(sentence, 50);
+			std::cin.getline(sentence,49);
+			toUpperFunc(sentence);
 			std::cout << sentence << "\n";
 			std::cout << "\r\nType anthing and hit Enter to continue . . .\r\n";
 			std::cin >> anything;
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			gameOn = false;
 			continue;
 
-		//default:
-		//	system("cls");
-		//	std::cin.clear();
-		//	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		//	std::cout << "\r\nIncorrect Input, try again!\r\n";
-		//	continue;
+
+		case 4:
+			std::cout << "\r\nType a sentence\n";
+			std::cin.getline(sentence, 49);
+			removeEmptySpaces(sentence);
+			std::cout << sentence << "\n";
+			std::cout << "\r\nType anthing and hit Enter to continue . . .\r\n";
+			std::cin >> anything;
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			continue;
+
+
+		case 5:
+
+			std::cout << "\r\nType anthing and hit Enter to continue . . .\r\n";
+			std::cin >> anything;
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			continue;
+
+
+		case 6:
+
+			std::cout << "\r\nType anthing and hit Enter to continue . . .\r\n";
+			std::cin >> anything;
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			continue;
+
+
+		case 7:
+
+			std::cout << "\r\nType anthing and hit Enter to continue . . .\r\n";
+			std::cin >> anything;
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			continue;
+
+		default:
+			system("cls");
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "\r\nIncorrect Input, try again!\r\n";
+			continue;
 
 
 		}
