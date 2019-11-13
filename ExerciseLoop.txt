@@ -1,0 +1,51 @@
+#include <iostream>
+#include "utils.h"
+int main()
+{
+
+	int anything;
+	int choice;
+	bool gameOn = true;
+	while (gameOn == true)
+	{
+		system("cls");
+		std::cout << "Welcome to arrays, type the number of the exercise you'd like to view!\r\nPrintArray[1]\r\nSum of 3[2]\r\nMin 2 Numbers[3]\r\nMax 2 Numbers[4]\r\nClamp[5]\r\nDistance[6]\r\nEstimated Time of Arrival[7]\r\nQuit[8]\r\n";
+		std::cin >> choice;
+
+		switch (choice)
+		{
+		case 1:
+			
+			std::cout << "\r\nType anthing and hit Enter to continue . . .\r\n";
+			std::cin >> anything;
+			continue;
+
+		case 2:
+
+			std::cout << "\r\nType anthing and hit Enter to continue . . .\r\n";
+			std::cin >> anything;
+			continue;
+
+
+		case 99:
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "\r\nType anthing and hit Enter to continue . . .\r\n";
+			std::cin >> anything;
+			gameOn = false;
+			continue;
+
+		default:
+			system("cls");
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "\r\nIncorrect Input, try again!\r\n";
+			continue;
+
+
+		}
+	}
+
+	return 0;
+}
+
