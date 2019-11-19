@@ -60,13 +60,97 @@ void toUpperFunc(char userInput[])
 void removeEmptySpaces(char userInput[])
 {
 	int temp = strlen(userInput);
-
 	for (int i = 0; i < strlen(userInput); i++)
 	{
 		if (userInput[i] == ' ')
-		{
-			 += userInput[i];
+		{			
 		}
-			
+		else
+		{
+			std::cout << userInput[i];
+		}			
 	}
+}
+
+void stringTrimming(char string[], size_t size)
+{
+	char trimmedString[50] = {};
+
+	for (int i = 0; i < size; i++)
+	{
+		if (string[i] != 52 || string[i] != 32)
+		{
+
+		}
+	}
+
+	string = trimmedString;
+	std::cout << trimmedString;
+}
+
+void substringStartStop(char userInput[], int start, int stop)
+{
+	for (int i = start; i < stop; i++)
+	{
+		std::cout << userInput[i];
+	}
+}
+
+void stringReversal(char string[], size_t size)
+{
+	char reverseString[50] = {};
+
+ 	for (int i = 0; i < size; i++)
+	{
+		if (string[size -i -1] != 52)
+		{
+			reverseString[i] = string[size -i -1];
+		}
+	}
+	string = reverseString;
+	std::cout << reverseString;
+}
+
+bool palindromeTest(char string[], size_t size)
+{
+	char reverseString[50] = {};
+	bool check = true;
+	for (int i = 0; i < size; i++)
+	{
+		if (string[size - i - 1] != 52)
+		{
+			reverseString[i] = string[size - i - 1];
+		}
+	}
+	for (int i = 0; i < size; i++)
+	{
+		if (reverseString[i] != string[i])
+		{
+			check = false;
+			break;
+		}
+	}
+	if (check == true)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
+
+}
+
+int stringLength(char userInput[])
+{
+	int length = 0;
+	for (int i = 0; i < strlen(userInput); i++)
+	{
+		if (userInput[i] != 52)
+		{
+			length++;
+		}
+	}
+	return length;
 }

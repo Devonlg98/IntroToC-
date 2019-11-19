@@ -6,8 +6,13 @@ int main()
 {
 	int anything;
 	int choice = 0;
-	char sentence[50] = {};
 	bool gameOn = true;
+	char sentence[50] = {};
+	char trimmedSentence[] = { "       destroy all boomers      " };
+	char reverseSentence[] = { "Please reverse this string" };
+	char racecar[] = { "racecar" };
+	char guiltyGear[] = { "guiltygear" };
+	char fortniteBad[] = { "Fortnite bad" };
 
 	while (gameOn == true)
 	{
@@ -58,7 +63,6 @@ int main()
 			std::cout << "\r\nType a sentence\n";
 			std::cin.getline(sentence, 49);
 			removeEmptySpaces(sentence);
-			std::cout << sentence << "\n";
 			std::cout << "\r\nType anthing and hit Enter to continue . . .\r\n";
 			std::cin >> anything;
 			std::cin.clear();
@@ -67,7 +71,15 @@ int main()
 
 
 		case 5:
-
+			int start;
+			int stop;
+			std::cout << "\r\nType a sentence\n";
+			std::cin.getline(sentence, 49);
+			std::cout << "\r\nWhat position in the string would you like to start reading?\r\n";
+			std::cin >> start;
+			std::cout << "\r\nWhat position in the string would you like to stop reading?\r\n";
+			std::cin >> stop;
+			substringStartStop(sentence, start, stop);
 			std::cout << "\r\nType anthing and hit Enter to continue . . .\r\n";
 			std::cin >> anything;
 			std::cin.clear();
@@ -76,6 +88,18 @@ int main()
 
 
 		case 6:
+			std::cout << "\r\n \r\n";
+			stringTrimming(trimmedSentence, 32);
+			std::cout << "\r\nType anthing and hit Enter to continue . . .\r\n";
+			std::cin >> anything;
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			continue;
+
+		case 7:
+			std::cout << "\r\nI'm going to reverse this string: \n"<< reverseSentence << std::endl;
+			
+			stringReversal(reverseSentence, 26);
 
 			std::cout << "\r\nType anthing and hit Enter to continue . . .\r\n";
 			std::cin >> anything;
@@ -83,9 +107,36 @@ int main()
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			continue;
 
+		case 8:
+			std::cout << "\r\nIs 'racecar' a palindrome?\r\n";
+			if (palindromeTest(racecar, 7) == true)
+			{
+				std::cout << "\r\nyes\r\n";
+			}
+			else
+			{
+				std::cout << "\r\nno\r\n";
+			}
+			std::cout << "\r\nIs 'guiltygear' a palindrome?\r\n";
+			if (palindromeTest(guiltyGear, 10) == true)
+			{
+				std::cout << "\r\nyes\r\n";
+			}
+			else
+			{
+				std::cout << "\r\nno\r\n";
+			}
+			
+			std::cout << "\r\nType anthing and hit Enter to continue . . .\r\n";
+			std::cin >> anything;
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			continue;
 
-		case 7:
-
+		case 9:
+			std::cout << "\r\nType a string and the length of your string will come out after.\r\n";
+			std::cin.getline(sentence, 49);
+			std::cout << stringLength(sentence);
 			std::cout << "\r\nType anthing and hit Enter to continue . . .\r\n";
 			std::cin >> anything;
 			std::cin.clear();
