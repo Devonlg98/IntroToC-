@@ -17,7 +17,7 @@ int main()
 	while (gameOn == true)
 	{
 		system("cls");
-		std::cout << "Welcome to character arrays, type the number of the exercise you'd like to view!\r\nGreeting[1]\r\n";
+		std::cout << "Welcome to character arrays, type the number of the exercise you'd like to view!\r\nGreeting[1]\r\nFavorite Color[2]\r\nUppercase your sentence[3]\r\nRemove Empty Spaces[4]\r\nStart and stop string[5]\r\nTrimmed string[6]\r\nString Reversal[7]\r\nPalindrome Test[8]\r\nString Length[9]\r\n";
 		std::cin >> choice;
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -88,7 +88,7 @@ int main()
 
 
 		case 6:
-			std::cout << "\r\n \r\n";
+			std::cout << "\r\nThis will trim the string : \r\n" << trimmedSentence << std::endl;
 			stringTrimming(trimmedSentence, 32);
 			std::cout << "\r\nType anthing and hit Enter to continue . . .\r\n";
 			std::cin >> anything;

@@ -75,14 +75,21 @@ void removeEmptySpaces(char userInput[])
 void stringTrimming(char string[], size_t size)
 {
 	char trimmedString[50] = {};
-
+	bool stringBeginning = false;
+	int idx = 0;
 	for (int i = 0; i < size; i++)
 	{
-		if (string[i] != 52 || string[i] != 32)
+		if (string[i] != 52 && string[i] != 32)
 		{
-
+			stringBeginning = true;
 		}
-	}
+		
+		if (stringBeginning == true)
+		{
+			trimmedString[idx] = string[i];
+			idx++;
+		}
+ 	}
 
 	string = trimmedString;
 	std::cout << trimmedString;
