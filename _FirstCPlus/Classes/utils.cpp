@@ -85,6 +85,19 @@ bool ServerBrowserService::registerServer(ServerInfo newServer)
 	return true;
 }
 
+int ServerBrowserService::getServers(ServerInfo * dstArray, size_t dstSize)
+{
+	int idx = 0;
+	for (int i = 0; i < dstSize; i++)
+	{
+		if (servers[i].regionID != NULL)
+		{
+			dstArray[idx] = servers[i];
+			idx++;
+		}
+	}
+	return idx;
+}
 
 
 
@@ -101,53 +114,63 @@ int ServerBrowserService::getServers(ServerInfo * dstArray, size_t dstSize, Serv
 			if (servers[i].regionID != NULL && idx != filter.maxResults)
 			{
 				dstArray[idx] = servers[i];
-				idx++;
+			}
+			else
+			{
 				continue;
 			}
 		}
 
-
-		if (servers[i].regionID != NULL && servers[i].ping < filter.ping)
+		if (filter.ping != NULL)
 		{
-			dstArray[idx] = servers[i];
-			idx++;
-			continue;
-		}
+			if (servers[i].regionID != NULL && servers[i].ping < filter.ping)
+			{
+				dstArray[idx] = servers[i];
+			}
+			else
+			{
+				continue;
+			}
 
-		if (servers[i].regionID != NULL && servers[i].regionID == filter.regionID)
+		}
+		if (filter.regionID != NULL)
 		{
-			dstArray[idx] = servers[i];
-			idx++;
-			continue;
+			if (servers[i].regionID != NULL && servers[i].regionID == filter.regionID)
+			{
+				dstArray[idx] = servers[i];
+			}
+			else
+			{
+				continue;
+			}
 		}
-
-		if (servers[i].regionID != NULL && servers[i].currentPlayerCount < servers[i].maxPlayers)
+		//If they don't want empty lobbies, only add servers with a player count above max
+		if (filter.allowEmpty == false)
 		{
-			dstArray[idx] = servers[i];
-			idx++;
-			continue;
+			if (servers[i].regionID != NULL && servers[i].currentPlayerCount > servers[i].maxPlayers)
+			{
+				dstArray[idx] = servers[i];
+			}
+			else
+			{
+				continue;
+			}
 		}
-
-		if (servers[i].regionID != NULL && servers[i].currentPlayerCount > servers[i].maxPlayers)
+		//If they don't want full lobbies, only add servers with a player count less than max
+		if (filter.allowFull == false)
 		{
-			dstArray[idx] = servers[i];
-			idx++;
-			continue;
-		}
+			if (servers[i].regionID != NULL && servers[i].currentPlayerCount < servers[i].maxPlayers)
+			{
+				dstArray[idx] = servers[i];
+			}
+			else
+			{
 
+				continue;
+			}
+		}
+		idx++;
 	}
-
-
-	//int idx = 0;
-	//for (int i = 0; i < dstSize; i++)
-	//{
-	//	if (servers[i].regionID != NULL)
-	//	{
-	//	dstArray[idx] = servers[i];
-	//	idx++;
-	//	}
-	//}
-	//return idx;
 	return idx;
 }
 

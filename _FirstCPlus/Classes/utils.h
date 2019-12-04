@@ -54,7 +54,7 @@ struct ServerInfo
 struct ServerFilter
 {
 	int maxResults = INT_MAX;
-	int ping = INT_MAX;                
+	int ping = NULL;                
 	int regionID = NULL;
 	bool allowEmpty = true;
 	bool allowFull = true;
