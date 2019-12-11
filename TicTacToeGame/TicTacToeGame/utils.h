@@ -9,10 +9,14 @@ struct player
 {
 	int score;
 	std::string name;
+	int xoro;
+	int playerInput;
 };
 int * printBoard(int * board[], size_t size);
 int * resetBoard(int * board[], size_t size);
-int * placeBoardX(int * board[], size_t size, int input);
-int * placeBoardY(int * board[], size_t size, int input);
+int * placeBoard(int * board[], size_t size, player player);
+
+bool boardCheckWin(int * board[], size_t size, player player);
+
 
 #endif // ! _UTILS_H_
