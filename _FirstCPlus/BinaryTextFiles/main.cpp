@@ -4,30 +4,30 @@
 #include <fstream>
 using std::cout;
 using std::endl;
-using std::cin;
+
 using std::string;
+
 
 int main()
 {
 	struct Library
 	{
-		int callNumber;
-		string title;
-		string author;
-		int bookStatus;
-		int dueDate;
-		string borrowersName;
+		char callNumber[32];
+		char title[32];
+		char author[32];
+		char bookStatus[32];
+		char dueDate[32];
+		char borrowersName[32];
 
 	};
-	//int amountOfBooks = 10;
-	//Library * books = new Library[amountOfBooks];
-	//Library library;
-	//
-	//Library book1 = { 0016452, "ahh", "AhhRowling", 2, 10272021, "Devon" };
-
-	//
-	testWrite("test.bin", "yo");    // write "yo" to the file
-	std::cout << testRead("test.bin");  // read "yo" from the file
+	int amountOfBooks = 1;
+	Library books[3];
+	Library library;
+	string readIn;
+	int count = sizeof(books) / sizeof(Library);
+	
+	//testWrite("test.bin", "yo");    // write "yo" to the file
+	//std::cout << testRead("test.bin");  // read "yo" from the file
 
 	
 
@@ -37,13 +37,73 @@ int main()
 
 	
 
-	//std::fstream file;
-	////read	//	file.open("library.dat", std::ios::in | std::ios::binary);
-	//if (file.is_open())	//{	//	file.read((char*)&library, sizeof(Library));
-	//	file.close();	//}	//else	//{	//	file.open("library.txt", std::ios::in);	//	if (!file.is_open())	//	{	//		cout << "Error" << endl;	//	}	//	file.close();	//}	////write
+	std::fstream bin;
+	//read
+		bin.open("library.dat", std::ios::in | std::ios::binary);
+		bin.read((char*)&books, sizeof(Library));
+	if (bin.is_open())
+	{
+		cout << "bin is open, now closing" << endl;
+		bin.close();
+	}
+	else
+	{
+
+		std::fstream txtFile;
+		txtFile.open("library.txt", std::ios::in);
+		cout << "opening library text file" << endl;
+		if (txtFile.bad())
+		{
+			cout << "Error, failed to open" << endl;
+
+		}
+		else
+		{
+			bin.close();
+			cout << "text file opening" << endl;
+			for (int i = 0; i < 3; i++)
+			{
+			cout << "loop" << i << endl;
+			std::getline(txtFile, readIn);
+			strcpy_s(books[i].callNumber, readIn.c_str());
+			std::getline(txtFile, readIn);
+			strcpy_s(books[i].title, readIn.c_str());
+			std::getline(txtFile, readIn);
+			strcpy_s(books[i].author, readIn.c_str());
+			std::getline(txtFile, readIn);
+			strcpy_s(books[i].bookStatus, readIn.c_str());
+			std::getline(txtFile, readIn);
+			strcpy_s(books[i].dueDate, readIn.c_str());
+			std::getline(txtFile, readIn);
+			strcpy_s(books[i].borrowersName, readIn.c_str());
+			cout << "loop" << i << endl;
+			}
+			txtFile.close();
+			cout << "closing txt" << endl;
+			//creats new bat
+			cout << "creating bat" << endl;
+			bin.open("library.dat", std::ios::out | std::ios::binary);
+
+			bin.write((char*)&books, sizeof(Library) * 3);
+			bin.close();
+
+		}
+		
+
+
+	}
+
+
+
+
+
+
+	//write
 	//file.open("library.dat", std::ios::out | std::ios::binary);
 	//file.write((char*)&library, sizeof(Library));
-	//file.close();
+	//file.close();
+
+
 
 
 

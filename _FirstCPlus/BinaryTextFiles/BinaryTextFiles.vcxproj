@@ -121,6 +121,11 @@
   <ItemGroup>
     <ClInclude Include="utils.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="libary.txt">
+      <DeploymentContent>true</DeploymentContent>
+    </Text>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
