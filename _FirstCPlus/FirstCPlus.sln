@@ -27,6 +27,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextFiles", "TextFiles\Text
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BinaryTextFiles", "BinaryTextFiles\BinaryTextFiles.vcxproj", "{62ED16F4-37D4-4EEA-98DC-08A7B7E122BE}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DynamicArray", "DynamicArray\DynamicArray.vcxproj", "{7028C39E-B080-40DD-85E5-61C9C794A7DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -131,6 +133,14 @@ Global
 		{62ED16F4-37D4-4EEA-98DC-08A7B7E122BE}.Release|x64.Build.0 = Release|x64
 		{62ED16F4-37D4-4EEA-98DC-08A7B7E122BE}.Release|x86.ActiveCfg = Release|Win32
 		{62ED16F4-37D4-4EEA-98DC-08A7B7E122BE}.Release|x86.Build.0 = Release|Win32
+		{7028C39E-B080-40DD-85E5-61C9C794A7DC}.Debug|x64.ActiveCfg = Debug|x64
+		{7028C39E-B080-40DD-85E5-61C9C794A7DC}.Debug|x64.Build.0 = Debug|x64
+		{7028C39E-B080-40DD-85E5-61C9C794A7DC}.Debug|x86.ActiveCfg = Debug|Win32
+		{7028C39E-B080-40DD-85E5-61C9C794A7DC}.Debug|x86.Build.0 = Debug|Win32
+		{7028C39E-B080-40DD-85E5-61C9C794A7DC}.Release|x64.ActiveCfg = Release|x64
+		{7028C39E-B080-40DD-85E5-61C9C794A7DC}.Release|x64.Build.0 = Release|x64
+		{7028C39E-B080-40DD-85E5-61C9C794A7DC}.Release|x86.ActiveCfg = Release|Win32
+		{7028C39E-B080-40DD-85E5-61C9C794A7DC}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
