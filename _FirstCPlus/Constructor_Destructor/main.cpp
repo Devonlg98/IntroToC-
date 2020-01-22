@@ -11,7 +11,7 @@ int main() {
 	myHero george = { "George" };
 	myHero* chief = new myHero;
 	delete chief;
-
+	
 
 	while (true)
 	{

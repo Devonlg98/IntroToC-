@@ -22,8 +22,8 @@ public:
 	T *data()
 	{
 		return *arr;
-	}                          
-	 // reallocates the underlying array to at least the given capacity
+	}
+	// reallocates the underlying array to at least the given capacity
 	void reserve(size_t newCapacity)
 	{
 		T *tempArr = new T[newCapacity];
@@ -35,7 +35,7 @@ public:
 
 		delete[] arr;
 		arr = tempArr;
-	}  
+	}
 
 	// adds an element to the end of the vector which is value
 	void push_back(const T &value)
@@ -116,7 +116,7 @@ public:
 template <typename T>
 tVector<T>::tVector()
 {
-	
+
 	arrSize = 0;
 	arrCapacity = 10;
 	arr = new T[arrCapacity];
@@ -124,11 +124,11 @@ tVector<T>::tVector()
 
 template <typename T>
 tVector<T>::~tVector()
-{ 
+{
 
 }
 
- template <typename T>
+template <typename T>
 tVector<T>::tVector(const tVector &vec)
 {
 	arrSize = vec.arrSize;
