@@ -12,10 +12,10 @@ int main()
 
 	list.push_front(3);
 	list.push_front(6);
+	list.push_front(6);
 	list.push_front(9);
 	list.remove(9);
-
-
+	
 	while (true)
 	{
 

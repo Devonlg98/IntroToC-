@@ -127,7 +127,7 @@ tVector<T>::~tVector()
 { 
 
 }
-
+//Copy constructor makes a brand new copy
  template <typename T>
 tVector<T>::tVector(const tVector &vec)
 {
@@ -140,6 +140,7 @@ tVector<T>::tVector(const tVector &vec)
 	}
 }
 
+//Both already exist and assigns copied values
 template <typename T>
 tVector<T>& tVector<T>::operator=(const tVector<T> &vec)
 {

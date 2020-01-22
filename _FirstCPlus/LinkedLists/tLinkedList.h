@@ -22,7 +22,9 @@ public:
 
 	void remove(const T& val);      // removes all elements equal to the given value
 
-	void printList(Node * head);
+	tForwardList(const tForwardList& other);            // copy-constructor
+
+	tForwardList& operator=(const tForwardList &rhs);   // copy-assignment
 };
 
 template<typename T>
@@ -92,9 +94,18 @@ inline const T & tForwardList<T>::front() const
 template<typename T>
 inline void tForwardList<T>::remove(const T & val)
 {
-	Node* currentHead = head;
 	
 	//Check head first and check if null
+	if (head->data == val|| head == nullptr)
+	{
+		pop_front();
+	}
+	//if (head == nullptr)
+	//{
+	//	return;
+	//}
+	Node* currentHead = head;
+	//curentHead->next = the pointer from current head
 	while (currentHead->next != nullptr)
 	{
 		if (currentHead->next->data == val)
@@ -102,11 +113,39 @@ inline void tForwardList<T>::remove(const T & val)
 			Node* deleteNode = currentHead->next;
 			currentHead->next = currentHead->next->next;
 			delete (deleteNode);
-
 		}
 		currentHead = currentHead->next;
 	}
 
+
+
+}
+//Copy Constructor
+template<typename T>
+inline tForwardList<T>::tForwardList(const tForwardList & other)
+{
+	//head null check head - nullptr
+	//Other isn't pointer so I use . instead of ->
+	head = new Node(other.head->data);
+	//for orignal node
+	Node * iterOrignialNode = head;
+	//for new node
+	Node * iterNewNode = other.head;
+	while (iterOriginalNode->next == nullptr)
+	{
+		iterNewNode->next = new Node(iterOrignialNode->next->data);
+
+	}
+ 
+
 }
 
+//Assignment Operator
+template<typename 
+inline tForwardList<T> & tForwardList<T>::operator=(const tForwardList & rhs)
+{
 
+
+
+	//Don't return anything
+}
