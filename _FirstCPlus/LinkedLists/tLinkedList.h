@@ -4,8 +4,16 @@ class tForwardList
 {
 	struct Node
 	{
+
 		T data;                     // data for the element stored
 		Node * next;                // pointer to node following this node
+
+		//Constructor takes in two parameters if you want two values
+		Node() {};
+		Node(T orig) 
+		{
+			data = orig;
+		}
 	};
 
 	Node * head;                    // pointer to head of linked list
@@ -25,6 +33,11 @@ public:
 	tForwardList(const tForwardList& other);            // copy-constructor
 
 	tForwardList& operator=(const tForwardList &rhs);   // copy-assignment
+
+	bool empty() const;             // Returns true if there are no elements
+	void clear();                   // Destroys every single node in the linked list
+	void resize(size_t newSize);    // Resizes the linked list to contain the given number of elements
+									// New elements are default-initialized
 };
 
 template<typename T>
@@ -126,26 +139,58 @@ inline tForwardList<T>::tForwardList(const tForwardList & other)
 {
 	//head null check head - nullptr
 	//Other isn't pointer so I use . instead of ->
-	head = new Node(other.head->data);
-	//for orignal node
-	Node * iterOrignialNode = head;
-	//for new node
-	Node * iterNewNode = other.head;
-	while (iterOriginalNode->next == nullptr)
-	{
-		iterNewNode->next = new Node(iterOrignialNode->next->data);
 
+	Node * otherNode = other.head;
+	head = new Node(otherNode->data);
+	Node * headPointer = head;
+
+	while (otherNode->next != nullptr)
+	{
+		headPointer->next = new Node(otherNode->next->data);
+		headPointer = headPointer->next;
+		otherNode = otherNode->next;
 	}
- 
+	//head = headPointer;
 
 }
 
 //Assignment Operator
-template<typename 
+template<typename T>
 inline tForwardList<T> & tForwardList<T>::operator=(const tForwardList & rhs)
 {
-
-
-
-	//Don't return anything
+	head = rhs.head;
+	return *this;
 }
+
+// Returns true if there are no nodes in the linked list
+template<typename T>
+inline bool tForwardList<T>::empty() const
+{
+	if (head == nullptr)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+// Destroys every single node in the linked list
+template<typename T>
+inline void tForwardList<T>::clear()
+{
+	if (head == nullptr)
+	{
+		std::cout << "They are no nodes in this list" << std::endl;
+		return;
+	}
+
+	//Temp data for head so it can be deleted
+	Node *tempN = head;
+	//set head to the next Node
+
+	head = head->next;
+	//delete old headed node
+	delete (tempN);
+}
+
