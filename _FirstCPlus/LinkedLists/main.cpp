@@ -37,6 +37,7 @@ int main()
 	}
 	emptyList.empty();
 	list.push_front(3);
+	list.resize(10);
 	while (true)
 	{
 
