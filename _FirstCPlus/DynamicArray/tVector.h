@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cmath>
 #include <fstream>
+#include <algorithm>
 #include<list>
 
 template <typename T>
@@ -36,6 +37,39 @@ public:
 		delete[] arr;
 		arr = tempArr;
 	}  
+
+	void bubbleSort()
+	{
+		bool valueSwapped = true;
+		while (valueSwapped == true )
+		{
+			valueSwapped = false;
+			for (int i = 0; i < size(); i++)
+			{
+				if (arr[i] < arr[i + 1])
+				{
+					std::swap(arr[i], arr[i + 1]);
+					valueSwapped = true;
+				}
+			}
+		}
+	}
+
+	void insertionSort()
+	{
+		int intSize = size();
+		for (int i = 1; i < intSize; i++)
+		{
+			int key = arr[i];
+			int	j = i - 1;
+			while (j >= 0 && arr[j] > key)
+			{
+				arr[j + 1] = arr[j];
+				j = j - 1;
+				arr[j + 1] = key;
+			}
+		}
+	}
 
 	// adds an element to the end of the vector which is value
 	void push_back(const T &value)

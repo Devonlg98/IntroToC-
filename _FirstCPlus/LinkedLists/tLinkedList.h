@@ -144,14 +144,11 @@ inline void tForwardList<T>::remove(const T & val)
 {
 	
 	//Check head first and check if null
-	if (head->data == val|| head == nullptr)
+	while (head->data == val|| head == nullptr)
 	{
 		pop_front();
 	}
-	//if (head == nullptr)
-	//{
-	//	return;
-	//}
+
 	Node* currentHead = head;
 	//curentHead->next = the pointer from current head
 	while (currentHead->next != nullptr)
@@ -162,7 +159,10 @@ inline void tForwardList<T>::remove(const T & val)
 			currentHead->next = currentHead->next->next;
 			delete (deleteNode);
 		}
+		else
+		{
 		currentHead = currentHead->next;
+		}
 	}
 }
 //Copy Constructor
@@ -232,22 +232,23 @@ inline void tForwardList<T>::clear()
 template<typename T>
 inline void tForwardList<T>::resize(size_t newSize)
 {
+	int sizeInt = size();
 	Node *placeHolderNode = new Node;
 	placeHolderNode->data = 0;
 	Node* currentHead = head;
 	if (newSize > size())
 	{
-		for (int i = 0; i < size()-1; i++)
+		for (int i = 0; i < sizeInt-1; i++)
 		{
 			currentHead = currentHead->next;
 		}
-		for (int i = size(); i < newSize; i++)
+		for (int i = sizeInt; i < newSize; i++)
 		{
 			currentHead->next = new Node(placeHolderNode->data);
 			currentHead = currentHead->next;
 		}
 	}
-	else if (newSize <= size())
+	else if (newSize <= sizeInt)
 	{
 		std::cout << "New size is smaller than current list" << std::endl;
 		return;
