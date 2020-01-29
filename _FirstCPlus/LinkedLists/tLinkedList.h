@@ -10,7 +10,7 @@ class tForwardList
 
 		//Constructor takes in two parameters if you want two values
 		Node() {};
-		Node(T orig) 
+		Node(T orig)
 		{
 			data = orig;
 		}
@@ -78,6 +78,7 @@ inline tForwardList<T>::~tForwardList()
 template<typename T>
 inline void tForwardList<T>::push_front(const T & val)
 {
+
 	//Creating new node pointer
 	Node *n = new Node;
 	//Setting values of new node to val
@@ -142,9 +143,9 @@ inline const T & tForwardList<T>::front() const
 template<typename T>
 inline void tForwardList<T>::remove(const T & val)
 {
-	
+
 	//Check head first and check if null
-	while (head->data == val|| head == nullptr)
+	while (head->data == val || head == nullptr)
 	{
 		pop_front();
 	}
@@ -161,7 +162,7 @@ inline void tForwardList<T>::remove(const T & val)
 		}
 		else
 		{
-		currentHead = currentHead->next;
+			currentHead = currentHead->next;
 		}
 	}
 }
@@ -238,7 +239,7 @@ inline void tForwardList<T>::resize(size_t newSize)
 	Node* currentHead = head;
 	if (newSize > size())
 	{
-		for (int i = 0; i < sizeInt-1; i++)
+		for (int i = 0; i < sizeInt - 1; i++)
 		{
 			currentHead = currentHead->next;
 		}
@@ -317,7 +318,7 @@ inline T & tForwardList<T>::iterator::operator*() const
 }
 
 template<typename T>
-inline typename tForwardList<T>::iterator tForwardList<T>::iterator::operator++(int )
+inline typename tForwardList<T>::iterator tForwardList<T>::iterator::operator++(int)
 {
 	cur = cur->next;
 	return *this;
