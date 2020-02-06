@@ -1,16 +1,25 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "tLinkedList.h"
+#include "tList.h"
 using std::cout;
 using std::endl;
 using std::string;
 
 int main()
 {
+	tList<int> backList;
+	backList.push_back(1);
+	backList.push_back(2);
+	backList.push_back(3);
+	backList.push_back(4);
+	backList.push_front(100);
+	backList.push_front(12);
+	backList.push_front(130);
+	backList.push_front(110);
 	// Creates a list with values pushed to the back.
 	tList<int> list;
-	list.push_back(3);
+	list.push_back(3);         
 	list.push_back(6);
 	list.push_back(6);
 	list.push_back(3);
@@ -28,17 +37,17 @@ int main()
 	list.resize(3);
 
 	// Creates a new list where the values get pushed to the front.
-	tList<int> backList;
-	backList.push_front(100);
-	backList.push_front(12);
-	backList.push_front(130);
-	backList.push_front(110);
+	//tList<int> backList;
+	//backList.push_front(100);
+	//backList.push_front(12);
+	//backList.push_front(130);
+	//backList.push_front(110);
 
 	// Pops the back of list off and resets the tail.
 	backList.pop_back();
+	backList.pop_front();
 
 	// Pops the front of list off and resets the head.
-	backList.pop_front();
 
 	// Clears the rest of the list.
 	backList.clear();
@@ -58,6 +67,9 @@ int main()
 	list.remove(3);
 	list.pop_back();
 	list.pop_front();
+
+
+	//FIX DUMB ITERATOR THING???
 
 	// Iterates trough the whole list and writes Joe to the console each time.
 	for (auto it = cpyList.begin(); it != cpyList.end(); ++it)
