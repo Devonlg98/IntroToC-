@@ -10,8 +10,6 @@ class tList
 		T data;                     // data for the element stored
 		Node * prev;                // pointer to node following this node
 		Node * next;                // pointer to node following this node
-
-		//Constructor takes in two parameters if you want two values
 		Node()
 		{
 			prev = nullptr;
@@ -26,27 +24,29 @@ class tList
 		}
 	};
 
-	Node * head;                    // pointer to head of linked list
-	Node * tail;                // pointer to node following this node
+	Node * head;                 // pointer to head of linked list
+	Node * tail;                // pointer to tail of linked list
 
 public:
 	tList();                 // initializes head to null
-	tList(const tList& other)            // copy-constructor
+	// copy-constructor
+	tList(const tList& other) 
 	{
-		//head null check head - nullptr
-        //Other isn't pointer so I use . instead of ->
 
+		//iterates through loop with head pointer and other node and copys values from other into new nodes.
 		Node * otherNode = other.head;
 		head = new Node(otherNode->data, otherNode->prev, otherNode->next);
 		Node * headPointer = head;
 
-		while (otherNode->next != nullptr)
+		while (otherNode->next->next != nullptr)
 		{
-			headPointer->next = new Node(otherNode->data, otherNode->prev, otherNode->next);
+			headPointer->next = new Node(otherNode->next->data, otherNode, otherNode->next->next);
 			headPointer = headPointer->next;
 			otherNode = otherNode->next;
 		}
+
 		otherNode->next = nullptr;
+		tail = otherNode;
 	}
 	tList& operator=(const tList &rhs);   // copy-assignment
 	~tList();                // delete all nodes upon destruction
@@ -75,7 +75,7 @@ public:
 		Node * cur;                                 // current node being operated upon
 
 	public:
-		//Iterator like currenthead
+
 		iterator();                                 // initializes an empty iterator pointing to null
 		iterator(Node * startNode);                 // initializes an iterator pointing to the given node
 
@@ -106,6 +106,7 @@ public:
 
 };
 
+//Sets head and tail to null on constructor
 template<typename T>
 inline tList<T>::tList()
 {
@@ -113,16 +114,18 @@ inline tList<T>::tList()
 	tail = nullptr;
 }
 
+//Deconstructor clears and deconstrucst list
 template<typename T>
 inline tList<T>::~tList()
 {
-
+	clear();
 }
 
 // adds element to front (i.e. head)
 template<typename T>
 inline void tList<T>::push_front(const T & val)
 {
+	//checking if the list is empty and creating initial node
 	if (head == nullptr)
 	{
 		Node *n = new Node();
@@ -134,6 +137,7 @@ inline void tList<T>::push_front(const T & val)
 	{
 		//Creating new node pointer
 		Node *n = new Node();
+		//storing old head pointer for later
 		Node * oldHead = head;
 		//Setting values of new node to val
 		n->data = val;
@@ -141,22 +145,10 @@ inline void tList<T>::push_front(const T & val)
 		n->next = head;
 		//Setting the head to the new node
 		head = n;
+		//setting oldHeads previous to head
 		oldHead->prev = head;
 	}
 
-	
-
-
-
-	//// n and tmp are two pointers that are iterating, prev is being set after tail moves forward, so it's always a step behind tail. tmp IS NOT prev
-	//while (n->next != nullptr)
-	//{
-	//	n = n->next;
-	//	n->prev = tmp;
-	//	tmp = tmp->next;
-	//}
-	//tail = n;
-	//head->prev = nullptr;
 }
 
 // removes element from front aka removing whole node
@@ -166,21 +158,25 @@ inline void tList<T>::pop_front()
 	if (head == nullptr)
 	{
 		std::cout << "List needs more than 1 nodes." << std::endl;
-		tail = nullptr;
 		return;
 	}
 	if (tail == nullptr)
 	{
 		std::cout << "List needs more than 1 nodes." << std::endl;
-		head = nullptr;
 		return;
 	}
 	if (tail->prev == nullptr)
 	{
 		Node *oldHead = head;
 		head = head->next;
-		head->prev = nullptr;
 		tail = nullptr;
+		delete (oldHead);
+	}
+	if (head->next == nullptr)
+	{
+		Node *oldHead = head;
+		head = head->next;
+		head = nullptr;
 		delete (oldHead);
 	}
 	else
@@ -242,11 +238,11 @@ inline void tList<T>::pop_back()
 	}
 	else 
 	{
-
 		Node *oldTail = tail;
 		tail = tail->prev;
 		tail->next = nullptr;
 		delete (oldTail);
+
 	}
 
 
@@ -281,11 +277,17 @@ inline const T & tList<T>::back() const
 template<typename T>
 inline void tList<T>::remove(const T & val)
 {
-
-	//Check head first and check if null
-	while (head->data == val || head == nullptr)
+	if (head == nullptr)
 	{
-		pop_front();
+		return;
+	}
+	//Check head first and check if null
+	while (head->data == val)
+	{
+		Node *oldHead = head;
+		head = head->next;
+		head->prev = nullptr;
+		delete (oldHead);
 	}
 
 	Node* currentHead = head;
@@ -304,32 +306,25 @@ inline void tList<T>::remove(const T & val)
 		}
 	}
 }
-////Copy Constructor
-//template<typename T>
-//inline tList<T>::tList(const tList & other)
-//{
-//	//head null check head - nullptr
-//	//Other isn't pointer so I use . instead of ->
-//
-//	Node * otherNode = other.head;
-//	head = new Node(otherNode->data);
-//	Node * headPointer = head;
-//
-//	while (otherNode->next != nullptr)
-//	{
-//		headPointer->next = new Node(otherNode->next->data);
-//		headPointer = headPointer->next;
-//		otherNode = otherNode->next;
-//	}
-//	//head = headPointer;
-//
-//}
 
 //Assignment Operator
 template<typename T>
-inline tList<T> & tList<T>::operator=(const tList & rhs)
+inline tList<T> & tList<T>::operator=(const tList & other)
 {
-	head = rhs.head;
+
+	this->clear();
+	Node * originalCurr = other.head;
+	this->head = new Node(other.head->data, other.head->prev, other.head->next);
+	Node * currentNode = this->head;
+
+	while (originalCurr->next != nullptr)
+	{
+		currentNode->next = new Node(originalCurr->next->data, originalCurr->prev, originalCurr->next);
+		originalCurr = originalCurr->next;
+		currentNode = currentNode->next;
+	}
+	currentNode->next = nullptr;
+	tail = currentNode;
 	return *this;
 }
 
@@ -355,32 +350,35 @@ inline void tList<T>::clear()
 		std::cout << "They are no nodes in this list" << std::endl;
 		return;
 	}
-	//Node* currentHead = head;
-	//Node* deleteNode = currentHead;
 	while (head != nullptr)
 	{
-		pop_back();
+		pop_front();
 	}
-	head = nullptr;
-	delete(head);
+	tail = nullptr;
+	delete(tail);
 }
-// Resizes the linked list to contain the given number of elements
-// New elements are default-initialized
 
 
+//Checks size of list by iterating through
 template<typename T>
 inline T & tList<T>::size()
 {
 	int nodeCount = 0;
 	Node* currentHead = head;
-	while (currentHead != nullptr)
+	while (currentHead->next != nullptr)
 	{
 		nodeCount++;
 		currentHead = currentHead->next;
 	}
+	if (nodeCount != 0)
+	{
+	nodeCount++;
+	}
 	return nodeCount;
 }
 
+// Resizes the linked list to contain the given number of elements
+// New elements are default-initialized
 template<typename T>
 inline void tList<T>::resize(size_t newSize)
 {
@@ -388,6 +386,7 @@ inline void tList<T>::resize(size_t newSize)
 	Node *placeHolderNode = new Node;
 	placeHolderNode->data = 0;
 	Node* currentHead = head;
+	//if the new size is larger than current list, initalize empty nodes to the front
 	if (newSize > size())
 	{
 		for (int i = 0; i < sizeInt - 1; i++)
@@ -399,10 +398,11 @@ inline void tList<T>::resize(size_t newSize)
 			currentHead->next = new Node(placeHolderNode->data, placeHolderNode->prev, placeHolderNode->next);
 			currentHead = currentHead->next;
 		}
+		tail = currentHead;
 	}
-	else if (newSize <= sizeInt)
+	//if the new size is smaller, return;
+	else if (newSize < sizeInt)
 	{
-		std::cout << "New size is smaller than current list" << std::endl;
 		return;
 	}
 
@@ -424,6 +424,7 @@ inline typename const tList<T>::iterator tList<T>::begin() const
 	return iterator(head);
 }
 
+//returning iterator nullptr because the end is always null
 template<typename T>
 inline typename tList<T>::iterator tList<T>::end()
 {
@@ -435,19 +436,20 @@ inline typename const tList<T>::iterator tList<T>::end() const
 {
 	return iterator(nullptr);
 }
-
+//Initializes empty pointing to null
 template<typename T>
 inline tList<T>::iterator::iterator()
 {
 	cur = nullptr;
 }
-
+//initializes pointing to current node
 template<typename T>
 inline tList<T>::iterator::iterator(Node * startNode)
 {
 	cur = startNode;
 }
 
+//returns true if iteraor points to the same node, false if not
 template<typename T>
 inline bool tList<T>::iterator::operator==(const iterator & rhs) const
 {
@@ -461,6 +463,7 @@ inline bool tList<T>::iterator::operator==(const iterator & rhs) const
 	}
 }
 
+//returns true if iteraor does not point to the same node, true if it does
 template<typename T>
 inline bool tList<T>::iterator::operator!=(const iterator & rhs) const
 {
@@ -487,8 +490,6 @@ inline typename T & tList<T>::iterator::operator*() const
 	return *cur->data;
 }
 
-// pre-increment (returns a reference to this iterator after it is incremented)
-// post-increment (returns an iterator as it was before it was incremented)
 
 
 
