@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "tVector.h"
+#include "utils.h"
 #include <fstream>
 using std::cout;
 using std::endl;
@@ -21,28 +21,11 @@ int main()
 	original.push_back(1);
 	original.push_back(23);
 	original.push_back(11);
+	original.printList();
 	original.bubbleSort();
-	original.insertionSort();
-	tVector<int> copy = original;
-	copy.pop_back(); // removes from the copy array, but not the original
-	copy.pop_back();
-	copy.pop_back();
-
-
-	for (size_t i = 0; i < original.size(); i++)
-	{
-		cout << original.at(i) << endl;
-	}
-
-	//for (size_t i = 0; i < copy.size(); i++)
-	//{
-	//	cout << copy[i] << endl;
-	//}
-
-	
-
-
-
+	original.printList();
+	original.bubbleSortReverse();
+	original.printList();
 
 
 	while (true)

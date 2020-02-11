@@ -1,83 +1,49 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "tLinkedList.h"
+#include "tList.h"
 using std::cout;
 using std::endl;
-using std::string;
-
 int main()
 {
-	// Creates a list with values pushed to the back.
-	tList<int> list;
-	list.push_back(3);
-	list.push_back(6);
-	list.push_back(6);
-	list.push_back(3);
-	list.push_back(3);
-	list.push_back(3);
-	list.push_back(3);
-	list.push_back(7);
-	list.push_back(6);
+	tList<int> newList;
 
-	// Makes a new list equal to another.
-	tList<int> listManCopy;
-	listManCopy = list;
+	newList.push_back(1);
+	newList.push_back(2);
+	newList.push_front(3);
+	newList.push_front(4);
+	newList.push_back(5);
+	newList.push_front(6);
+	
+	tList<int> newListCopy;
+	newListCopy = newList;
+	newListCopy.remove(3);
+	newList.pop_back();
+	newList.pop_back(); 
+	tList<int> newListActualCopy(newListCopy);
 
-	// Resizes the list to a length of three.
-	list.resize(3);
+	newListActualCopy.remove(5);
+	newListActualCopy.resize(8);
 
-	// Creates a new list where the values get pushed to the front.
-	tList<int> backList;
-	backList.push_front(100);
-	backList.push_front(12);
-	backList.push_front(130);
-	backList.push_front(110);
-
-	// Pops the back of list off and resets the tail.
-	backList.pop_back();
-
-	// Pops the front of list off and resets the head.
-	backList.pop_front();
-
-	// Clears the rest of the list.
-	backList.clear();
-
-	// Checks if either list are empty and outputs a boolean.
-	std::cout << backList.empty() << std::endl;
-	std::cout << list.empty() << std::endl;
-
-	// Returns the front and back of the list.
-	std::cout << list.front() << std::endl;
-	std::cout << list.back() << std::endl;
-
-	// Creates a copy of the main list and puts it into the new one.
-	tList<int> cpyList(list);
-
-	// Removes all threes in the array, then pops the front and back.
-	list.remove(3);
-	list.pop_back();
-	list.pop_front();
-
-	// Iterates trough the whole list and writes Joe to the console each time.
-	for (auto it = cpyList.begin(); it != cpyList.end(); ++it)
+	if (newListCopy.empty() == true)
 	{
-		std::cout << "Joe" << std::endl;
+		std::cout << "this list is empty" << std::endl;
 	}
-
-	// Iterates trough the whole list and writes Jojo to the console each time.
-	for (auto it = list.begin(); it != list.end(); ++it)
+	else
 	{
-		std::cout << "Jojo" << std::endl;
+		std::cout << "this list is not empty" << std::endl;
 	}
-
-	// Iterates trough the whole list and writes Jo to the console each time.
-	for (auto it = listManCopy.begin(); it != listManCopy.end(); ++it)
+	newListCopy.clear();
+	if (newListCopy.empty() == true)
 	{
-		std::cout << "Jo" << std::endl;
+		std::cout << "this list is empty" << std::endl;
 	}
-
-	// A loop to keep the console open.
+	else
+	{
+		std::cout << "this list is not empty" << std::endl;
+	}
+	std::cout << newList.front() << std::endl;
+	std::cout << newList.back() << std::endl;
 	while (true)
 	{
 

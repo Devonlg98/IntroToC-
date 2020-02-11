@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CustomingSortingAlgo", "CustomingSortingAlgo\CustomingSortingAlgo.vcxproj", "{35399480-8EF8-4240-AC79-DE07FE341495}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35399480-8EF8-4240-AC79-DE07FE341495}.Debug|x64.ActiveCfg = Debug|x64
+		{35399480-8EF8-4240-AC79-DE07FE341495}.Debug|x64.Build.0 = Debug|x64
+		{35399480-8EF8-4240-AC79-DE07FE341495}.Debug|x86.ActiveCfg = Debug|Win32
+		{35399480-8EF8-4240-AC79-DE07FE341495}.Debug|x86.Build.0 = Debug|Win32
+		{35399480-8EF8-4240-AC79-DE07FE341495}.Release|x64.ActiveCfg = Release|x64
+		{35399480-8EF8-4240-AC79-DE07FE341495}.Release|x64.Build.0 = Release|x64
+		{35399480-8EF8-4240-AC79-DE07FE341495}.Release|x86.ActiveCfg = Release|Win32
+		{35399480-8EF8-4240-AC79-DE07FE341495}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2CB9A3B7-2A89-4ABF-A784-D5DC40402428}
+	EndGlobalSection
+EndGlobal
