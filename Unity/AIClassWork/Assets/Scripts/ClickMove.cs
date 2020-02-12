@@ -24,6 +24,7 @@ public class ClickMove : MonoBehaviour
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitLayers))
             {
                 P1Move.transform.position = hit.point;
+                
             }
         }
 
