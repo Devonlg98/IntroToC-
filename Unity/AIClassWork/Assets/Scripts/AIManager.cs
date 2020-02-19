@@ -8,8 +8,9 @@ public class AIManager : MonoBehaviour
     public float mass = 1f;
     public float maxForce = 1f;
     public float maxSpeed = 5f;
-    Vector3 velocity = Vector3.zero;
-    Vector3 steeringVector = Vector3.zero;
+    private Transform tmpTarget;
+    public Vector3 velocity = Vector3.zero;
+    Vector3 steeringVector;
 
     [HideInInspector]
     public float startMaxSpeed;
@@ -23,7 +24,7 @@ public class AIManager : MonoBehaviour
         startMaxSpeed = maxSpeed;
     }
 
-    // Update is called once per frame
+    // Update is called once per frame1
     void Update()
     {
         Vector3 steering = Vector3.ClampMagnitude(steeringVector, maxForce);
@@ -46,6 +47,10 @@ public class AIManager : MonoBehaviour
 
     //Pass through vector from seek and flee
     public void AiSteer(Vector3 v)
+    {
+        steeringVector += v;
+    }
+    public void AiSteerWander(Vector3 v)
     {
         steeringVector += v;
     }

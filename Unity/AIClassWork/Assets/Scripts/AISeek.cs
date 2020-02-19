@@ -6,7 +6,10 @@ public class AISeek : MonoBehaviour
 {
 
     public AIManager aiMan;
+    private AIManager aiEnem;
     public Transform tmpTarget;
+    private GameObject tmpTargetGO;
+
     public float maxVelocity = 1f;
     public float arriveTurnSpeed = .1f;
     Vector3 force;
@@ -15,14 +18,14 @@ public class AISeek : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        aiEnem = tmpTarget.GetComponent<AIManager>();
     }
 
 
     // Update is called once per frame
     void Update()
     {
-
+        
 
         float distanceToTarget = Vector3.Distance(tmpTarget.position, transform.position);
         if (distanceToTarget < 100)
@@ -53,7 +56,7 @@ public class AISeek : MonoBehaviour
 
     void Movement()
     {
-        v = ((tmpTarget.position - transform.position) * maxVelocity).normalized;
+        v = ((tmpTarget.position +aiEnem.velocity - transform.position) * maxVelocity).normalized;
         force = v - CurrentVelocity;
         CurrentVelocity += force * Time.deltaTime;
         transform.position += CurrentVelocity * Time.deltaTime;
@@ -69,6 +72,7 @@ public class AISeek : MonoBehaviour
         aiMan.AiSteer(v);
         aiMan.mass = 1/arriveTurnSpeed;
     }
+
 
 
 }
