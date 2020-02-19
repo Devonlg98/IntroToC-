@@ -8,6 +8,7 @@ public class ClickMove : MonoBehaviour
 
     public float maxVelocity = 1f;
     public float arriveTurnSpeed = .1f;
+    int idx = 0;
     float distanceToTarget;
     Vector3 force;
     Vector3 v;
@@ -30,55 +31,48 @@ public class ClickMove : MonoBehaviour
     void Update()
     {
 
-
-
-        
         for (int i = 0; i < path.corners.Length - 1; i++)
         {
-            
             Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
         }
+
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 mousePos = Input.mousePosition;
             Ray ray = Camera.main.ScreenPointToRay(mousePos);
             RaycastHit hit;
 
-
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitLayers))
             {
-                myNavMeshAgent.SetDestination(hit.point);
                 NavMesh.CalculatePath(transform.position, hit.point, NavMesh.AllAreas, path);
             }
-
-            
-
         }
         if (Input.GetMouseButtonDown(1))
         {
             {
                 Vector3 mousePos = Input.mousePosition;
-                  Ray ray = Camera.main.ScreenPointToRay(mousePos);
-                 RaycastHit hit;
+                Ray ray = Camera.main.ScreenPointToRay(mousePos);
+                RaycastHit hit;
                 if (Physics.Raycast(ray, out hit))
                 {
                     hit.transform.gameObject.SetActive(false);
                 }
             }
         }
-        int idx = 0;
+
+        // NO PATH, BAIL
+        if (path.corners.Length == 0) { return; }
+
+        v = (path.corners[idx] - transform.position).normalized;
+        agent.AiSteer(v);
 
         distanceToTarget = Vector3.Distance(path.corners[idx], transform.position);
-
-        v = ((path.corners[idx] - transform.position) * maxVelocity).normalized;
-        force = v - CurrentVelocity;
-        CurrentVelocity += force * Time.deltaTime;
-        transform.position += CurrentVelocity * Time.deltaTime;
-        agent.AiSteer(path.corners[idx]);
-        if (distanceToTarget < 1)
+        if (distanceToTarget < 1.1f)
         {
-            if (idx < path.corners.Length)
+
+            if (idx + 1 < path.corners.Length)
             {
+
                 idx += 1;
             }
         }

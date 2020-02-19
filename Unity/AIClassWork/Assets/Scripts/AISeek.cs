@@ -56,6 +56,7 @@ public class AISeek : MonoBehaviour
 
     void Movement()
     {
+        //Not needed can fix, look into Djikastro/navmesh
         v = ((tmpTarget.position +aiEnem.velocity - transform.position) * maxVelocity).normalized;
         force = v - CurrentVelocity;
         CurrentVelocity += force * Time.deltaTime;

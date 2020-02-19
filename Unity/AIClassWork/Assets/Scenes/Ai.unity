@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73e027d39c1aa9a49937bdb18cbb1555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aiMan: {fileID: 1740780131}
   maxVelocity: 0.1
   smooth: 1.5
 --- !u!65 &398075909
@@ -243,7 +244,6 @@ MonoBehaviour:
   mass: 1
   maxForce: 1
   maxSpeed: 1
-  tmpTarget: {fileID: 1740780136}
   velocity: {x: 0, y: 0, z: 0}
   startMaxSpeed: 0
   startMass: 0
@@ -578,7 +578,6 @@ MonoBehaviour:
   mass: 1
   maxForce: 0.5
   maxSpeed: 5
-  tmpTarget: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
   startMaxSpeed: 0
   startMass: 0
