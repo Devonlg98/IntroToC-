@@ -335,11 +335,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 1182702293}
   AI: {fileID: 365103183}
+  AIx: 0
+  AIy: 0
+  AIpos: 25
+  targetPos: 0
+  whileLoopBreaker: 0
+  tileScript: {fileID: -462579844857194347, guid: f7c1d43fac170a94d93583a5b6d1f7ac,
+    type: 3}
   tilePrefab: {fileID: 7078528256394438602, guid: f7c1d43fac170a94d93583a5b6d1f7ac,
     type: 3}
-  tilePrefab2: {fileID: 6564891408010696926, guid: 985e0791660688d4f97f5b4f3077559f,
-    type: 3}
-  length: 8
+  length: 6
+  materialvisited: {fileID: 2100000, guid: 95b0aebb51c102545b2c1b883e4149d4, type: 2}
+  materialclosed: {fileID: 2100000, guid: 17f984eb749594e49921d1524a8b7d0b, type: 2}
   Tiles:
   - {fileID: 0}
   - {fileID: 0}
