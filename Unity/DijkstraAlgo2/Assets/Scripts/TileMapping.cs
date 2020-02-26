@@ -26,7 +26,7 @@ public class TileMapping : MonoBehaviour
     public List<int> unvisited = new List<int>();
     public List<int> visited = new List<int>();
     public List<int> closed = new List<int>();
-
+    public List<GameObject> targetPath = new List<GameObject>();
     public Material materialvisited;
     public Material materialclosed;
 
@@ -34,6 +34,7 @@ public class TileMapping : MonoBehaviour
 
 
     public GameObject[] Tiles = new GameObject[0];
+    //public GameObject[] pathTargets = new GameObject[0];
     // Start is called before the first frame update
     void Start()
     {
@@ -48,29 +49,46 @@ public class TileMapping : MonoBehaviour
         }
         AI.position = matchPosition(AIpos);
         visited.Add(AIpos);
-        Target.position = matchPosition(length * length - 1);
+        Target.position = matchPosition(targetPos);
         Tiles[targetPos].GetComponent<TileScript>().target = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Jump"))
-        {
-            //while (unvisited.Count >= 1 || foundTarget == false || whileLoopBreaker > 1000)
-            //{
-                //Tiles[visited[0]].GetComponent<TileScript>().Object.material = materialvisited;
-                surroundingCheck(visited[0]);
-                whileLoopBreaker++;
 
-            
+        while (unvisited.Count > 1 && foundTarget == false)
+        {
+            //Tiles[visited[0]].GetComponent<TileScript>().Object.material = materialvisited;
+            surroundingCheck(visited[0]);           
+            whileLoopBreaker++;
         }
+
+        if (foundTarget == true)
+        {
+            GameObject temp = Tiles[0];
+            while (Tiles.GetComponent<TileScript>().prev == true)
+            {
+                for (int i = 0; i < Tiles.Length - 1; i++)
+                {
+                    targetPath.Add(temp.GetComponent<TileScript>().prev);
+                    temp = temp.GetComponent<TileScript>().prev;
+                }
+                targetPath.Reverse();
+            }
+
+        }
+
+
+
+
     }
 
 
 
     void instMap()
     {
+
         Tiles = new GameObject[length * length];
         for (int i = 0; i < length; i++)
         {
@@ -78,10 +96,11 @@ public class TileMapping : MonoBehaviour
             { 
                 Tiles[tileCount] = Instantiate(tilePrefab, new Vector3(j * 1.02f, 0f, i * 1.02f), Quaternion.identity);
                 Tiles[tileCount].name = "Tile " + tileCount;
+                Tiles[tileCount].GetComponent<TileScript>().ID = tileCount;
                 tileCount++;
                 unvisited.Add(i*length+j);
             }
-
+            
         }
 
         for (int i = 0; i < length*length; i++)
@@ -92,6 +111,12 @@ public class TileMapping : MonoBehaviour
             if (i + length < length*length)
             {
                 tile.up = Tiles[i + length];
+            }
+
+            //Right
+            if ((i + 1) % length != 0)
+            {
+                tile.right = Tiles[i + 1];
             }
 
             //Down
@@ -106,11 +131,6 @@ public class TileMapping : MonoBehaviour
                 tile.left = Tiles[i - 1];
             }
 
-            //Right
-            if ((i + 1) % length != 0)
-            {
-                tile.right = Tiles[i + 1];
-            }
         }
     }
 
@@ -125,17 +145,15 @@ public class TileMapping : MonoBehaviour
         Tiles[visited[0]].GetComponent<TileScript>().Object.material = materialclosed;
         visited.RemoveAt(0);
         closed.Add(checkPos);
-
-
-
-
         TileScript checkedTile = Tiles[checkPos].GetComponent<TileScript>();
+        
         //Up
-        if (checkedTile.up == true && !(visited.Contains(checkPos + length) && !(closed.Contains(checkPos - length))))
+        if (checkedTile.up == true && !(visited.Contains(checkPos + length)) && !(closed.Contains(checkPos + length)))
         {
             Debug.Log(checkPos + length);
             visited.Add(checkPos + length);
             Tiles[checkPos + length].GetComponent<TileScript>().Object.material = materialvisited;
+            Tiles[checkPos + length].GetComponent<TileScript>().prev = Tiles[checkPos];
             unvisited.Remove(checkPos + length);
             if(Tiles[checkPos + length].GetComponent<TileScript>().target == true)
             {
@@ -146,12 +164,13 @@ public class TileMapping : MonoBehaviour
         }
 
         //Right
-        if (checkedTile.right == true && !(visited.Contains(checkPos + 1) && !(closed.Contains(checkPos - length))))
+        if (checkedTile.right == true && !(visited.Contains(checkPos + 1)) && !(closed.Contains(checkPos +1 )))
         {
             Debug.Log(checkPos + 1);
             visited.Add(checkPos + 1);
             Tiles[checkPos + 1].GetComponent<TileScript>().Object.material = materialvisited;
-            //Tiles[unvisited[checkPos + 1]].GetComponent<Renderer>().material = materialvisited;
+            Tiles[checkPos + 1].GetComponent<TileScript>().prev = Tiles[checkPos];
+
             unvisited.Remove(checkPos + 1);
             if (Tiles[checkPos + 1].GetComponent<TileScript>().target == true)
             {
@@ -167,6 +186,8 @@ public class TileMapping : MonoBehaviour
             Debug.Log(checkPos - length);
             visited.Add(checkPos - length);
             Tiles[checkPos - length].GetComponent<TileScript>().Object.material = materialvisited;
+            Tiles[checkPos - length].GetComponent<TileScript>().prev = Tiles[checkPos];
+
             unvisited.Remove(checkPos - length);
             if (Tiles[checkPos - length].GetComponent<TileScript>().target == true)
             {
@@ -177,17 +198,12 @@ public class TileMapping : MonoBehaviour
         }
 
         //Left
-        if (checkedTile.left == true && !(visited.Contains(checkPos - 1) && !(closed.Contains(checkPos - length))))
+        if (checkedTile.left == true && !(visited.Contains(checkPos - 1)) && !(closed.Contains(checkPos - 1)))
         {
             Debug.Log(checkPos - 1);
             visited.Add(checkPos - 1);
-            Debug.Log("Actual Tile Being updated = " + Tiles[checkPos - 1].GetComponent<TileScript>().Object.name);
-
             Tiles[checkPos - 1].GetComponent<TileScript>().Object.material = materialvisited;
-
-//            Tiles[unvisited[checkPos - 1]].GetComponent<TileScript>().Object.material = materialvisited;
-
-            //Tiles[unvisited[checkPos - 2]].GetComponent<Renderer>().material = materialvisited;
+            Tiles[checkPos - 1].GetComponent<TileScript>().prev = Tiles[checkPos];
             unvisited.Remove(checkPos - 1);
             if (Tiles[checkPos - 1].GetComponent<TileScript>().target == true)
             {
@@ -196,17 +212,12 @@ public class TileMapping : MonoBehaviour
                 return;
             }
         }
-
-
         ////Up
         //if (Tiles[checkPos].GetComponent<TileScript>().up == true && Tiles[checkPos + length].GetComponent<TileScript>().visited == false)
         //{
         //    visited.Add(checkPos + length);
         //    unvisited.Remove(checkPos + length);
         //    Tiles[checkPos].GetComponent<TileScript>().visited = true;
-        //}
-
-
     }
 
 

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TileScript : MonoBehaviour
 {
-    public float weight;
+    public float weight; 
+    public float ID; 
     public bool target = false;
     public float x;
     public float y;
@@ -12,6 +13,7 @@ public class TileScript : MonoBehaviour
     public GameObject down;
     public GameObject left;
     public GameObject right;
+    public GameObject prev;
 
 
 
