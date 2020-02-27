@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class TileScript : MonoBehaviour
 {
-    public float weight; 
-    public float ID; 
+    public float weight = 1;
+    public int ID; 
     public bool target = false;
-    public float x;
-    public float y;
     public GameObject up;
     public GameObject down;
     public GameObject left;
@@ -21,8 +19,6 @@ public class TileScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        x = transform.position.x;
-        y = transform.position.y;
         Object = GetComponent<Renderer>();
     }
 

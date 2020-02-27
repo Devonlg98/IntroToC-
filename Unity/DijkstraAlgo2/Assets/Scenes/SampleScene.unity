@@ -338,18 +338,20 @@ MonoBehaviour:
   AIx: 0
   AIy: 0
   AIpos: 25
-  targetPos: 34
+  targetPos: 150
   whileLoopBreaker: 0
   tileScript: {fileID: -462579844857194347, guid: f7c1d43fac170a94d93583a5b6d1f7ac,
     type: 3}
   tilePrefab: {fileID: 7078528256394438602, guid: f7c1d43fac170a94d93583a5b6d1f7ac,
     type: 3}
-  length: 6
+  length: 30
   unvisited: 
   visited: 
   closed: 
-  materialvisited: {fileID: 2100000, guid: 95b0aebb51c102545b2c1b883e4149d4, type: 2}
-  materialclosed: {fileID: 2100000, guid: 17f984eb749594e49921d1524a8b7d0b, type: 2}
+  targetPath: 
+  materialVisited: {fileID: 2100000, guid: 95b0aebb51c102545b2c1b883e4149d4, type: 2}
+  materialClosed: {fileID: 2100000, guid: 17f984eb749594e49921d1524a8b7d0b, type: 2}
+  materialPath: {fileID: 2100000, guid: 35034223783fde845895e77aae46ad3c, type: 2}
   Tiles:
   - {fileID: 0}
   - {fileID: 0}
@@ -463,13 +465,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 10, y: 50, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1182702289
 GameObject:
   m_ObjectHideFlags: 0
