@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 320071232}
   - component: {fileID: 320071231}
   - component: {fileID: 320071230}
+  - component: {fileID: 320071234}
   - component: {fileID: 320071229}
   m_Layer: 0
   m_Name: AI
@@ -149,13 +150,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 320071228}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 608b2d8b627807944a3be9b4bc241c67, type: 3}
+  m_Script: {fileID: 11500000, guid: 901aaf43dce158948bfe274481db7aa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolLocations: []
-  currentPatrolIndex: 0
-  fleeTarget: {fileID: 0}
-  seekTarget: {fileID: 0}
+  aiMan: {fileID: 320071234}
+  tmpTarget: {fileID: 1363804662}
+  pathNextNode: {x: 0, y: 0, z: 0}
+  tileMap: {fileID: 828363290}
+  maxVelocity: 1
+  arriveTurnSpeed: 1
 --- !u!65 &320071230
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -224,11 +227,29 @@ Transform:
   m_GameObject: {fileID: 320071228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &320071234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320071228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 351b7c7a01915cb4290b665c90642887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mass: 1
+  maxForce: 5
+  maxSpeed: 5
+  velocity: {x: 0, y: 0, z: 0}
+  startMaxSpeed: 0
+  startMass: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,15 +448,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 1363804662}
   AI: {fileID: 320071233}
-  AIpos: 134
-  targetPos: 11
+  AIpos: 188
+  targetPos: 379
   tileScript: {fileID: -462579844857194347, guid: f7c1d43fac170a94d93583a5b6d1f7ac,
     type: 3}
   tilePrefab: {fileID: 7078528256394438602, guid: f7c1d43fac170a94d93583a5b6d1f7ac,
     type: 3}
   wallPrefab: {fileID: 7078528256394438602, guid: 2e87c07aa1fcfc24988953b853d3ba5a,
     type: 3}
-  length: 30
+  length: 20
   unvisited: 
   visited: 
   closed: 
@@ -444,6 +465,7 @@ MonoBehaviour:
   materialClosed: {fileID: 2100000, guid: 17f984eb749594e49921d1524a8b7d0b, type: 2}
   materialPath: {fileID: 2100000, guid: 35034223783fde845895e77aae46ad3c, type: 2}
   materialWall: {fileID: 2100000, guid: c835a747b89de4249b1f1e74851362ba, type: 2}
+  pathVec2: []
   Tiles: []
   WallArray: []
 --- !u!1 &963194225
@@ -541,6 +563,7 @@ GameObject:
   - component: {fileID: 1363804661}
   - component: {fileID: 1363804660}
   - component: {fileID: 1363804659}
+  - component: {fileID: 1363804663}
   m_Layer: 0
   m_Name: Target
   m_TagString: Untagged
@@ -616,8 +639,26 @@ Transform:
   m_GameObject: {fileID: 1363804658}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1363804663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363804658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 351b7c7a01915cb4290b665c90642887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mass: 1
+  maxForce: 1
+  maxSpeed: 5
+  velocity: {x: 0, y: 0, z: 0}
+  startMaxSpeed: 0
+  startMass: 0

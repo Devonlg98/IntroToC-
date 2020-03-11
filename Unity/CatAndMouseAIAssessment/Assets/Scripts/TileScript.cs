@@ -7,6 +7,8 @@ public class TileScript : MonoBehaviour
     public float weight = 1;
     public int ID; 
     public bool target = false;
+    public int x;
+    public int y;
     public GameObject up;
     public GameObject down;
     public GameObject left;
