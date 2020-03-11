@@ -62,8 +62,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\AIManager.cs" />
-    <Compile Include="Assets\Scripts\AISeek.cs" />
+    <Compile Include="Assets\AgentMovement.cs" />
+    <Compile Include="Assets\Scripts\Agent.cs" />
     <Compile Include="Assets\Scripts\TileMapping.cs" />
     <Compile Include="Assets\Scripts\TileScript.cs" />
     <Reference Include="Unity.Timeline.Editor">

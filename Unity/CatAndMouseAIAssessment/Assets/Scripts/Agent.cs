@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class AIManager : MonoBehaviour
+public class Agent : MonoBehaviour
 {
     public float mass = 1f;
     public float maxForce = 1f;
@@ -23,7 +23,7 @@ public class AIManager : MonoBehaviour
         startMaxSpeed = maxSpeed;
     }
 
-    // Update is called once per frame1
+    // Update is called once per frame
     void Update()
     {
         Vector3 steering = Vector3.ClampMagnitude(steeringVector, maxForce);
@@ -54,7 +54,3 @@ public class AIManager : MonoBehaviour
         steeringVector += v;
     }
 }
-
-
-
-

@@ -28,30 +28,28 @@ public class TileMapping : MonoBehaviour
     public Material materialWall;
     public int pathITR;
 
-    public List<Vector2> pathVec2;
+    public Vector3[] pathVec3;
     public GameObject[] Tiles;
     public GameObject[] WallArray;
+
+
+    public Agent agent;
     //public GameObject[] pathTargets = new GameObject[0];
     // Start is called before the first frame update
     void Start()
     {
         tileScript.Object = GetComponent<Renderer>();
         instMap();
-        //AIx = AI.position.x;
-        //AIy = AI.position.y;
-
-        if(AIpos < 0 || AIpos >= length*length)
+        if (AIpos < 0 || AIpos >= length*length)
         {
             AIpos = 0;
         }
+
         AI.position = matchPosition(AIpos);
         visited.Add(AIpos);
         Target.position = matchPosition(targetPos);
         Tiles[targetPos].GetComponent<TileScript>().target = true;
         Tiles[AIpos].GetComponent<TileScript>().weight = 0;
-
-
-
     }
 
     // Update is called once per frame
@@ -60,24 +58,25 @@ public class TileMapping : MonoBehaviour
 
         while (unvisited.Count > 1 && foundTarget == false)
         {
-            surroundingCheck(visited[0]);           
+            surroundingCheck(visited[0]);
         }
 
         if(foundTarget == true && whileBreaker == true)
         {
+            pathITR = 0;
             GameObject temp = Tiles[0];
             targetPath.Add(Tiles[foundPos].GetComponent<TileScript>().ID);
             while (Tiles[foundPos].GetComponent<TileScript>().ID != AIpos)
             {
                 Tiles[foundPos] = Tiles[foundPos].GetComponent<TileScript>().prev;
                 Tiles[foundPos].GetComponent<TileScript>().Object.material = materialPath;
-                pathVec2.Add(new Vector2(Tiles[foundPos].GetComponent<TileScript>().x, Tiles[foundPos].GetComponent<TileScript>().y));
+                pathVec3[pathITR] = new Vector3(Tiles[foundPos].GetComponent<TileScript>().x, Tiles[foundPos].GetComponent<TileScript>().y);
                 targetPath.Add(Tiles[foundPos].GetComponent<TileScript>().ID);
                 foundPos = Tiles[foundPos].GetComponent<TileScript>().ID;
                 pathITR++;
-                if(pathITR  > pathVec2.Count)
+                if(pathITR  > pathVec3.Length-1)
                 {
-                    pathITR = 0;
+                    break;
                 }
             }
             whileBreaker = false;
@@ -157,9 +156,6 @@ public class TileMapping : MonoBehaviour
             }
 
         }
-
-
-
 
         //tiles[5].getcomponent<tilescript>().weight = 30;
         //tiles[5] = instantiate(tileprefab, new vector3(5 * 1.1f, 1f, 0 * 1.1f), quaternion.identity);

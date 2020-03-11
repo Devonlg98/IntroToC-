@@ -132,10 +132,10 @@ GameObject:
   - component: {fileID: 320071232}
   - component: {fileID: 320071231}
   - component: {fileID: 320071230}
-  - component: {fileID: 320071234}
   - component: {fileID: 320071229}
+  - component: {fileID: 320071234}
   m_Layer: 0
-  m_Name: AI
+  m_Name: Cat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,15 +150,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 320071228}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 901aaf43dce158948bfe274481db7aa6, type: 3}
+  m_Script: {fileID: 11500000, guid: 0db6be7525f3fa44d8bb426448968b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aiMan: {fileID: 320071234}
-  tmpTarget: {fileID: 1363804662}
-  pathNextNode: {x: 0, y: 0, z: 0}
-  tileMap: {fileID: 828363290}
-  maxVelocity: 1
-  arriveTurnSpeed: 1
+  mass: 1
+  maxForce: 1
+  maxSpeed: 5
+  velocity: {x: 0, y: 0, z: 0}
+  startMaxSpeed: 0
+  startMass: 0
 --- !u!65 &320071230
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -241,15 +241,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 320071228}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 351b7c7a01915cb4290b665c90642887, type: 3}
+  m_Script: {fileID: 11500000, guid: fdff4f9ddca66f040824bf441a105e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1
-  maxForce: 5
-  maxSpeed: 5
-  velocity: {x: 0, y: 0, z: 0}
-  startMaxSpeed: 0
-  startMass: 0
+  agent: {fileID: 320071229}
+  tileMap: {fileID: 828363290}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,9 +461,11 @@ MonoBehaviour:
   materialClosed: {fileID: 2100000, guid: 17f984eb749594e49921d1524a8b7d0b, type: 2}
   materialPath: {fileID: 2100000, guid: 35034223783fde845895e77aae46ad3c, type: 2}
   materialWall: {fileID: 2100000, guid: c835a747b89de4249b1f1e74851362ba, type: 2}
-  pathVec2: []
+  pathITR: 0
+  pathVec3: []
   Tiles: []
   WallArray: []
+  agent: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,9 +561,8 @@ GameObject:
   - component: {fileID: 1363804661}
   - component: {fileID: 1363804660}
   - component: {fileID: 1363804659}
-  - component: {fileID: 1363804663}
   m_Layer: 0
-  m_Name: Target
+  m_Name: Mouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -644,21 +641,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1363804663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1363804658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 351b7c7a01915cb4290b665c90642887, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mass: 1
-  maxForce: 1
-  maxSpeed: 5
-  velocity: {x: 0, y: 0, z: 0}
-  startMaxSpeed: 0
-  startMass: 0
