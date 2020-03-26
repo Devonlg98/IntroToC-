@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -462579844857194347}
   m_Layer: 0
   m_Name: Tile (0)
-  m_TagString: Untagged
+  m_TagString: tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56,10 +56,11 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8333b1cda231c3840bb4b1cc48b613f2, type: 2}
+  - {fileID: 2100000, guid: e988ff08769c3374e84b2caa73d5f9ad, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88,10 +89,10 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7078528256394438602}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 1.5, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-462579844857194347
 MonoBehaviour:
@@ -102,12 +103,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7078528256394438602}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3a18ab38e5fdac43817aa74d8b8eadc, type: 3}
+  m_Script: {fileID: 11500000, guid: d3358d78aaf718f4eb6bfd4fb6b4bef6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 1
   ID: 0
   target: 0
+  x: 0
+  y: 0
   up: {fileID: 0}
   down: {fileID: 0}
   left: {fileID: 0}

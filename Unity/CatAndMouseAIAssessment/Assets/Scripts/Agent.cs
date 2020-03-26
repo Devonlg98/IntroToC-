@@ -44,6 +44,8 @@ public class Agent : MonoBehaviour
 
     }
 
+
+
     //Pass through vector from seek and flee
     public void AiSteer(Vector3 v)
     {
